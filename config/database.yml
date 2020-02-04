@@ -4,7 +4,6 @@ defaults: &defaults
   min_messages: warning
   timeout: 5000
   pool: <%= [ENV.fetch("MAX_THREADS", 5), ENV.fetch("DB_POOL", 5)].max %>
-  url: <%= ENV.fetch("DATABASE_URL") %>
 
 development:
   database: <%= ENV.fetch("DB_NAME", "#{File.basename(Rails.root)}_dev") %>
@@ -13,9 +12,3 @@ development:
 test:
   database: <%= ENV.fetch("DB_NAME", "#{File.basename(Rails.root)}_test") %>
   <<: *defaults
-
-production: &deploy
-  database: <%= ENV.fetch("DB_NAME", "#{File.basename(Rails.root)}_production") %>
-  <<: *defaults
-
-staging: *deploy
