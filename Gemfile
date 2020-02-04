@@ -9,6 +9,7 @@ gem "rails", "6.0.2.1"
 # all other gems
 gem "bootsnap", require: false
 gem "decent_exposure"
+gem "health_check"
 gem "interactor"
 gem "puma"
 
