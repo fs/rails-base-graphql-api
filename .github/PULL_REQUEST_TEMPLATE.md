@@ -2,7 +2,7 @@
 
 A brief description of the pull request.
 
-### Screenshots, screencasts
+### How it works
 
 Screenshots/screencasts of the pull request introduced functionality.
 
@@ -10,8 +10,16 @@ Screenshots/screencasts of the pull request introduced functionality.
 
 List of steps to manually test introduced functionality:
 
-* Go to Application
-* Sign in
+* Open [GraphiQL Interface](http://localhost:3000/graphiql)
+* Make request using schema:
+```
+  query {
+    me: {
+      id
+      name
+    }
+  }
+```
 * ...
 
 ### Review notes
@@ -23,7 +31,6 @@ please make sure that:
 - new tests are in place, no redundant tests
 - DB schema changes reflect new migrations
 - newly introduced DB fields have indexes and constraints
-- routes are RESTful, no useless routes
 - there are no missed files (migrations, view templates)
 - required ENV variables added and described in `.env.example` and added to Heroku
 - associated Heroku review app works correctly with introduced changes
@@ -34,5 +41,5 @@ Notes regarding deployment the contained body of work.
 These should note any db migrations, ENV variables, services, scripts, etc.
 
 ### References
-* [GitHub Issue ####](https://github.com/drapergem/draper/issues/####)
-* [GitHub Pull Request ####](https://github.com/drapergem/draper/pull/####)
+* [GitHub Issue ####](https://github.com/fs/rails-base-graphql-api/issues/####)
+* [GitHub Pull Request ####](https://github.com/fs/rails-base-graphql-api/pull/####)
