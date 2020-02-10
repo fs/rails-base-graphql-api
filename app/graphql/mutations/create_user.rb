@@ -5,12 +5,9 @@ module Mutations
     argument :last_name, String, required: true
     argument :password, String, required: true
 
-    field :id, ID, null: false
-    field :email, String, null: false
-
     type Types::UserType
 
-    def resolve(email, first_name, last_name, password)
+    def resolve(email:, first_name:, last_name:, password:)
       User.create(
         email: email,
         first_name: first_name,
