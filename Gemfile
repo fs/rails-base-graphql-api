@@ -3,17 +3,17 @@ source "https://rubygems.org"
 ruby "2.6.5"
 
 # the most important stuff
-gem "graphql"
-gem "jwt"
 gem "pg"
 gem "rails", "6.0.2.1"
 
 # all other gems
-gem "bootsnap", require: false
 gem "bcrypt"
+gem "bootsnap", require: false
 gem "decent_exposure"
+gem "graphql"
 gem "health_check"
 gem "interactor"
+gem "jwt"
 gem "puma"
 
 group :development do

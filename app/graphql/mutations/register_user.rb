@@ -1,5 +1,5 @@
 module Mutations
-  class CreateUser < BaseMutation
+  class RegisterUser < BaseMutation
     argument :email, String, required: true
     argument :first_name, String, required: true
     argument :last_name, String, required: true
@@ -7,13 +7,14 @@ module Mutations
 
     type Types::UserType
 
-    def resolve(email:, first_name:, last_name:, password:)
-      User.create(
-        email: email,
-        first_name: first_name,
-        last_name: last_name,
-        password: password
-      )
+    def resolve(**params)
+      result = RegisterUserService.call(params)
+
+      if result.success?
+        result.user
+      else
+
+      end
     end
   end
 end
