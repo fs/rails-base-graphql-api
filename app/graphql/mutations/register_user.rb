@@ -8,13 +8,9 @@ module Mutations
     type Types::UserType
 
     def resolve(**params)
-      result = RegisterUserService.call(params)
+      result = ::RegisterUserService.call(params: params)
 
-      if result.success?
-        result.user
-      else
-
-      end
+      result.user
     end
   end
 end
