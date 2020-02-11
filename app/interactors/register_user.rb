@@ -1,4 +1,4 @@
-class RegisterUserService
+class RegisterUser
   include Interactor
 
   delegate :params, to: :context
