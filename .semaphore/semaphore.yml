@@ -33,7 +33,7 @@ blocks:
       prologue:
         commands:
           - sem-service start postgres
-          - bin/rails db:setup'
+          - bin/rails db:setup
       jobs:
         - name: All Tests
           commands:
