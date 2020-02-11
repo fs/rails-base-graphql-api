@@ -1,13 +1,13 @@
 require "rails_helper"
 
 RSpec.describe Types::QueryType do
+  let!(:user) { create :user }
+
   let(:response) { ApplicationSchema.execute(query, query_options).as_json }
 
   let(:query_options) do
     { context: { current_user: user } }
   end
-
-  let(:user) { create :user }
 
   let(:query) do
     <<-GRAPHQL
