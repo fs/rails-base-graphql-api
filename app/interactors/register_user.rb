@@ -1,11 +1,11 @@
 class RegisterUser
   include Interactor
 
-  delegate :params, to: :context
+  delegate :params, :user, to: :context
 
   def call
-    user = User.create(params)
+    context.user = User.new(params)
 
-    context.user = user
+    context.fail! unless user.save
   end
 end

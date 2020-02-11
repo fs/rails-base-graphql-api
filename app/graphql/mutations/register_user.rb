@@ -5,12 +5,13 @@ module Mutations
     argument :last_name, String, required: true
     argument :password, String, required: true
 
-    type Types::UserType
+    field :user, Types::UserType, null: false
+    field :errors, [String], null: true
 
     def resolve(**params)
       result = ::RegisterUser.call(params: params)
 
-      result.user
+      { user: result.user, errors: result.user.errors.full_messages }
     end
   end
 end

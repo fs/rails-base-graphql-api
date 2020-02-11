@@ -3,6 +3,7 @@ class GraphqlController < ApplicationController
     variables = ensure_hash(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
+
     context = {
       current_user: current_user
     }
@@ -41,7 +42,8 @@ class GraphqlController < ApplicationController
   end
 
   def current_user
-    token = request.headers["Authorization"]
+    # Authorization: Bearer token_is_here
+    token = request.headers["Authorization"].split(" ").last
     payload = JWT.decode token, nil, false
     data_hash = payload.reduce Hash.new, :merge
 
