@@ -42,7 +42,6 @@ class GraphqlController < ApplicationController
   end
 
   def current_user
-    # Authorization: Bearer token_is_here
     token = request.headers["Authorization"].split(" ").last
     payload = JWT.decode token, nil, false
     data_hash = payload.reduce Hash.new, :merge
