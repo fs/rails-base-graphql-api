@@ -12,9 +12,12 @@ RSpec.describe Mutations::RegisterUser do
           lastName: "Baggins",
           password: "TheRing"
         ) {
-          email
-          firstName
-          lastName
+          user {
+            email
+            firstName
+            lastName
+          }
+          errors
         }
       }
     GRAPHQL
@@ -23,9 +26,12 @@ RSpec.describe Mutations::RegisterUser do
   let(:expected_response) do
     { "data" =>
       { "registerUser" =>
-        { "email"=>"bilbo.baggins@shire.com",
-          "firstName"=>"Bilbo",
-          "lastName"=>"Baggins"
+        { "user" =>
+          { "email"=>"bilbo.baggins@shire.com",
+            "firstName"=>"Bilbo",
+            "lastName"=>"Baggins"
+          },
+          "errors" => []
         }
       }
     }
