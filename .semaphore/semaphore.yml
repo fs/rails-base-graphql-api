@@ -19,17 +19,13 @@ global_job_config:
     - name: RACK_ENV
       value: test
     - name: DATABASE_URL
-      value: 'postgresql://postgres@localhost/test?encoding=utf8'
-    - name: BUNDLER_ARGS
-      value: >-
-        --deployment -j 4 --path vendor/bundle --without development staging
-        production
+      value: postgresql://postgres@localhost/test?encoding=utf8
+
   prologue:
     commands:
       - checkout
       - cache restore
-      - sem-version ruby 2.6.5
-      - 'bundle install ${BUNDLER_ARGS}'
+      - bundle install --deployment -j 4 --path vendor/bundle --without development staging production
       - cache store
 blocks:
   - name: Unit Tests
@@ -37,8 +33,7 @@ blocks:
       prologue:
         commands:
           - sem-service start postgres
-          - 'bundle install ${BUNDLER_ARGS}'
-          - 'bundle exec rake db:setup'
+          - bin/rails db:setup'
       jobs:
         - name: All Tests
           commands:
