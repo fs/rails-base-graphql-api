@@ -3,11 +3,12 @@ module Mutations
     argument :email, String, required: true
     argument :password, String, required: true
 
-    type Types::UserType
+    field :user, Types::UserType, null: true
+    field :token, String, null: true
 
     def resolve(email:, password:)
       result = CreateJwt.call(email: email, password: password)
-      byebug
+
       if result.success?
         { user: result.user, token: result.token }
       else

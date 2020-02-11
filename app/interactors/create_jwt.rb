@@ -5,7 +5,8 @@ class CreateJwt
 
   def call
     context.fail!(error: :invalid_credentials) unless authenticated?
-    context.jwt_token = jwt_token
+    context.user = user
+    context.token = token
   end
 
   private
@@ -14,7 +15,7 @@ class CreateJwt
     user.present? && user.authenticate(password)
   end
 
-  def jwt_token
+  def token
     JWT.encode payload, nil, "none"
   end
 
