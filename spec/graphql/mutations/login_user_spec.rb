@@ -13,7 +13,6 @@ RSpec.describe Mutations::RegisterUser do
           password: "TheRing"
         ) {
           user {
-            id
             email
           }
           token
@@ -27,14 +26,15 @@ RSpec.describe Mutations::RegisterUser do
       "data" => {
         "loginUser" => {
           "user" => {
-            "id" => "1",
             "email" => "bilbo.baggins@shire.com"
           },
-          "token" => "eyJhbGciOiJub25lIn0.eyJzdWIiOjF9."
+          "token" => token
         }
       }
     }
   end
+
+  let(:token) { JWT.encode({sub: user.id}, nil, "none") }
 
   context "with valid credentials" do
     it "gets user token" do

@@ -12,7 +12,6 @@ RSpec.describe Mutations::RegisterUser do
           lastName: "Baggins",
           password: "TheRing"
         ) {
-          id
           email
           firstName
           lastName
@@ -26,7 +25,6 @@ RSpec.describe Mutations::RegisterUser do
       { "registerUser" =>
         { "email"=>"bilbo.baggins@shire.com",
           "firstName"=>"Bilbo",
-          "id"=>"1",
           "lastName"=>"Baggins"
         }
       }
