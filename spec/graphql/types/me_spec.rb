@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Types::QueryType do
+describe Types::QueryType do
   let!(:user) { create :user }
 
   let(:response) { ApplicationSchema.execute(query, query_options).as_json }

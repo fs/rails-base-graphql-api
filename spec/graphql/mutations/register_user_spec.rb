@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Mutations::RegisterUser do
+describe Mutations::RegisterUser do
   let(:response) { ApplicationSchema.execute(query, {}).as_json }
 
   let(:query) do
@@ -8,30 +8,26 @@ RSpec.describe Mutations::RegisterUser do
       mutation {
         registerUser(
           email: "bilbo.baggins@shire.com",
-          firstName: "Bilbo",
-          lastName: "Baggins",
           password: "TheRing"
         ) {
           user {
+            id
             email
-            firstName
-            lastName
           }
-          errors
         }
       }
     GRAPHQL
   end
 
+  let(:registered_user) { User.first }
+
   let(:expected_response) do
     { "data" =>
       { "registerUser" =>
         { "user" =>
-          { "email"=>"bilbo.baggins@shire.com",
-            "firstName"=>"Bilbo",
-            "lastName"=>"Baggins"
-          },
-          "errors" => []
+          { "id" => registered_user.id.to_s,
+            "email"=>"bilbo.baggins@shire.com"
+          }
         }
       }
     }

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Mutations::RegisterUser do
+describe Mutations::RegisterUser do
   let(:response) { ApplicationSchema.execute(query, {}).as_json }
 
   let!(:user) { create :user, email: "bilbo.baggins@shire.com", password: "TheRing" }
