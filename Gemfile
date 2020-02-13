@@ -7,10 +7,13 @@ gem "pg"
 gem "rails", "6.0.2.1"
 
 # all other gems
+gem "bcrypt"
 gem "bootsnap", require: false
 gem "decent_exposure"
+gem "graphql"
 gem "health_check"
 gem "interactor"
+gem "jwt"
 gem "puma"
 
 group :development do
@@ -20,6 +23,13 @@ group :development do
 end
 
 group :development, :test do
+  gem "factory_bot_rails"
+  gem "ffaker"
   gem "byebug"
+  gem "rspec-rails"
+end
+
+group :test do
+  gem "database_cleaner-active_record"
 end
 

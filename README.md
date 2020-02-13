@@ -2,6 +2,8 @@
 
 ## Getting Started
 
+For development process, tasks and bugs pls visit our [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2432730).
+
 ### Prepare dependencies
 
 Some gems may have native extensions, so you must have GCC installed on your development environment.
