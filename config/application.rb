@@ -34,10 +34,12 @@ module RailsBaseGraphqlApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    allowed_hosts = ENV.fetch("ALLOW_CORS_REQUESTS_FROM", "").split(",")
+
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins "localhost:5000", "lvh.me:5000", "127.0.0.1:5000"
-        resource "*", headers: :any, methods: [:get, :post, :put, :patch, :delete]
+        origins allowed_hosts
+        resource "*", headers: :any, methods: :any
       end
     end
   end
