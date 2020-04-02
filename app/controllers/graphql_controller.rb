@@ -40,12 +40,4 @@ class GraphqlController < ApplicationController
 
     render json: { error: { message: e.message, backtrace: e.backtrace }, data: {} }, status: 500
   end
-
-  def current_user
-    token = request.headers["Authorization"].split(" ").last
-    payload = JWT.decode token, nil, false
-    data_hash = payload.reduce Hash.new, :merge
-
-    User.find_by(id: data_hash["sub"])
-  end
 end

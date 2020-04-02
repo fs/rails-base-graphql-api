@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Mutations::LoginUser do
+describe Mutations::CreateToken do
   let!(:user) { create :user, email: "bilbo.baggins@shire.com", password: "TheRing" }
 
   let(:token) { JWT.encode({ sub: user.id }, nil, "none") }
@@ -11,13 +11,14 @@ describe Mutations::LoginUser do
     let(:query) do
       <<-GRAPHQL
         mutation {
-          loginUser (
+          createToken (
             email: "bilbo.baggins@shire.com",
             password: "TheRing"
           ) {
-            user {
-              email
+            token
+            me {
               id
+              email
             }
           }
         }
@@ -27,8 +28,9 @@ describe Mutations::LoginUser do
     let(:expected_response) do
       {
         "data" => {
-          "loginUser" => {
-            "user" => {
+          "createToken" => {
+            "token" => token,
+            "me" => {
               "id" => user.id.to_s,
               "email" => "bilbo.baggins@shire.com"
             }
@@ -48,11 +50,12 @@ describe Mutations::LoginUser do
     let(:query) do
       <<-GRAPHQL
         mutation {
-          loginUser (
+          createToken (
             email: "bilbo.baggins@shire.com",
             password: "Sauron"
           ) {
-            user {
+            token
+            me {
               id
               email
             }
@@ -63,13 +66,13 @@ describe Mutations::LoginUser do
 
     let(:expected_response) do
       { "data" =>
-        { "loginUser" => nil },
+        { "createToken" => nil },
           "errors" => [
           { "message" => "Invalid credentials",
             "locations" => [
               { "line" => 2, "column" => 11 }
             ],
-            "path" => ["loginUser"]
+            "path" => ["createToken"]
           }
         ]
       }
