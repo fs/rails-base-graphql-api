@@ -15,6 +15,7 @@ gem "health_check"
 gem "interactor"
 gem "jwt"
 gem "puma"
+gem "rack-cors"
 
 group :development do
   gem "listen"

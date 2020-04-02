@@ -33,5 +33,12 @@ module RailsBaseGraphqlApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins "localhost:5000", "lvh.me:5000", "127.0.0.1:5000"
+        resource "*", headers: :any, methods: [:get, :post, :put, :patch, :delete]
+      end
+    end
   end
 end
