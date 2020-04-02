@@ -24,10 +24,10 @@ group :development do
 end
 
 group :development, :test do
+  gem "byebug"
   gem "dotenv-rails"
   gem "factory_bot_rails"
   gem "ffaker"
-  gem "byebug"
   gem "rspec-rails"
 end
 
