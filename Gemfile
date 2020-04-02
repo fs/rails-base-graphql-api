@@ -15,6 +15,7 @@ gem "health_check"
 gem "interactor"
 gem "jwt"
 gem "puma"
+gem "rack-cors"
 
 group :development do
   gem "listen"
@@ -23,9 +24,10 @@ group :development do
 end
 
 group :development, :test do
+  gem "byebug"
+  gem "dotenv-rails"
   gem "factory_bot_rails"
   gem "ffaker"
-  gem "byebug"
   gem "rspec-rails"
 end
 
