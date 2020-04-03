@@ -1,5 +1,3 @@
-require "rails_helper"
-
 describe Mutations::LoginUser do
   let!(:user) { create :user, email: "bilbo.baggins@shire.com", password: "TheRing" }
 

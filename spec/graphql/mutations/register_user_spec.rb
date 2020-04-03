@@ -1,5 +1,3 @@
-require "rails_helper"
-
 describe Mutations::RegisterUser do
   let(:response) { ApplicationSchema.execute(query, {}).as_json }
 

@@ -1,5 +1,3 @@
-require "rails_helper"
-
 describe Types::QueryType do
   let!(:user) { create :user }
 
