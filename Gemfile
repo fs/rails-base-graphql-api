@@ -4,7 +4,7 @@ ruby "2.6.5"
 
 # the most important stuff
 gem "pg"
-gem "rails", "6.0.2.1"
+gem "rails", "6.0.2.2"
 
 # all other gems
 gem "bcrypt"
