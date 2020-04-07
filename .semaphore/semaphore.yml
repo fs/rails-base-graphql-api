@@ -20,21 +20,35 @@ global_job_config:
       value: test
     - name: DATABASE_URL
       value: postgresql://postgres@localhost/test?encoding=utf8
-
   prologue:
     commands:
       - checkout
       - cache restore
+      - cp .env.example .env
       - bundle install --deployment -j 4 --path vendor/bundle --without development staging production
-      - cache store
 blocks:
-  - name: Unit Tests
+  - name: Setup
+    dependencies: []
+    task:
+      jobs:
+        - name: Bundle
+          commands:
+            - cache store
+  - name: Quality
+    dependencies: ["Setup"]
+    task:
+      jobs:
+        - name: Quality
+          commands:
+            - bin/quality
+  - name: Test
+    dependencies: ["Setup"]
     task:
       prologue:
         commands:
           - sem-service start postgres
           - bin/rails db:setup
       jobs:
-        - name: All Tests
+        - name: Test
           commands:
             - bin/tests
