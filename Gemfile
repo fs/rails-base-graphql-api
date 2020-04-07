@@ -18,6 +18,7 @@ gem "puma"
 gem "rack-cors"
 
 group :development do
+  gem 'brakeman'
   gem "listen"
   gem "spring"
   gem "spring-watcher-listen"
