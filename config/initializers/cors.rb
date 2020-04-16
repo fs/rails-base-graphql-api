@@ -11,8 +11,8 @@ if ENV["CORS_ORIGINS"].present?
       origins(*ENV.fetch("CORS_ORIGINS").split(","))
 
       resource "*",
-        headers: :any,
-        methods: %i[get post put patch delete options head]
+               headers: :any,
+               methods: %i[get post put patch delete options head]
     end
   end
 end

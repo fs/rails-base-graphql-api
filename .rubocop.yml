@@ -2,11 +2,8 @@ require:
   - rubocop-rspec
   - rubocop-rails
 
-Rails:
-  Enabled: true
-
 AllCops:
-  TargetRubyVersion: ~
+  TargetRubyVersion: 2.6
   DisplayCopNames: true
   Exclude:
     - bin/**/*
@@ -14,13 +11,20 @@ AllCops:
     - vendor/**/*
     - tmp/**/*
 
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - development
+    - test
+    - staging
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: true
+
 Rails/HasAndBelongsToMany:
   Enabled: false
 
 Rails/OutputSafety:
-  Enabled: false
-
-Rails/UnknownEnv:
   Enabled: false
 
 RSpec/MultipleExpectations:
@@ -29,13 +33,10 @@ RSpec/MultipleExpectations:
 RSpec/ExampleLength:
   Enabled: false
 
-RSpec/RepeatedDescription:
-  Enabled: false
-
-RSpec/SharedExamples:
-  Enabled: false
-
 RSpec/ImplicitSubject:
+   Enabled: false
+
+RSpec/RepeatedDescription:
   Enabled: false
 
 RSpec/MessageSpies:
@@ -75,14 +76,17 @@ Style/FrozenStringLiteralComment:
 Style/StringMethods:
   Enabled: true
 
-Style/ClassAndModuleChildren:
-  Enabled: false
+Style/HashEachMethods:
+  Enabled: true
 
-Metrics/LineLength:
-  Max: 120
+Style/HashTransformKeys:
+  Enabled: true
 
-Metrics/BlockLength:
-  Enabled: false
+Style/HashTransformValues:
+  Enabled: true
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
 
 Layout/ParameterAlignment:
   EnforcedStyle: with_fixed_indentation
@@ -90,27 +94,24 @@ Layout/ParameterAlignment:
     - with_first_parameter
     - with_fixed_indentation
 
+Layout/LineLength:
+  Max: 120
+
 Layout/EndAlignment:
   EnforcedStyleAlignWith: variable
   SupportedStylesAlignWith:
     - keyword
     - variable
 
-RSpec/LetSetup:
+Metrics/BlockLength:
   Enabled: false
-
-RSpec/NestedGroups:
-  Max: 5
-
-RSpec/EmptyExampleGroup:
-  Exclude:
-    - "spec/api/**/*spec.rb"
-    - "spec/support/shared_examples/api/*.rb"
-
-RSpec/DescribeClass:
-  Exclude:
-    - "spec/lib/tasks/**/*spec.rb"
 
 Lint/AmbiguousBlockAssociation:
   Exclude:
-    - "spec/**/*"
+    - spec/**/*
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true

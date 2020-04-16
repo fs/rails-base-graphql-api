@@ -9,7 +9,7 @@ module Mutations
     field :user, Types::UserType, null: false
 
     def resolve(**params)
-      result = ::RegisterUser.call(params: params)
+      ::RegisterUser.call(params: params)
     end
   end
 end

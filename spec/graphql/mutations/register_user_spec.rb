@@ -20,11 +20,12 @@ describe Mutations::RegisterUser do
   let(:registered_user) { User.first }
 
   let(:expected_response) do
-    { "data" =>
-      { "registerUser" =>
-        { "user" =>
-          { "id" => registered_user.id.to_s,
-            "email"=>"bilbo.baggins@shire.com"
+    {
+      "data" => {
+        "registerUser" => {
+          "user" => {
+            "id" => registered_user.id.to_s,
+            "email" => "bilbo.baggins@shire.com"
           }
         }
       }

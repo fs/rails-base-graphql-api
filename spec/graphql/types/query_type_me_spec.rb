@@ -21,12 +21,13 @@ describe Types::QueryType do
   end
 
   let(:expected_response) do
-    {"data" =>
-      { "me"=>
-        { "id"=> user.id.to_s,
-          "email"=> user.email,
-          "firstName"=> user.first_name,
-          "lastName"=> user.last_name
+    {
+      "data" => {
+        "me" => {
+          "id" => user.id.to_s,
+          "email" => user.email,
+          "firstName" => user.first_name,
+          "lastName" => user.last_name
         }
       }
     }

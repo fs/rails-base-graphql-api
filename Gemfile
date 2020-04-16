@@ -18,7 +18,7 @@ gem "puma"
 gem "rack-cors"
 
 group :development do
-  gem 'brakeman'
+  gem "brakeman"
   gem "listen"
   gem "spring"
   gem "spring-watcher-listen"
@@ -31,12 +31,11 @@ group :development, :test do
   gem "ffaker"
   gem "rspec-rails"
   gem "rubocop", require: false
-  gem "rubocop-rspec", require: false
   gem "rubocop-rails", require: false
+  gem "rubocop-rspec", require: false
 end
 
 group :test do
   gem "database_cleaner-active_record"
   gem "simplecov", require: false
 end
-
