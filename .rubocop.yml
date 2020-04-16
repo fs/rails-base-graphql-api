@@ -85,6 +85,9 @@ Style/HashTransformKeys:
 Style/HashTransformValues:
   Enabled: true
 
+Style/ExponentialNotation:
+  Enabled: true
+
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
@@ -102,6 +105,9 @@ Layout/EndAlignment:
   SupportedStylesAlignWith:
     - keyword
     - variable
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
 
 Metrics/BlockLength:
   Enabled: false
