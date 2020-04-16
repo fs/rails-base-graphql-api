@@ -18,13 +18,13 @@ gem "puma"
 gem "rack-cors"
 
 group :development do
-  gem "brakeman"
   gem "listen"
   gem "spring"
   gem "spring-watcher-listen"
 end
 
 group :development, :test do
+  gem "brakeman"
   gem "byebug"
   gem "dotenv-rails"
   gem "factory_bot_rails"
