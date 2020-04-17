@@ -1,40 +1,63 @@
 version: v1.0
 name: Rails Base GraphQL API
+
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
+
 execution_time_limit:
-  minutes: 30
+  hours: 1
+
 auto_cancel:
   queued:
     when: 'true'
+
 fail_fast:
   stop:
     when: 'true'
+
 global_job_config:
   env_vars:
     - name: RAILS_ENV
-      value: test
-    - name: RACK_ENV
-      value: test
+      value: 'test'
     - name: DATABASE_URL
-      value: postgresql://postgres@localhost/test?encoding=utf8
+      value: 'postgresql://postgres@localhost/test?encoding=utf8'
+    - name: BUNDLE_ARGS
+      value: '--deployment --without development staging production --jobs 4'
 
   prologue:
     commands:
       - checkout
       - cache restore
-      - bundle install --deployment -j 4 --path vendor/bundle --without development staging production
-      - cache store
+      - cp .env.example .env
+
 blocks:
-  - name: Unit Tests
+  - name: Setup
+    task:
+      jobs:
+        - name: Bundle
+          commands:
+            - bundle install ${BUNDLE_ARGS}
+            - cache store
+
+  - name: Quality
+    task:
+      jobs:
+        - name: Quality
+          commands:
+            - bundle install ${BUNDLE_ARGS} --local
+            - bin/quality
+
+  - name: Test
     task:
       prologue:
         commands:
+          - bundle install ${BUNDLE_ARGS} --local
           - sem-service start postgres
           - bin/rails db:setup
+
       jobs:
-        - name: All Tests
+        - name: Test
           commands:
             - bin/tests

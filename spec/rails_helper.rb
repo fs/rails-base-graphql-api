@@ -7,4 +7,4 @@ require "spec_helper"
 
 SimpleCov.start "rails"
 
-Dir[Rails.root.join("spec", "support", "**", "*.rb")].each { |f| require f }
+Dir[Rails.root.join("spec/support/**/*.rb")].sort.each { |f| require f }

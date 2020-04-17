@@ -62,12 +62,18 @@ describe Mutations::LoginUser do
     end
 
     let(:expected_response) do
-      { "data" =>
-        { "loginUser" => nil },
-          "errors" => [
-          { "message" => "Invalid credentials",
+      {
+        "data" => {
+          "loginUser" => nil
+        },
+        "errors" => [
+          {
+            "message" => "Invalid credentials",
             "locations" => [
-              { "line" => 2, "column" => 11 }
+              {
+                "line" => 2,
+                "column" => 11
+              }
             ],
             "path" => ["loginUser"]
           }

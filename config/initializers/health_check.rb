@@ -1,5 +1,4 @@
 HealthCheck.setup do |config|
-
   # uri prefix (no leading slash)
   config.uri = "health_check"
 
@@ -26,14 +25,15 @@ HealthCheck.setup do |config|
 
   # You can customize which checks happen on a standard health check, eg to set an explicit list use:
   # config.standard_checks = [ "database", "migrations", "custom" ]
-  config.standard_checks = ["database", "migrations"]
+  config.standard_checks = %w[database migrations]
 
   # Or to exclude one check:
-  config.standard_checks -= [ "emailconf" ]
+  config.standard_checks -= %w[emailconf]
 
   # You can set what tests are run with the "full" or "all" parameter
-  # config.full_checks = ["database", "migrations", "custom", "email", "cache", "redis", "resque-redis", "sidekiq-redis", "s3"]
-  config.full_checks = ["database", "migrations", "cache"]
+  # config.full_checks = ["database", "migrations", "custom", "email",
+  #                       "cache", "redis", "resque-redis", "sidekiq-redis", "s3"]
+  config.full_checks = %w[database migrations cache]
 
   # Add one or more custom checks that return a blank string if ok, or an error message if there is an error
   # config.add_custom_check do
