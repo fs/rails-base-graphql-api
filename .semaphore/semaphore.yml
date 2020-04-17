@@ -38,8 +38,8 @@ blocks:
       jobs:
         - name: Bundle
           commands:
-          - bundle install ${BUNDLE_ARGS}
-          - cache store
+            - bundle install ${BUNDLE_ARGS}
+            - cache store
 
   - name: Quality
     task:
@@ -58,6 +58,6 @@ blocks:
           - bin/rails db:setup
 
       jobs:
-      - name: Test
-        commands:
-          - bin/tests
+        - name: Test
+          commands:
+            - bin/tests
