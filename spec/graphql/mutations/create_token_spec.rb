@@ -11,7 +11,7 @@ describe Mutations::CreateToken do
     let(:query) do
       <<-GRAPHQL
         mutation {
-          createToken (
+          signin (
             email: "bilbo.baggins@shire.com",
             password: "TheRing"
           ) {
@@ -28,7 +28,7 @@ describe Mutations::CreateToken do
     let(:expected_response) do
       {
         "data" => {
-          "createToken" => {
+          "signin" => {
             "token" => token,
             "me" => {
               "id" => user.id.to_s,
@@ -50,7 +50,7 @@ describe Mutations::CreateToken do
     let(:query) do
       <<-GRAPHQL
         mutation {
-          createToken (
+          signin (
             email: "bilbo.baggins@shire.com",
             password: "Sauron"
           ) {
@@ -66,13 +66,13 @@ describe Mutations::CreateToken do
 
     let(:expected_response) do
       { "data" =>
-        { "createToken" => nil },
+        { "signin" => nil },
           "errors" => [
           { "message" => "Invalid credentials",
             "locations" => [
               { "line" => 2, "column" => 11 }
             ],
-            "path" => ["createToken"]
+            "path" => ["signin"]
           }
         ]
       }

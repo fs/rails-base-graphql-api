@@ -6,7 +6,7 @@ describe Mutations::RegisterUser do
   let(:query) do
     <<-GRAPHQL
       mutation {
-        registerUser(
+        signup(
           email: "bilbo.baggins@shire.com",
           password: "TheRing"
         ) {
@@ -23,7 +23,7 @@ describe Mutations::RegisterUser do
 
   let(:expected_response) do
     { "data" =>
-      { "registerUser" =>
+      { "signup" =>
         { "user" =>
           { "id" => registered_user.id.to_s,
             "email"=>"bilbo.baggins@shire.com"
