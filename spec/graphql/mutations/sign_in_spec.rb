@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Mutations::CreateToken do
+describe Mutations::SignIn do
   let!(:user) { create :user, email: "bilbo.baggins@shire.com", password: "TheRing" }
 
   let(:token) { JWT.encode({ sub: user.id }, nil, "none") }

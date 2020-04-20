@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Mutations::RegisterUser do
+describe Mutations::SignUp do
   let(:response) { ApplicationSchema.execute(query, {}).as_json }
 
   let(:query) do
