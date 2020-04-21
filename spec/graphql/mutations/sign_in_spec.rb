@@ -70,7 +70,10 @@ describe Mutations::SignIn do
           "errors" => [
           { "message" => "Invalid credentials",
             "locations" => [
-              { "line" => 2, "column" => 11 }
+              {
+                "line" => 2,
+                "column" => 11
+              }
             ],
             "path" => ["signin"]
           }

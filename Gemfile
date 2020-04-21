@@ -24,15 +24,19 @@ group :development do
 end
 
 group :development, :test do
+  gem "brakeman"
+  gem "bundler-audit"
   gem "byebug"
   gem "dotenv-rails"
   gem "factory_bot_rails"
   gem "ffaker"
   gem "rspec-rails"
+  gem "rubocop", require: false
+  gem "rubocop-rails", require: false
+  gem "rubocop-rspec", require: false
 end
 
 group :test do
   gem "database_cleaner-active_record"
   gem "simplecov", require: false
 end
-
