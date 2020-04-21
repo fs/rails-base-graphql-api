@@ -22,11 +22,12 @@ describe Mutations::SignUp do
   let(:registered_user) { User.first }
 
   let(:expected_response) do
-    { "data" =>
-      { "signup" =>
-        { "user" =>
-          { "id" => registered_user.id.to_s,
-            "email"=>"bilbo.baggins@shire.com"
+    {
+      "data" => {
+        "signup" => {
+          "user" => {
+            "id" => registered_user.id.to_s,
+            "email" => "bilbo.baggins@shire.com"
           }
         }
       }

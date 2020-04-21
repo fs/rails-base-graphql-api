@@ -18,6 +18,6 @@ module AuthenticableUser
   end
 
   def payload_data
-    @payload_data ||= payload.reduce Hash.new, :merge
+    @payload_data ||= payload.reduce({}, :merge)
   end
 end

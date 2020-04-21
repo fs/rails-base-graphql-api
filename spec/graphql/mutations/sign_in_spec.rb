@@ -65,10 +65,13 @@ describe Mutations::SignIn do
     end
 
     let(:expected_response) do
-      { "data" =>
-        { "signin" => nil },
-          "errors" => [
-          { "message" => "Invalid credentials",
+      {
+        "data" => {
+          "signin" => nil
+        },
+        "errors" => [
+          {
+            "message" => "Invalid credentials",
             "locations" => [
               {
                 "line" => 2,

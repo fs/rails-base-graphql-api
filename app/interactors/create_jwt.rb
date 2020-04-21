@@ -12,7 +12,7 @@ class CreateJwt
   private
 
   def authenticated?
-    user && user.authenticate(password)
+    user&.authenticate(password)
   end
 
   def token
