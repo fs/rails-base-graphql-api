@@ -7,6 +7,21 @@ if [ "$CI" ]; then
   BUNDLER_ARGS="--without development staging production"
 fi
 
+# Fix Semaphore bug
+if [ "$SEMAPHORE" ]; then
+  sudo chown 1000:1000 -R ./
+fi
+
+# Build Docker image
+docker-compose up --build --detach
+
+# Set up database and add any development seed data
+docker-compose exec app bin/rails db:create db:schema:load
+
+if [ -z "$CI" ]; then
+  docker-compose exec app bin/rails db:seed
+fi
+
 # Make sure we have Bundler installed
 gem install bundler --conservative
 
