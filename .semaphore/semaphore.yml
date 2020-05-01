@@ -30,6 +30,8 @@ blocks:
           - export DOCKER_REPO="flatstack/rails_base_graphql_api"
           - export CACHE_IMAGE="${DOCKER_REPO}:${SEMAPHORE_GIT_BRANCH}"
           - export WORKFLOW_CACHE_IMAGE="${CACHE_IMAGE}-${SEMAPHORE_WORKFLOW_ID}"
+          - export RAILS_ENV="test"
+          - export RACK_ENV="test"
 
           # Authenticate with DockerHub
           - echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
@@ -65,6 +67,8 @@ blocks:
           - export DOCKER_REPO="flatstack/rails_base_graphql_api"
           - export CACHE_IMAGE="${DOCKER_REPO}:${SEMAPHORE_GIT_BRANCH}"
           - export WORKFLOW_CACHE_IMAGE="${CACHE_IMAGE}-${SEMAPHORE_WORKFLOW_ID}"
+          - export RAILS_ENV="test"
+          - export RACK_ENV="test"
 
           - checkout
 

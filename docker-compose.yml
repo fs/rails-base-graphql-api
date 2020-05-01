@@ -14,6 +14,9 @@ services:
     image: rails_base_graphql_api
     environment:
       - DATABASE_URL=postgres://postgres:password@db
+      - RAILS_ENV=${RAILS_ENV}
+      - RACK_ENV=${RACK_ENV}
+      - DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true
     build:
       context: .
       cache_from:
