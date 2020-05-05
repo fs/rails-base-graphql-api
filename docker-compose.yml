@@ -24,6 +24,7 @@ services:
       args:
         - BUNDLE_WITHOUT="${BUNDLE_WITHOUT}"
         - BUNDLER_VERSION=2.1.4
+        - ADDITIONAL_PACKAGES=${ADDITIONAL_PACKAGES}
     ports:
       - "3000:3000"
     links:

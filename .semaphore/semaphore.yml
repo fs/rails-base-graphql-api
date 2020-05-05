@@ -32,6 +32,7 @@ blocks:
           - export WORKFLOW_CACHE_IMAGE="${CACHE_IMAGE}-${SEMAPHORE_WORKFLOW_ID}"
           - export RAILS_ENV="test"
           - export RACK_ENV="test"
+          - export ADDITIONAL_PACKAGES="git"
 
           # Authenticate with DockerHub
           - echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
@@ -69,6 +70,7 @@ blocks:
           - export WORKFLOW_CACHE_IMAGE="${CACHE_IMAGE}-${SEMAPHORE_WORKFLOW_ID}"
           - export RAILS_ENV="test"
           - export RACK_ENV="test"
+          - export ADDITIONAL_PACKAGES="git"
 
           - checkout
 
