@@ -6,12 +6,12 @@ module Mutations
     type Types::AuthenticationType
 
     def resolve(email:, password:)
-      create_token = CreateJwt.call(email: email, password: password)
+      singin_user = SigninUser.call(email: email, password: password)
 
-      if create_token.success?
-        create_token
+      if singin_user.success?
+        singin_user
       else
-        GraphQL::ExecutionError.new "Invalid credentials"
+        execution_error(error_data: singin_user.error_data)
       end
     end
   end

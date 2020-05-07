@@ -1,12 +1,11 @@
-class CreateJwt
+class AuthenticateUser
   include Interactor
 
   delegate :email, :password, to: :context
 
   def call
-    context.fail!(error: :invalid_credentials) unless authenticated?
+    context.fail!(error_data: error_data) unless authenticated?
     context.user = user
-    context.token = token
   end
 
   private
@@ -15,15 +14,11 @@ class CreateJwt
     user&.authenticate(password)
   end
 
-  def token
-    JWT.encode payload, nil, "none"
-  end
-
-  def payload
-    { sub: user.id }
-  end
-
   def user
     @user ||= User.find_by(email: email)
+  end
+
+  def error_data
+    { message: "Invalid credentials", status: 401, code: :unauthorized }
   end
 end

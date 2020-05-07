@@ -1,7 +1,7 @@
 class GraphqlController < ApplicationController
   def execute
     render json: execute_query
-  rescue StandartError => e
+  rescue StandardError => e
     raise e unless Rails.env.development?
 
     handle_error_in_development e
