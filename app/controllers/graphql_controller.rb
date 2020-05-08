@@ -1,7 +1,7 @@
 class GraphqlController < ApplicationController
   def execute
     render json: execute_query
-  rescue StandartError => e
+  rescue StandardError => e
     raise e unless Rails.env.development?
 
     handle_error_in_development e
@@ -44,13 +44,5 @@ class GraphqlController < ApplicationController
     error = { error: { message: exception.message, backtrace: exception.backtrace }, data: {} }
 
     render json: error, status: :internal_server_error
-  end
-
-  def current_user
-    token = request.headers["Authorization"].split(" ").last
-    payload = JWT.decode token, nil, false
-    data_hash = payload.reduce {}, :merge
-
-    User.find_by(id: data_hash["sub"])
   end
 end
