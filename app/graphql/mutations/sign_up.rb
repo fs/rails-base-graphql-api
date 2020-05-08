@@ -9,7 +9,7 @@ module Mutations
     type Types::AuthenticationType
 
     def resolve(**user_params)
-      signup_user = SignupUser.call(user: User.new, user_params: user_params)
+      signup_user = SignupUser.call(user_params: user_params)
 
       if signup_user.success?
         signup_user
