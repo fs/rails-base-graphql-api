@@ -20,8 +20,11 @@ ActiveRecord::Schema.define(version: 2020_05_19_104937) do
     t.string "token", null: false
     t.bigint "user_id", null: false
     t.datetime "expires_at", null: false
+    t.string "client_uid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_uid"], name: "index_refresh_tokens_on_client_uid"
+    t.index ["token"], name: "index_refresh_tokens_on_token"
     t.index ["user_id"], name: "index_refresh_tokens_on_user_id"
   end
 
@@ -35,4 +38,5 @@ ActiveRecord::Schema.define(version: 2020_05_19_104937) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "refresh_tokens", "users"
 end
