@@ -23,11 +23,11 @@ global_job_config:
       # Setup dynamic environment variables b/c they do not support via env_vars yet
       - export BUNDLE_WITHOUT="development staging production"
       - export DOCKER_REPO="flatstack/rails_base_graphql_api"
-      - export CACHE_IMAGE="${DOCKER_REPO}:${SEMAPHORE_GIT_BRANCH}"
-      - export WORKFLOW_CACHE_IMAGE="${CACHE_IMAGE}-${SEMAPHORE_WORKFLOW_ID}"
+      - export IMAGE_NAME="${DOCKER_REPO}:${SEMAPHORE_GIT_BRANCH}"
       - export RAILS_ENV="test"
       - export RACK_ENV="test"
       - export ADDITIONAL_PACKAGES="git"
+      - export BUNDLE_WITHOUT="development staging production"
 
       # Authenticate with DockerHub
       - echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
@@ -42,19 +42,7 @@ blocks:
       jobs:
       - name: Docker build
         commands:
-          # Try to pull image for this branch
-          - docker pull "${CACHE_IMAGE}" || true
-
-          # Build image
-          - docker-compose build
-
-          # Push image to DockerHub for the next tasks
-          - docker tag rails_base_graphql_api:latest "${WORKFLOW_CACHE_IMAGE}"
-          - docker push "${WORKFLOW_CACHE_IMAGE}"
-
-          # Push images for the next builds
-          - docker tag rails_base_graphql_api:latest "${CACHE_IMAGE}"
-          - docker push "${CACHE_IMAGE}"
+          - docker pull "${IMAGE_NAME}" || (docker build --build-arg BUNDLE_WITHOUT="${BUNDLE_WITHOUT}" --build-arg BUNDLER_VERSION=2.1.4 --build-arg ADDITIONAL_PACKAGES=${ADDITIONAL_PACKAGES} && docker push "${IMAGE_NAME}")
 
   - name: Run
     task:
@@ -63,30 +51,13 @@ blocks:
 
       prologue:
         commands:
-          # Pull image build on previous task
-          - docker pull "${WORKFLOW_CACHE_IMAGE}"
-          - docker tag "${WORKFLOW_CACHE_IMAGE}" rails_base_graphql_api:latest
-
-          # Setup dotenv
-          - cp .env.example .env
-
-          # Fix Semaphore permissions bug
-          - sudo chown 1000:1000 -R ./
-
-          # Run container
-          - docker-compose up --detach
-
-          # Setup database
-          - docker-compose exec app bin/rails db:create db:schema:load
+          - docker pull "${IMAGE_NAME}"
+          - bin/setup
 
       jobs:
-      - name: Check Running Images
-        commands:
-          - docker ps
-
       - name: Run RSpec
         commands:
-          - docker-compose exec app bin/rspec spec
+          - docker-compose exec app bin/tests
 
       - name: Run Quality
         commands:

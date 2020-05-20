@@ -47,20 +47,13 @@ RUN apk add --update --no-cache \
     file \
     $ADDITIONAL_PACKAGES
 
-# Add user
-RUN addgroup -g 1000 -S app && adduser -u 1000 -S app -G app
-USER app
-
 # Copy app with gems from former build stage
-COPY --from=Builder --chown=app:app /usr/local/bundle/ /usr/local/bundle/
-COPY --from=Builder --chown=app:app /app/ /app/
+COPY --from=Builder /usr/local/bundle/ /usr/local/bundle/
+COPY --from=Builder /app/ /app/
 
 WORKDIR /app
 
-# Add a script to be executed every time the container starts.
-COPY --chown=app:app bin/docker-entrypoint /usr/bin/
-RUN chmod +x /usr/bin/docker-entrypoint
-ENTRYPOINT ["docker-entrypoint"]
+CMD ["bin/docker-entrypoint"]
 
 # Expose Server port
 EXPOSE 3000

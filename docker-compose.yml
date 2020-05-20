@@ -11,7 +11,7 @@ services:
       - db-data:/var/lib/postgresql/data
 
   app: &app_base
-    image: rails_base_graphql_api
+    image: ${IMAGE_NAME}_app
     environment:
       - DATABASE_URL=postgres://postgres:password@db
       - RAILS_ENV=${RAILS_ENV}
@@ -20,7 +20,7 @@ services:
     build:
       context: .
       cache_from:
-        - ${CACHE_IMAGE}
+        - ${IMAGE_NAME}
       args:
         - BUNDLE_WITHOUT="${BUNDLE_WITHOUT}"
         - BUNDLER_VERSION=2.1.4
