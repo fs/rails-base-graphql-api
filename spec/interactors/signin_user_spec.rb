@@ -7,7 +7,7 @@ describe SigninUser do
     let(:expected_interactors) do
       [
         AuthenticateUser,
-        CreateJwtToken
+        GenerateTokenPair
       ]
     end
 

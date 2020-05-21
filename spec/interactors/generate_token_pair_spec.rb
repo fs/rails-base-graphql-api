@@ -1,13 +1,15 @@
 require "rails_helper"
 
-describe SignupUser do
+describe GenerateTokenPair do
+  include_context "with interactor"
+
   describe ".organized" do
     subject { described_class.organized }
 
     let(:expected_interactors) do
       [
-        CreateUser,
-        GenerateTokenPair
+        CreateAccessToken,
+        CreateRefreshToken
       ]
     end
 
