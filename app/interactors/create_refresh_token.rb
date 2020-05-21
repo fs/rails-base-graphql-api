@@ -26,10 +26,10 @@ class CreateRefreshToken
   end
 
   def payload
-    { sub: user.id, exp: REFRESH_TOKEN_TTL.from_now.to_i }
+    { sub: user.id, client_uid: client_uid, exp: REFRESH_TOKEN_TTL.from_now.to_i }
   end
 
   def client_uid
-    "uid"
+    "#{user.id}-#{SecureRandom.hex}"
   end
 end
