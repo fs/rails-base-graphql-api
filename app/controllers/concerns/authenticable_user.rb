@@ -2,9 +2,10 @@ module AuthenticableUser
   private
 
   def current_user
-    return unless token && payload
+    return unless token || refresh_token
 
-    User.find_by(id: payload_data["sub"])
+    refresh_token&.user
+    User.find_by(id: payload_data["sub"]) if payload
   end
 
   def token
@@ -19,5 +20,15 @@ module AuthenticableUser
 
   def payload_data
     @payload_data ||= payload.reduce({}, :merge)
+  end
+
+  def refresh_token_header
+    request.headers["X-Refresh-Token"].to_s
+  end
+
+  def refresh_token
+    return if refresh_token_header.present?
+
+    RefreshToken.find_by(token: refresh_token_header)
   end
 end

@@ -6,6 +6,8 @@ class CreateAccessToken
   delegate :user, to: :context
 
   def call
+    context.fail!(error_data: error_data) unless user
+
     context.access_token = access_token
   end
 
@@ -17,5 +19,9 @@ class CreateAccessToken
 
   def payload
     { sub: user.id, exp: ACCESS_TOKEN_TTL.from_now.to_i }
+  end
+
+  def error_data
+    { message: "Invalid credentials", status: 401, code: :unauthorized }
   end
 end
