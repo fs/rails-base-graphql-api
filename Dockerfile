@@ -39,13 +39,12 @@ RUN rm -rf $FOLDERS_TO_REMOVE
 FROM ruby:2.6.5-alpine
 
 # Add Alpine packages
-ARG ADDITIONAL_PACKAGES
 RUN apk add --update --no-cache \
     postgresql-client \
     imagemagick \
     tzdata \
     file \
-    $ADDITIONAL_PACKAGES
+    git
 
 # Copy app with gems from former build stage
 COPY --from=Builder /usr/local/bundle/ /usr/local/bundle/
@@ -53,10 +52,4 @@ COPY --from=Builder /app/ /app/
 
 WORKDIR /app
 
-CMD ["bin/docker-entrypoint"]
-
-# Expose Server port
-EXPOSE 3000
-
-# Set Rails env
-ENV RAILS_LOG_TO_STDOUT true
+ENTRYPOINT ["bin/docker-entrypoint"]

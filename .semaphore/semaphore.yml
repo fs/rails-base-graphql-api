@@ -26,7 +26,6 @@ global_job_config:
       - export IMAGE_NAME="${DOCKER_REPO}:${SEMAPHORE_GIT_BRANCH}"
       - export RAILS_ENV="test"
       - export RACK_ENV="test"
-      - export ADDITIONAL_PACKAGES="git"
       - export BUNDLE_WITHOUT="development staging production"
 
       # Authenticate with DockerHub
@@ -42,7 +41,7 @@ blocks:
       jobs:
       - name: Docker build
         commands:
-          - docker pull "${IMAGE_NAME}" || (docker build --build-arg BUNDLE_WITHOUT="${BUNDLE_WITHOUT}" --build-arg BUNDLER_VERSION=2.1.4 --build-arg ADDITIONAL_PACKAGES=${ADDITIONAL_PACKAGES} && docker push "${IMAGE_NAME}")
+          - docker pull "${IMAGE_NAME}" || (docker build -t "${IMAGE_NAME}" --build-arg BUNDLE_WITHOUT="${BUNDLE_WITHOUT}" --build-arg BUNDLER_VERSION=2.1.4 . && docker push "${IMAGE_NAME}")
 
   - name: Run
     task:
@@ -52,13 +51,14 @@ blocks:
       prologue:
         commands:
           - docker pull "${IMAGE_NAME}"
-          - bin/setup
+          - docker-compose -f docker-compose-test.yml up --detach
 
       jobs:
       - name: Run RSpec
         commands:
-          - docker-compose exec app bin/tests
+          - docker-compose -f docker-compose-test.yml exec app bin/rails db:create db:schema:load
+          - docker-compose -f docker-compose-test.yml exec app bin/tests
 
       - name: Run Quality
         commands:
-          - docker-compose exec app bin/quality
+          - docker-compose -f docker-compose-test.yml exec app bin/quality
