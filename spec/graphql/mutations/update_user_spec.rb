@@ -44,7 +44,7 @@ describe Mutations::UpdateUser do
   it "updates user" do
     response
 
-    expect(user.first_name).to eq "Randle"
-    expect(user.last_name).to eq "McMurphy"
+    expect(user.first_name).to eq("Randle")
+    expect(user.last_name).to eq("McMurphy")
   end
 end
