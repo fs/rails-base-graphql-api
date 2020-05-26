@@ -29,6 +29,6 @@ module AuthenticableUser
   def refresh_token
     return if refresh_token_header.present?
 
-    RefreshToken.find_by(token: refresh_token_header)
+    @refresh_token ||= RefreshToken.find_by(token: refresh_token_header)
   end
 end
