@@ -1,4 +1,6 @@
 class GraphqlController < ApplicationController
+  before_action :validate_token!
+
   def execute
     render json: execute_query
   rescue StandardError => e
@@ -20,7 +22,8 @@ class GraphqlController < ApplicationController
 
   def execution_context
     {
-      current_user: current_user
+      current_user: current_user,
+      client_uid: client_uid
     }
   end
 
