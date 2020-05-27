@@ -48,4 +48,7 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  # for graphiql-rails
+  config.assets.precompile += %w[graphiql/rails/application.js graphiql/rails/application.css]
 end
