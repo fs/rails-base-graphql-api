@@ -6,7 +6,7 @@ class DeleteRefreshToken
   def call
     context.fail!(error_data: error_data) unless refresh_token
 
-    refresh_token.delete
+    refresh_token.destroy
   end
 
   private
