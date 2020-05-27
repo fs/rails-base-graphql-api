@@ -1,20 +1,50 @@
 require "rails_helper"
 
 describe UpdateUser do
-  include_context "with interactor"
-
   describe ".call" do
-    let(:user) { create :user }
-    let(:user_params) { { first_name: "Arthur", last_name: "Dent" } }
+    include_context "with interactor"
+
+    let(:user) { create :user, password: "123456" }
     let(:initial_context) { { user: user, user_params: user_params } }
 
-    it_behaves_like "success interactor"
+    context "with valid data" do
+      let(:user_params) { { email: "dent@gmail.com", first_name: "Arthur", last_name: "Dent" } }
 
-    it "updates user" do
-      interactor.run
+      it_behaves_like "success interactor"
 
-      expect(user.first_name).to eq("Arthur")
-      expect(user.last_name).to eq("Dent")
+      it "updates user" do
+        interactor.run
+
+        expect(user.email).to eq("dent@gmail.com")
+        expect(user.first_name).to eq("Arthur")
+        expect(user.last_name).to eq("Dent")
+      end
+    end
+
+    context "when updating password" do
+      let(:user_params) { { old_password: "123456", new_password: "qwerty" } }
+
+      it_behaves_like "success interactor"
+
+      it "updates password" do
+        interactor.run
+
+        expect(user.authenticate("qwerty")).to be_truthy
+      end
+    end
+
+    context "when no old password provided" do
+      let(:user_params) { { new_password: "qwerty" } }
+      let(:error_data) { { message: "Authentication failed" } }
+
+      it_behaves_like "failed interactor"
+    end
+
+    context "when wrong old password provided" do
+      let(:user_params) { { old_password: "123457", new_password: "qwerty" } }
+      let(:error_data) { { message: "Authentication failed" } }
+
+      it_behaves_like "failed interactor"
     end
   end
 end
