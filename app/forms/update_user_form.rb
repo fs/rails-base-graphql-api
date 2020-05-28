@@ -23,7 +23,7 @@ class UpdateUserForm
 
   def assign_attributes(attrs)
     attrs.each do |key, value|
-      public_send "#{key}=", value if value
+      public_send "#{key}=", value
     end
     self
   end
