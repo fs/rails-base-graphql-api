@@ -3,8 +3,8 @@ module Mutations
     argument :email, String, required: false
     argument :first_name, String, required: false
     argument :last_name, String, required: false
-    argument :old_password, String, required: false
-    argument :new_password, String, required: false
+    argument :current_password, String, required: false
+    argument :password, String, required: false
 
     type Types::AuthenticationType
 

@@ -22,7 +22,7 @@ describe UpdateUser do
     end
 
     context "when updating password" do
-      let(:user_params) { { old_password: "123456", new_password: "qwerty" } }
+      let(:user_params) { { current_password: "123456", password: "qwerty" } }
 
       it_behaves_like "success interactor"
 
@@ -34,14 +34,14 @@ describe UpdateUser do
     end
 
     context "when no old password provided" do
-      let(:user_params) { { new_password: "qwerty" } }
+      let(:user_params) { { password: "qwerty" } }
       let(:error_data) { { message: "Authentication failed" } }
 
       it_behaves_like "failed interactor"
     end
 
     context "when wrong old password provided" do
-      let(:user_params) { { old_password: "123457", new_password: "qwerty" } }
+      let(:user_params) { { current_password: "123457", password: "qwerty" } }
       let(:error_data) { { message: "Authentication failed" } }
 
       it_behaves_like "failed interactor"

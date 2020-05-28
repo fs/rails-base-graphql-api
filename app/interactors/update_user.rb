@@ -16,19 +16,19 @@ class UpdateUser
   def authenticated_user
     return user unless updating_password?
 
-    user.authenticate(user_params[:old_password]) || context.fail!(error_data: auth_problem)
+    user.authenticate(user_params[:current_password]) || context.fail!(error_data: auth_problem)
   end
 
   def user_attributes
     return user_params unless updating_password?
 
     user_params
-      .except(:new_password, :old_password)
-      .merge(password: user_params[:new_password])
+      .except(:password, :current_password)
+      .merge(password: user_params[:password])
   end
 
   def updating_password?
-    user_params[:new_password].present?
+    user_params[:password].present?
   end
 
   def error_data

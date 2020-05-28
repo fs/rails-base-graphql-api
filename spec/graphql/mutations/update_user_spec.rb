@@ -11,8 +11,8 @@ describe Mutations::UpdateUser do
           email: "new_email_11@example.com",
           firstName: "Randle",
           lastName: "McMurphy",
-          oldPassword: "123456",
-          newPassword: "qwerty"
+          currentPassword: "123456",
+          password: "qwerty"
         ) {
           me {
             id
