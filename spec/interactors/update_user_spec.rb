@@ -35,14 +35,19 @@ describe UpdateUser do
 
     context "when no old password provided" do
       let(:user_params) { { password: "qwerty" } }
-      let(:error_data) { { message: "Authentication failed" } }
+      let(:error_data) do
+        {
+          message: "Record Invalid",
+          detail: ["Current password is incorrect", "Current password can't be blank"]
+        }
+      end
 
       it_behaves_like "failed interactor"
     end
 
     context "when wrong old password provided" do
       let(:user_params) { { current_password: "123457", password: "qwerty" } }
-      let(:error_data) { { message: "Authentication failed" } }
+      let(:error_data) { { message: "Record Invalid", detail: ["Current password is incorrect"] } }
 
       it_behaves_like "failed interactor"
     end
