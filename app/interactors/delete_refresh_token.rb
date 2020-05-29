@@ -1,12 +1,17 @@
 class DeleteRefreshToken
   include Interactor
 
-  delegate :token, to: :context
+  delegate :token, :client_uid, to: :context
 
   def call
-    context.fail!(error_data: error_data) unless refresh_token
+    unless refresh_token
+      RefreshToken.where(client_uid: client_uid).delete_all if client_uid
 
-    refresh_token.destroy
+      context.fail!(error_data: error_data)
+      context.client_uid = nil
+    end
+
+    refresh_token.delete
   end
 
   private
@@ -16,6 +21,6 @@ class DeleteRefreshToken
   end
 
   def error_data
-    { message: "Not found", status: 404, code: :not_found }
+    { message: "Invalid credentials", status: 401, code: :unauthorized }
   end
 end

@@ -2,23 +2,29 @@ require "rails_helper"
 
 describe CreateRefreshToken do
   include_context "with interactor"
+  include_context "when time is frozen"
 
-  let(:initial_context) { { user: user } }
+  let(:initial_context) { { user: user, client_uid: client_uid, jti: jti } }
 
-  let(:user) { create :user }
-  let(:payload) { { sub: user.id, client_uid: client_uid, exp: 30.days.from_now.to_i } }
-  let(:refresh_token) { JWT.encode(payload, ENV["AUTH_SECRET_TOKEN"], "HS256") }
+  let(:user) { create :user, id: 111_111 }
+  let(:refresh_token) do
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiY2xpZW50X3VpZCI6IjExMTExMS0xMjM0NTY3OCIsImV4cCI6MTU5MTcwNTgw"\
+    "MCwianRpIjoianRpIiwidHlwZSI6InJlZnJlc2gifQ.B0aKNaW_ppj2oi6BT66AkKmlz-vaXAPaw7ORJDq9CiU"
+  end
   let(:saved_refresh_token) { RefreshToken.last }
+  let(:jti) { "jti" }
+  let(:expires_at) { 30.days.since }
+
   let(:refresh_token_attributes) do
     {
-      user_id: user.id,
+      user_id: 111_111,
       token: refresh_token,
-      client_uid: client_uid
+      client_uid: client_uid,
+      jti: jti,
+      expires_at: expires_at
     }
   end
-  let(:client_uid) { "#{user.id}-qwerty54321" }
-
-  before { allow(SecureRandom).to receive(:hex).and_return("qwerty54321") }
+  let(:client_uid) { "111111-12345678" }
 
   describe ".call" do
     it_behaves_like "success interactor"

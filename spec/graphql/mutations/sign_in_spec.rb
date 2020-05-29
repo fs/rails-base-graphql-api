@@ -1,6 +1,8 @@
 require "rails_helper"
 
 describe Mutations::SignIn do
+  include_context "when time is frozen"
+
   let(:response) { ApplicationSchema.execute(query, {}).as_json }
   let(:query) do
     <<-GRAPHQL
@@ -20,14 +22,18 @@ describe Mutations::SignIn do
     GRAPHQL
   end
 
-  let!(:user) { create :user, email: "bilbo.baggins@shire.com", password: "TheRing" }
-  let(:access_payload) { { sub: user.id, exp: 1.hour.from_now.to_i } }
-  let(:access_token) { JWT.encode(access_payload, ENV["AUTH_SECRET_TOKEN"], "HS256") }
-  let(:refresh_payload) { { sub: user.id, client_uid: client_uid, exp: 30.days.from_now.to_i } }
-  let(:refresh_token) { JWT.encode(refresh_payload, ENV["AUTH_SECRET_TOKEN"], "HS256") }
-  let(:client_uid) { "#{user.id}-qwerty54321" }
+  let(:access_token) do
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiZXhwIjoxNTg5MTE3NDAwLCJjbGllbnRfdWlkIjoiMTExMTExLTE1ODkxMTM4MD" \
+    "AiLCJqdGkiOiJzZWs0elRBR2tOM09JIiwidHlwZSI6ImFjY2VzcyJ9.1JWZ-l0tcsnsXT0QDQT08en0OBU9EkR6ly1XL7hQ5dg"
+  end
+  let(:refresh_token) do
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiY2xpZW50X3VpZCI6IjExMTExMS0xNTg5MTEzODAwIiwiZXhwIjoxNTkxNzA1OD" \
+    "AwLCJqdGkiOiJzZWs0elRBR2tOM09JIiwidHlwZSI6InJlZnJlc2gifQ.JalYKabh0MJcqFKxJbx0TdLH6PTUN5vjdDkHteuYTPc"
+  end
 
-  before { allow(SecureRandom).to receive(:hex).and_return("qwerty54321") }
+  before do
+    create :user, id: 111_111, email: "bilbo.baggins@shire.com", password: "TheRing"
+  end
 
   context "with valid credentials" do
     let(:password) { "TheRing" }
@@ -38,7 +44,7 @@ describe Mutations::SignIn do
             "accessToken" => access_token,
             "refreshToken" => refresh_token,
             "me" => {
-              "id" => user.id.to_s,
+              "id" => "111111",
               "email" => "bilbo.baggins@shire.com"
             }
           }
