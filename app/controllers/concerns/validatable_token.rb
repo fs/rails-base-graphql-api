@@ -12,7 +12,7 @@ module ValidatableToken
   end
 
   def refresh_token
-    RefreshToken.find_by(jti: jti).exists?
+    RefreshToken.active.find_by(jti: jti).exists?
   end
 
   def raise_invalid_token

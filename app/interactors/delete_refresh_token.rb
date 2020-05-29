@@ -11,7 +11,7 @@ class DeleteRefreshToken
       context.client_uid = nil
     end
 
-    refresh_token.delete
+    refresh_token.destroy
   end
 
   private

@@ -12,7 +12,7 @@ module AuthenticableUser
   end
 
   def payload
-    @payload ||= JWT.decode(token, ENV["AUTH_SECRET_TOKEN"], true, algorithm: "HS256").first
+    @payload ||= JWT.decode(token, ENV.fetch("AUTH_SECRET_TOKEN"), true, algorithm: "HS256").first
   rescue JWT::DecodeError
     nil
   end
