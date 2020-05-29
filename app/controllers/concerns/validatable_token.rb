@@ -4,15 +4,15 @@ module ValidatableToken
   def validate_token!
     return unless token
 
-    raise_invalid_token unless refresh_token
+    raise_invalid_token unless payload && refresh_token
   end
 
   def jti
-    payload_data["jti"]
+    payload["jti"]
   end
 
   def refresh_token
-    RefreshToken.active.find_by(jti: jti).exists?
+    RefreshToken.active.find_by(jti: jti).present?
   end
 
   def raise_invalid_token
