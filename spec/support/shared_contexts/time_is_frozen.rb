@@ -1,5 +1,7 @@
 shared_context "when time is frozen" do
-  before { travel_to(Time.zone.local(2020, 5, 10, 12, 30)) }
+  let(:current_time) { Time.zone.local(2020, 5, 10, 12, 30) }
+
+  before { travel_to(current_time) }
 
   after { travel_back }
 end
