@@ -16,6 +16,7 @@ services:
       - DATABASE_URL=postgres://postgres:password@db
       - RAILS_ENV
       - RACK_ENV
+      - DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL
     build:
       context: .
       cache_from:
