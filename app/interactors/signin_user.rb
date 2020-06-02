@@ -2,5 +2,6 @@ class SigninUser
   include Interactor::Organizer
 
   organize AuthenticateUser,
-           GenerateTokenPair
+           CreateAccessToken,
+           CreateRefreshToken
 end
