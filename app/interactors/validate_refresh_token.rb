@@ -1,26 +1,29 @@
 class ValidateRefreshToken
   include Interactor
 
-  delegate :token, to: :context
+  delegate :token, :token_payload, to: :context
 
   def call
-    context.fail!(error_data: error_data) unless type == "refresh"
+    raise_unauthorized_error unless token_payload["type"] == "refresh"
+    destroy_same_tokens unless refresh_token
 
-    context.client_uid = client_uid
+    refresh_token.destroy
   end
 
-  def payload
-    @payload ||= JWT.decode(token, ENV.fetch("AUTH_SECRET_TOKEN"), true, algorithm: "HS256").first
-  rescue JWT::DecodeError
-    nil
+  private
+
+  def refresh_token
+    @refresh_token ||= RefreshToken.find_by(token: token)
   end
 
-  def client_uid
-    payload["client_uid"]
+  def destroy_same_tokens
+    RefreshToken.where(jti: token_payload["jti"]).destroy_all
+
+    raise_unauthorized_error
   end
 
-  def type
-    payload["type"]
+  def raise_unauthorized_error
+    context.fail!(error_data: error_data)
   end
 
   def error_data

@@ -1,6 +1,8 @@
 class UpdateTokenPair
   include Interactor::Organizer
+  include TransactionalInteractor
 
-  organize DeleteRefreshToken,
-           GenerateTokenPair
+  organize ValidateRefreshToken,
+           CreateAccessToken,
+           CreateRefreshToken
 end

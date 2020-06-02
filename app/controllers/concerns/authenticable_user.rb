@@ -3,8 +3,7 @@ module AuthenticableUser
 
   def current_user
     return unless token && payload
-
-    unauthenticated_request_error unless payload && refresh_token
+    return execution_error(authentication_error) unless active_refresh_token?
 
     User.find_by(id: payload["sub"])
   end
@@ -14,7 +13,7 @@ module AuthenticableUser
   end
 
   def payload
-    @payload ||= JWT.decode(token, ENV.fetch("AUTH_SECRET_TOKEN"), true, algorithm: "HS256").first
+    @payload ||= JWT.decode(token, ENV["AUTH_SECRET_TOKEN"], true, algorithm: "HS256").first
   rescue JWT::DecodeError
     nil
   end
@@ -23,13 +22,11 @@ module AuthenticableUser
     payload["jti"]
   end
 
-  def refresh_token
-    RefreshToken.active.find_by(jti: jti).present?
+  def active_refresh_token?
+    RefreshToken.active.exists?(jti: jti)
   end
 
-  def unauthenticated_request_error
-    GraphQL::ExecutionError.new(
-      extensions: { title: "Invalid credentials", detail: "", status: 401, code: :unauthorized, meta: {} }
-    )
+  def authentication_error
+    { message: "Invalid credentials", status: 401, code: :unauthorized }
   end
 end
