@@ -15,9 +15,11 @@ describe UpdateUser do
       it "updates user" do
         interactor.run
 
-        expect(user.email).to eq("dent@gmail.com")
-        expect(user.first_name).to eq("Arthur")
-        expect(user.last_name).to eq("Dent")
+        expect(user).to have_attributes(
+          email: "dent@gmail.com",
+          first_name: "Arthur",
+          last_name: "Dent"
+        )
       end
     end
 

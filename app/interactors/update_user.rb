@@ -4,19 +4,20 @@ class UpdateUser
   delegate :user_params, :user, to: :context
 
   def call
-    context.fail!(error_data: error_data(user)) unless update_user
+    context.fail!(error_data: error_data) unless update_user_form.valid? && update_user
   end
 
   private
 
   def update_user
-    form = UpdateUserForm.new(user).assign_attributes(user_params)
-    context.fail!(error_data: error_data(form)) unless form.valid?
-
-    user.update(form.user_attributes)
+    user.update(update_user_form.user_attributes)
   end
 
-  def error_data(model)
-    { message: "Record Invalid", detail: model.errors.to_a }
+  def update_user_form
+    @update_user_form ||= UpdateUserForm.new(user).assign_attributes(user_params)
+  end
+
+  def error_data
+    { message: "Record Invalid", detail: update_user_form.errors.to_a }
   end
 end

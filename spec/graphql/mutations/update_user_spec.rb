@@ -47,8 +47,10 @@ describe Mutations::UpdateUser do
   it "updates user" do
     response
 
-    expect(user.email).to eq("new_email_11@example.com")
-    expect(user.first_name).to eq("Randle")
-    expect(user.last_name).to eq("McMurphy")
+    expect(user).to have_attributes(
+      email: "new_email_11@example.com",
+      first_name: "Randle",
+      last_name: "McMurphy"
+    )
   end
 end
