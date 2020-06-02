@@ -23,12 +23,12 @@ describe Mutations::SignIn do
   end
 
   let(:access_token) do
-    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiZXhwIjoxNTg5MTE3NDAwLCJjbGllbnRfdWlkIjoiMTExMTExLTE1ODkxMTM4MD" \
-    "AiLCJqdGkiOiJzZWs0elRBR2tOM09JIiwidHlwZSI6ImFjY2VzcyJ9.1JWZ-l0tcsnsXT0QDQT08en0OBU9EkR6ly1XL7hQ5dg"
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiZXhwIjoxNTg5MTE3NDAwLCJqdGkiOiJzZWs0elRBR2tOM09JIiwidHlw" \
+    "ZSI6ImFjY2VzcyJ9.Dy5NpP_kE4bVDivhiQ0g-vy5yRd-TZpijNt379IMhAI"
   end
   let(:refresh_token) do
-    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiY2xpZW50X3VpZCI6IjExMTExMS0xNTg5MTEzODAwIiwiZXhwIjoxNTkxNzA1OD" \
-    "AwLCJqdGkiOiJzZWs0elRBR2tOM09JIiwidHlwZSI6InJlZnJlc2gifQ.JalYKabh0MJcqFKxJbx0TdLH6PTUN5vjdDkHteuYTPc"
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiY2xpZW50X3VpZCI6IjExMTExMS0xNTg5MTEzODAwIiwiZXhwIjoxNTkx" \
+    "NzA1ODAwLCJqdGkiOiJzZWs0elRBR2tOM09JIiwidHlwZSI6InJlZnJlc2gifQ.JalYKabh0MJcqFKxJbx0TdLH6PTUN5vjdDkHteuYTPc"
   end
 
   before do

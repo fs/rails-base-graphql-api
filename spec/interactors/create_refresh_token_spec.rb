@@ -8,8 +8,8 @@ describe CreateRefreshToken do
 
   let(:user) { create :user, id: 111_111 }
   let(:refresh_token) do
-    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiY2xpZW50X3VpZCI6IjExMTExMS0xMjM0NTY3OCIsImV4cCI6MTU5MTcwNTgw"\
-    "MCwianRpIjoianRpIiwidHlwZSI6InJlZnJlc2gifQ.B0aKNaW_ppj2oi6BT66AkKmlz-vaXAPaw7ORJDq9CiU"
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiY2xpZW50X3VpZCI6IjExMTExMS0xNTg5MTEzODAwIiwi"\
+    "ZXhwIjoxNTkxNzA1ODAwLCJqdGkiOiJqdGkiLCJ0eXBlIjoicmVmcmVzaCJ9.TxIs7V5wNALtPCrSfsGkg-7OZ8rkjAexkSk62t7Ky6I"
   end
   let(:saved_refresh_token) { RefreshToken.last }
   let(:jti) { "jti" }
@@ -24,7 +24,7 @@ describe CreateRefreshToken do
       expires_at: expires_at
     }
   end
-  let(:client_uid) { "111111-12345678" }
+  let(:client_uid) { "111111-1589113800" }
 
   describe ".call" do
     it_behaves_like "success interactor"

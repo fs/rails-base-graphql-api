@@ -2,5 +2,6 @@ class SignupUser
   include Interactor::Organizer
 
   organize CreateUser,
-           GenerateTokenPair
+           CreateAccessToken,
+           CreateRefreshToken
 end
