@@ -7,6 +7,11 @@ if [ -z "$CI" ]; then
     cp .env.example .env
   fi
 
+  # stop server (if it's running) and clean old data
+  docker-compose down
+  docker volume prune -f
+  docker rmi $(docker images rails_base_graphql_api -q)
+
   docker-compose up --detach
   docker-compose exec app bin/rails db:create db:schema:load
   docker-compose exec app bin/rails db:seed
