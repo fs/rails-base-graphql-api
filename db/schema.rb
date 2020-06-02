@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_28_082200) do
+ActiveRecord::Schema.define(version: 2020_06_02_140429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -20,11 +20,9 @@ ActiveRecord::Schema.define(version: 2020_05_28_082200) do
     t.string "token", null: false
     t.bigint "user_id", null: false
     t.datetime "expires_at", null: false
-    t.string "client_uid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "jti"
-    t.index ["client_uid"], name: "index_refresh_tokens_on_client_uid"
     t.index ["jti"], name: "index_refresh_tokens_on_jti"
     t.index ["token"], name: "index_refresh_tokens_on_token"
     t.index ["user_id"], name: "index_refresh_tokens_on_user_id"

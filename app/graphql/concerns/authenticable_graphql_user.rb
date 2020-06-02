@@ -6,7 +6,7 @@ module AuthenticableGraphqlUser
   def ready?(*)
     return true if current_user
 
-    raise execution_error(authentication_error)
+    raise execution_error(error_data: authentication_error)
   end
 
   def authentication_error

@@ -4,12 +4,12 @@ describe CreateRefreshToken do
   include_context "with interactor"
   include_context "when time is frozen"
 
-  let(:initial_context) { { user: user, client_uid: client_uid, jti: jti } }
+  let(:initial_context) { { user: user, jti: jti } }
 
   let(:user) { create :user, id: 111_111 }
   let(:refresh_token) do
-    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiY2xpZW50X3VpZCI6IjExMTExMS0xNTg5MTEzODAwIiwi"\
-    "ZXhwIjoxNTkxNzA1ODAwLCJqdGkiOiJqdGkiLCJ0eXBlIjoicmVmcmVzaCJ9.TxIs7V5wNALtPCrSfsGkg-7OZ8rkjAexkSk62t7Ky6I"
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiZXhwIjoxNTkxNzA1ODAwLCJqdGkiOiJqdGkiLCJ0eXBlIjoicmVmcmVzaCJ9."\
+    "rLewPTwiODP_ZkGvSN7h_WHGC1xv2DC7r_ne-cggcVo"
   end
   let(:saved_refresh_token) { RefreshToken.last }
   let(:jti) { "jti" }
@@ -19,7 +19,6 @@ describe CreateRefreshToken do
     {
       user_id: 111_111,
       token: refresh_token,
-      client_uid: client_uid,
       jti: jti,
       expires_at: expires_at
     }

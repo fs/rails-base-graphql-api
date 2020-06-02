@@ -30,7 +30,7 @@ class CreateAccessToken
   end
 
   def jti
-    @jti ||= "#{user.id}-#{Time.current.to_i}".crypt(auth_secret_token)
+    @jti ||= Digest::MD5.hexdigest("#{user.id}-#{Time.current.to_i}")
   end
 
   def auth_secret_token

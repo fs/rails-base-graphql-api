@@ -7,12 +7,12 @@ describe Mutations::SignUp do
 
   let(:registered_user) { User.first }
   let(:access_token) do
-    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTU4OTExNzQwMCwianRpIjoic2VIeVNNM2R"\
-    "1YTdXQSIsInR5cGUiOiJhY2Nlc3MifQ.YiEYiuUTMfwKRApXQzMl0eADjZxnWeukYYzY8SvPJm4"
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTU4OTExNzQwMCwianRpIjoiZGMzYzk5NmJjNjk3NDgwNDEx"\
+    "OTRjNDYzNWEzNmJlMDQiLCJ0eXBlIjoiYWNjZXNzIn0.RnZk3U3AiEVfenc9tmSZVRWhztmjbM2uBr_JA1k2BcI"
   end
   let(:refresh_token) do
-    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImNsaWVudF91aWQiOiIxLTE1ODkxMTM4MDAiLCJleHAiOj" \
-    "E1OTE3MDU4MDAsImp0aSI6InNlSHlTTTNkdWE3V0EiLCJ0eXBlIjoicmVmcmVzaCJ9.7gHXHRdGwlhzTnawf2YNW6up3G0-OWdm_GV3-VcwXa0"
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTU5MTcwNTgwMCwianRpIjoiZGMzYzk5NmJjNjk3NDgwNDE" \
+    "xOTRjNDYzNWEzNmJlMDQiLCJ0eXBlIjoicmVmcmVzaCJ9.WrdbN_TLEE97yKy3zXAjKvo9eqVF4cdsRcVdrA7dS7E"
   end
   let(:client_uid) { "#{registered_user.id}-qwerty54321" }
 

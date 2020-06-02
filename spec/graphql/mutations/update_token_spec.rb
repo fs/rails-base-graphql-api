@@ -16,27 +16,32 @@ describe Mutations::UpdateToken do
     GRAPHQL
   end
 
-  let(:user) { create :user, id: 111_111, email: "bilbo.baggins@shire.com", password: "TheRing" }
-  let(:client_uid) { old_refresh_token.client_uid }
+  let(:user) { create :user, id: 111_111 }
   let(:old_token) do
     "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiY2xpZW50X3VpZCI6IjExMTExMS0xNTg5MTEzODAwIiwiZXhwIjoxNT" \
     "kxNzA1ODAwLCJqdGkiOiJzZWs0elRBR2tOM09JIiwidHlwZSI6InJlZnJlc2gifQ.JalYKabh0MJcqFKxJbx0TdLH6PTUN5vjdDkHteuYTPc"
   end
 
   let(:old_refresh_token) do
-    create :refresh_token, token: old_token, user: user, client_uid: "111111-qwerty54321"
+    create :refresh_token, token: old_token, user: user, jti: "jti"
   end
 
   let(:access_token) do
-    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiZXhwIjoxNTg5MTE3NDAwLCJqdGkiOiJzZWs0elRBR2tOM09JIiw"\
-    "idHlwZSI6ImFjY2VzcyJ9.Dy5NpP_kE4bVDivhiQ0g-vy5yRd-TZpijNt379IMhAI"
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiZXhwIjoxNTg5MTE3NDAwLCJqdGkiOiI3ZmM2ZDIxOTEzODExYmU0OGRiN"\
+    "zQ0MTdmOWEyNjU5OCIsInR5cGUiOiJhY2Nlc3MifQ.e-wdSHA4hdSL3NzSrQMzPb1ggFCJDgRW_MGrcXPHwPM"
   end
   let(:refresh_token) do
-    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiY2xpZW50X3VpZCI6IjExMTExMS0xNTg5MTEzODAwIiwiZXhwIjoxNTkxNz"\
-    "A1ODAwLCJqdGkiOiJzZWs0elRBR2tOM09JIiwidHlwZSI6InJlZnJlc2gifQ.JalYKabh0MJcqFKxJbx0TdLH6PTUN5vjdDkHteuYTPc"
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiZXhwIjoxNTkxNzA1ODAwLCJqdGkiOiI3ZmM2ZDIxOTEzO"\
+    "DExYmU0OGRiNzQ0MTdmOWEyNjU5OCIsInR5cGUiOiJyZWZyZXNoIn0.NcsFRIy6_P5FU4iEm-28hBWRMRDMGn8ei7dKJJfpD_0"
   end
 
-  let(:execution_context) { { context: { current_user: user, token: old_token, client_uid: client_uid } } }
+  let(:execution_context) { { context: { current_user: user, token: old_token, token_payload: token_payload } } }
+  let(:token_payload) { { type: type }.stringify_keys }
+  let(:type) { "refresh" }
+
+  before do
+    create :refresh_token, token: old_token
+  end
 
   context "with valid credentials" do
     let(:password) { "TheRing" }
@@ -57,10 +62,7 @@ describe Mutations::UpdateToken do
   end
 
   context "with token type access" do
-    let(:old_token) do
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiZXhwIjoxNTg5MTE3NDAwLCJjbGllbnRfdWlkIjoiMTExMTExLTE1ODkxMTM4MDAiLCJq"\
-      "dGkiOiJzZWs0elRBR2tOM09JIiwidHlwZSI6ImFjY2VzcyJ9.1JWZ-l0tcsnsXT0QDQT08en0OBU9EkR6ly1XL7hQ5dg"
-    end
+    let(:type) { "access" }
     let(:expected_response) do
       {
         "data" => {
