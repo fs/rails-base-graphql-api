@@ -3,7 +3,11 @@
 set -e
 
 if [ -z "$CI" ]; then
-  docker-compose up --build --detach
+  if [ ! -f .env ]; then
+    cp .env.example .env
+  fi
+
+  docker-compose up --detach
   docker-compose exec app bin/rails db:create db:schema:load
   docker-compose exec app bin/rails db:seed
 fi

@@ -11,17 +11,17 @@ services:
       - db-data:/var/lib/postgresql/data
 
   app: &app_base
-    image: rails_base_graphql_api
+    image: ${IMAGE_NAME}
     environment:
       - DATABASE_URL=postgres://postgres:password@db
-      - RAILS_ENV=development
-      - RACK_ENV=development
+      - RAILS_ENV
+      - RACK_ENV
     build:
       context: .
       cache_from:
         - rails_base_graphql_api:latest
       args:
-        - BUNDLE_WITHOUT="production test staging"
+        - BUNDLE_WITHOUT="${BUNDLE_WITHOUT}"
         - BUNDLER_VERSION=2.1.4
         - FOLDERS_TO_REMOVE=""
     ports:

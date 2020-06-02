@@ -27,6 +27,7 @@ global_job_config:
       - export RAILS_ENV="test"
       - export RACK_ENV="test"
       - export BUNDLE_WITHOUT="development staging production"
+      - export DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL="true"
 
       # Authenticate with DockerHub
       - echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
@@ -51,14 +52,14 @@ blocks:
       prologue:
         commands:
           - docker pull "${IMAGE_NAME}"
-          - docker-compose -f docker-compose-test.yml up --detach
+          - docker-compose up --detach
 
       jobs:
       - name: Run RSpec
         commands:
-          - docker-compose -f docker-compose-test.yml exec app bin/rails db:create db:schema:load
-          - docker-compose -f docker-compose-test.yml exec app bin/tests
+          - docker-compose exec app bin/rails db:create db:schema:load
+          - docker-compose exec app bin/tests
 
       - name: Run Quality
         commands:
-          - docker-compose -f docker-compose-test.yml exec app bin/quality
+          - docker-compose exec app bin/quality
