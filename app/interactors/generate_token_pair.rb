@@ -1,6 +1,7 @@
 class GenerateTokenPair
   include Interactor::Organizer
 
-  organize CreateAccessToken,
+  organize ValidateRefreshToken,
+           CreateAccessToken,
            CreateRefreshToken
 end

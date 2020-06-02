@@ -3,7 +3,11 @@ class CreateRefreshToken
 
   REFRESH_TOKEN_TTL = 30.days
 
-  delegate :user, :client_uid, :jti, to: :context
+  delegate :user, :jti, :client_uid, to: :context
+
+  before do
+    context.client_uid ||= client_uid
+  end
 
   def call
     create_refresh_token!
@@ -34,5 +38,9 @@ class CreateRefreshToken
       jti: jti,
       type: "refresh"
     }
+  end
+
+  def client_uid
+    "#{user.id}-#{Time.current.to_i}"
   end
 end

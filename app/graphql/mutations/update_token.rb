@@ -3,16 +3,12 @@ module Mutations
     type Types::AuthenticationType
 
     def resolve
-      if type == "refresh"
-        update_token = UpdateTokenPair.call(user: user, token: token, client_uid: client_uid)
+      update_token = UpdateTokenPair.call(user: user, token: token)
 
-        if update_token.success?
-          update_token
-        else
-          execution_error(error_data: update_token.error_data)
-        end
+      if update_token.success?
+        update_token
       else
-        execution_error(error_data: error_data)
+        execution_error(error_data: update_token.error_data)
       end
     end
 
@@ -24,24 +20,6 @@ module Mutations
 
     def token
       context[:token]
-    end
-
-    def payload
-      @payload ||= JWT.decode(token, ENV.fetch("AUTH_SECRET_TOKEN"), true, algorithm: "HS256").first
-    rescue JWT::DecodeError
-      nil
-    end
-
-    def client_uid
-      payload["client_uid"]
-    end
-
-    def type
-      payload["type"]
-    end
-
-    def error_data
-      { message: "Invalid credentials", status: 401, code: :unauthorized }
     end
   end
 end

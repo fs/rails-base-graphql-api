@@ -36,5 +36,18 @@ describe DeleteRefreshToken do
 
       it_behaves_like "failed interactor"
     end
+
+    context "with two refresh tokens with the same client_uid" do
+      before do
+        create :refresh_token, client_uid: "2-dfdfd"
+        create :refresh_token, client_uid: "other_uid"
+      end
+
+      let(:client_uid) { refresh_token.client_uid }
+
+      it "removes refresh token" do
+        expect { interactor.run }.to change(RefreshToken, :count).from(3).to(1)
+      end
+    end
   end
 end
