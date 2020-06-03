@@ -6,6 +6,6 @@ if [ ! -f .env ]; then
   cp .env.example .env
 fi
 
-docker-compose up --build --detach
+docker-compose up --detach
 docker-compose exec app bin/rails db:create db:schema:load
 docker-compose exec app bin/rails db:seed
