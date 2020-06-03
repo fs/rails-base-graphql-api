@@ -10,6 +10,10 @@ RUN apk add --update --no-cache \
     git \
     imagemagick \
     tzdata
+
+# Remove bundle config if exist
+RUN rm -f .bundle/config
+
 RUN gem install bundler:$BUNDLER_VERSION
 
 WORKDIR /app
