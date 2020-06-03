@@ -1,25 +1,17 @@
 module Mutations
   class SignOut < BaseMutation
+    argument :everywhere, Boolean, required: false
+
     type Types::UserType
 
     def resolve
-      user = DeleteRefreshToken.call(client_uid: client_uid)
+      delete_token = SignOut.call(token: token, token_payload: token_payload, everywhere:)
 
-      if user.success?
+      if delete_token.success?
         current_user
       else
-        execution_error(error_data: user.error_data)
+        execution_error(error_data: delete_token.error_data)
       end
-    end
-
-    private
-
-    def client_uid
-      context[:client_uid]
-    end
-
-    def current_user
-      context[:current_user]
     end
   end
 end
