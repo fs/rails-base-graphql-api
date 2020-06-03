@@ -19,8 +19,6 @@ services:
       - DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL
     build:
       context: .
-      cache_from:
-        - rails_base_graphql_api:latest
       args:
         - BUNDLE_WITHOUT="${BUNDLE_WITHOUT}"
         - BUNDLER_VERSION=2.1.4
