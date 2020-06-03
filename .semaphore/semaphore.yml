@@ -44,8 +44,8 @@ blocks:
         commands:
           - docker pull "${BUILDER_NAME}" || echo "We need to build ${BUILDER_NAME}"
           - docker pull "${IMAGE_NAME}" || echo "We need to build ${IMAGE_NAME}"
-          - docker build --target Builder --cache-from="${BUILDER_NAME}" --build-arg BUNDLE_WITHOUT="${BUNDLE_WITHOUT}" --build-arg BUNDLER_VERSION=2.1.4 -t "${BUILDER_NAME}" .
-          - docker build --target Final --cache-from="${BUILDER_NAME}" --cache-from="${IMAGE_NAME}" --build-arg BUNDLE_WITHOUT="${BUNDLE_WITHOUT}" --build-arg BUNDLER_VERSION=2.1.4 -t "${IMAGE_NAME}" .
+          - docker build -t "${BUILDER_NAME}" --target Builder --cache-from="${BUILDER_NAME}" --build-arg BUNDLE_WITHOUT="${BUNDLE_WITHOUT}" --build-arg BUNDLER_VERSION=2.1.4 .
+          - docker build -t "${IMAGE_NAME}" --target Final --cache-from="${BUILDER_NAME}" --cache-from="${IMAGE_NAME}" --build-arg BUNDLE_WITHOUT="${BUNDLE_WITHOUT}" --build-arg BUNDLER_VERSION=2.1.4 .
           - docker push "${BUILDER_NAME}"
           - docker push "${IMAGE_NAME}"
 
