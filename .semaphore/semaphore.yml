@@ -43,8 +43,8 @@ blocks:
       jobs:
       - name: Docker build
         commands:
-          - docker pull "${IMAGE_NAME}"
-          - docker build --cache-from "${CACHE_FROM_IMAGE_NAME}" --build-arg BUNDLE_WITHOUT="${BUNDLE_WITHOUT}" --build-arg BUNDLER_VERSION=2.1.4 -t "${IMAGE_NAME}" .
+          - docker pull "$COMPANY_NAME"/rails_base_graphql_api:"$SEMAPHORE_GIT_BRANCH"
+          - docker build --cache-from "$COMPANY_NAME:rails_base_graphql_api:$SEMAPHORE_GIT_BRANCH" --build-arg BUNDLE_WITHOUT="${BUNDLE_WITHOUT}" --build-arg BUNDLER_VERSION=2.1.4 -t "${IMAGE_NAME}" .
           - docker push "${IMAGE_NAME}"
 
   - name: Run
