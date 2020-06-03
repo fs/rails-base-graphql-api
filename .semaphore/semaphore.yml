@@ -21,8 +21,10 @@ global_job_config:
   prologue:
     commands:
       # Setup dynamic environment variables b/c they do not support via env_vars yet
-      - export DOCKER_REPO="flatstack/rails_base_graphql_api"
-      - export IMAGE_NAME="${DOCKER_REPO}:${SEMAPHORE_GIT_BRANCH}"
+      - export COMPANY_NAME="flatstack"
+      - export REPO_NAME="rails_base_graphql_api"
+      - export IMAGE_NAME="${COMPANY_NAME}/${REPO_NAME}:${SEMAPHORE_GIT_BRANCH}"
+      - export CACHE_FROM_IMAGE_NAME="${COMPANY_NAME}:${REPO_NAME}:${SEMAPHORE_GIT_BRANCH}"
       - export RAILS_ENV="test"
       - export RACK_ENV="test"
       - export BUNDLE_WITHOUT="development staging production"
@@ -42,7 +44,7 @@ blocks:
       - name: Docker build
         commands:
           - docker pull "${IMAGE_NAME}"
-          - docker build -t "${IMAGE_NAME}" --cache-from "${IMAGE_NAME}" --build-arg BUNDLE_WITHOUT="${BUNDLE_WITHOUT}" --build-arg BUNDLER_VERSION=2.1.4 .
+          - docker build --cache-from "${CACHE_FROM_IMAGE_NAME}" --build-arg BUNDLE_WITHOUT="${BUNDLE_WITHOUT}" --build-arg BUNDLER_VERSION=2.1.4 -t "${IMAGE_NAME}" .
           - docker push "${IMAGE_NAME}"
 
   - name: Run
