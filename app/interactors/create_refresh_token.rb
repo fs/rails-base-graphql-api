@@ -22,7 +22,7 @@ class CreateRefreshToken
   end
 
   def refresh_token
-    @refresh_token ||= JWT.encode(payload, ENV["AUTH_SECRET_TOKEN"], "HS256")
+    @refresh_token ||= JWT.encode(payload, ENV.fetch("AUTH_SECRET_TOKEN"), "HS256")
   end
 
   def payload

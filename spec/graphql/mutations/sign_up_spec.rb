@@ -14,7 +14,6 @@ describe Mutations::SignUp do
     "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTU5MTcwNTgwMCwianRpIjoiZGMzYzk5NmJjNjk3NDgwNDE" \
     "xOTRjNDYzNWEzNmJlMDQiLCJ0eXBlIjoicmVmcmVzaCJ9.WrdbN_TLEE97yKy3zXAjKvo9eqVF4cdsRcVdrA7dS7E"
   end
-  let(:client_uid) { "#{registered_user.id}-qwerty54321" }
 
   let(:query) do
     <<-GRAPHQL

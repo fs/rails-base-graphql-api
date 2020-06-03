@@ -6,13 +6,13 @@ describe ValidateRefreshToken do
   let(:initial_context) do
     {
       token: token,
-      token_payload: token_payload
+      token_payload: token_payload.stringify_keys
     }
   end
   let(:error_data) do
     { message: "Invalid credentials", status: 401, code: :unauthorized }
   end
-  let(:token_payload) { { type: "refresh", jti: "jti" }.stringify_keys }
+  let(:token_payload) { { type: "refresh", jti: "jti" } }
 
   before do
     create :refresh_token, jti: "jti"

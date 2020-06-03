@@ -23,17 +23,21 @@ describe CreateRefreshToken do
       expires_at: expires_at
     }
   end
-  let(:client_uid) { "111111-1589113800" }
 
   describe ".call" do
     it_behaves_like "success interactor"
 
-    it "generates refresh token for user" do
+    it "provides generated refresh token" do
       interactor.run
 
       expect(context.refresh_token).to eq(refresh_token)
+    end
+
+    it "creates refresh token" do
+      interactor.run
+
       expect(RefreshToken.count).to eq(1)
-      expect(saved_refresh_token.reload).to have_attributes(refresh_token_attributes)
+      expect(saved_refresh_token).to have_attributes(refresh_token_attributes)
     end
   end
 end

@@ -7,7 +7,7 @@ class CreateAccessToken
 
   def call
     context.access_token = access_token
-    context.jti = existing_jti || jti
+    context.jti = jti
   end
 
   private
@@ -25,15 +25,19 @@ class CreateAccessToken
     }
   end
 
+  def jti
+    @jti ||= existing_jti || generate_jti
+  end
+
   def existing_jti
     token_payload && token_payload["jti"]
   end
 
-  def jti
-    @jti ||= Digest::MD5.hexdigest("#{user.id}-#{Time.current.to_i}")
+  def generate_jti
+    Digest::MD5.hexdigest("#{user.id}-#{Time.current.to_i}")
   end
 
   def auth_secret_token
-    @auth_secret_token ||= ENV["AUTH_SECRET_TOKEN"]
+    @auth_secret_token ||= ENV.fetch("AUTH_SECRET_TOKEN")
   end
 end
