@@ -57,8 +57,8 @@ blocks:
       - name: Run RSpec
         commands:
           - docker-compose exec app bin/rails db:create db:schema:load
-          - docker-compose exec app bin/tests
+          - docker-compose exec app bin/rspec spec
 
       - name: Run Quality
         commands:
-          - docker-compose exec app bin/quality
+          - bin/quality
