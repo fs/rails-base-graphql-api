@@ -40,7 +40,7 @@ RUN rm -rf $FOLDERS_TO_REMOVE
 
 ###############################
 # Stage Final
-FROM ruby:2.6.5-alpine
+FROM ruby:2.6.5-alpine as Final
 
 # Add Alpine packages
 RUN apk add --update --no-cache \
