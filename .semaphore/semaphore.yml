@@ -42,8 +42,8 @@ blocks:
       jobs:
       - name: Docker build
         commands:
-          - docker pull "${BUILDER_NAME}" || echo "We need to build ${BUILDER_NAME}"
-          - docker pull "${IMAGE_NAME}" || echo "We need to build ${IMAGE_NAME}"
+          - docker pull "${BUILDER_NAME}" || true
+          - docker pull "${IMAGE_NAME}" || true
           - docker build -t "${BUILDER_NAME}" --target Builder --cache-from="${BUILDER_NAME}" --build-arg BUNDLE_WITHOUT="${BUNDLE_WITHOUT}" --build-arg BUNDLER_VERSION=2.1.4 .
           - docker build -t "${IMAGE_NAME}" --target Final --cache-from="${BUILDER_NAME}" --cache-from="${IMAGE_NAME}" --build-arg BUNDLE_WITHOUT="${BUNDLE_WITHOUT}" --build-arg BUNDLER_VERSION=2.1.4 .
           - docker push "${BUILDER_NAME}"
@@ -63,7 +63,7 @@ blocks:
       - name: Run RSpec
         commands:
           - docker-compose exec app bin/rails db:create db:schema:load
-          - docker-compose exec app bin/rspec spec
+          - bin/tests
 
       - name: Run Quality
         commands:
