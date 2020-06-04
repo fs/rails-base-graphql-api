@@ -9,3 +9,4 @@ fi
 docker-compose up --detach
 docker-compose exec app bin/rails db:create db:schema:load
 docker-compose exec app bin/rails db:seed
+docker-compose stop
