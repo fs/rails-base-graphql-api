@@ -3,12 +3,6 @@ require "rails_helper"
 describe Types::QueryType do
   let!(:user) { create :user }
 
-  let(:response) { ApplicationSchema.execute(query, query_options).as_json }
-
-  let(:query_options) do
-    { context: { current_user: user } }
-  end
-
   let(:query) do
     <<-GRAPHQL
       query {
@@ -22,22 +16,19 @@ describe Types::QueryType do
     GRAPHQL
   end
 
-  let(:expected_response) do
-    {
-      "data" => {
-        "me" => {
-          "id" => user.id.to_s,
-          "email" => user.email,
-          "firstName" => user.first_name,
-          "lastName" => user.last_name
-        }
-      }
-    }
-  end
-
   context "with current_user provided" do
-    it "gets current_user info" do
-      expect(response).to eq expected_response
+    it_behaves_like "graphql_request", "gets current_user info" do
+      let(:schema_context) { { current_user: user } }
+      let(:fixture_path) { "json/acceptance/graphql/query_type_me.json" }
+      let(:prepared_fixture_file) do
+        fixture_file.gsub(
+          /:id|:email|:first_name|:last_name/,
+          ":id" => user.id,
+          ":email" => user.email,
+          ":first_name" => user.first_name,
+          ":last_name" => user.last_name
+        )
+      end
     end
   end
 end

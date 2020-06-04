@@ -1,7 +1,6 @@
 require "rails_helper"
 
 describe Mutations::SignIn do
-  let(:response) { ApplicationSchema.execute(query, {}).as_json }
   let(:query) do
     <<-GRAPHQL
       mutation {
@@ -24,54 +23,24 @@ describe Mutations::SignIn do
 
   context "with valid credentials" do
     let(:password) { "TheRing" }
-    let(:expected_response) do
-      {
-        "data" => {
-          "signin" => {
-            "token" => token,
-            "me" => {
-              "id" => user.id.to_s,
-              "email" => "bilbo.baggins@shire.com"
-            }
-          }
-        }
-      }
-    end
 
-    it "gets user token" do
-      expect(response).to eq expected_response
+    it_behaves_like "graphql_request", "gets user token" do
+      let(:fixture_path) { "json/acceptance/graphql/signin.json" }
+      let(:prepared_fixture_file) do
+        fixture_file.gsub(
+          /:id|:token/,
+          ":id" => user.id,
+          ":token" => token
+        )
+      end
     end
   end
 
   context "with invalid credentials" do
     let(:password) { "Sauron" }
-    let(:expected_response) do
-      {
-        "data" => {
-          "signin" => nil
-        },
-        "errors" => [
-          {
-            "message" => "Invalid credentials",
-            "extensions" => {
-              "status" => 401,
-              "code" => "unauthorized",
-              "detail" => nil
-            },
-            "locations" => [
-              {
-                "line" => 2,
-                "column" => 9
-              }
-            ],
-            "path" => ["signin"]
-          }
-        ]
-      }
-    end
 
-    it "returns error" do
-      expect(response).to eq expected_response
+    it_behaves_like "graphql_request", "returns error" do
+      let(:fixture_path) { "json/acceptance/graphql/signin_wrong.json" }
     end
   end
 end
