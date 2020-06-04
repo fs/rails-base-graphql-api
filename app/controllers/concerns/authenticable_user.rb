@@ -3,7 +3,7 @@ module AuthenticableUser
 
   def current_user
     return unless token && payload
-    return execution_error(authentication_error) unless active_refresh_token?
+    return execution_error(error_data: authentication_error) unless active_refresh_token?
 
     User.find_by(id: payload["sub"])
   end

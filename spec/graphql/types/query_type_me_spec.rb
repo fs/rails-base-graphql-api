@@ -6,8 +6,9 @@ describe Types::QueryType do
   let(:response) { ApplicationSchema.execute(query, query_options).as_json }
 
   let(:query_options) do
-    { context: { current_user: user } }
+    { context: { current_user: user, token_payload: token_payload.stringify_keys } }
   end
+  let(:token_payload) { { type: "access" } }
 
   let(:query) do
     <<-GRAPHQL
