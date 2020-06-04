@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2020_06_04_082036) do
     t.string "password_reset_token"
     t.datetime "password_reset_sent_at"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["password_reset_token"], name: "index_users_on_password_reset_token", unique: true
+    t.index ["password_reset_token"], name: "index_users_on_password_reset_token"
   end
 
   add_foreign_key "refresh_tokens", "users"
