@@ -68,3 +68,9 @@ blocks:
       - name: Run Quality
         commands:
           - bin/quality
+
+promotions:
+  - name: Deploy to Heroku
+    pipeline_file: heroku.yml
+    auto_promote:
+      when: "result = 'passed' and branch = 'master'"
