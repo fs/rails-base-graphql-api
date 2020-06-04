@@ -25,7 +25,7 @@ describe RequestPasswordReset do
 
     it "doesn't send email" do
       expect(ApplicationMailer).not_to receive(:password_recovery)
-      response
+      interactor.run
     end
   end
 end
