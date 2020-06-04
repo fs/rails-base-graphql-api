@@ -1,1 +1,12 @@
-{"data":{"updateUser":{"me":{"id":":id","email":"new_email_11@example.com","firstName":"Randle","lastName":"McMurphy"}}}}
+{
+  "data": {
+    "updateUser": {
+      "me": {
+        "id": ":id",
+        "email": "new_email_11@example.com",
+        "firstName": "Randle",
+        "lastName": "McMurphy"
+      }
+    }
+  }
+}

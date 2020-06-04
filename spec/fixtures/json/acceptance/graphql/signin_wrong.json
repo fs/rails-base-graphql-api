@@ -1,1 +1,19 @@
-{"data":{"signin":null},"errors":[{"message":"Invalid credentials","extensions":{"status":401,"code":"unauthorized","detail":null},"locations":[{"line":2,"column":9}],"path":["signin"]}]}
+{
+  "data": {
+    "signin": null
+  },
+  "errors": [
+    {
+      "message": "Invalid credentials",
+      "extensions": {
+        "status": 401,
+        "code": "unauthorized",
+        "detail": null
+      },
+      "locations": [
+        { "line": 2, "column": 9 }
+      ],
+      "path": ["signin"]
+    }
+  ]
+}
