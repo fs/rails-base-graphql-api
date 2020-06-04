@@ -6,7 +6,7 @@ describe RequestPasswordReset do
   let(:initial_context) { { email: user.email } }
 
   before do
-    delivery = double(ActionMailer::MessageDelivery)
+    delivery = instance_double(ActionMailer::MessageDelivery)
     allow(delivery).to receive(:deliver_later)
     allow(ApplicationMailer).to receive(:password_recovery).and_return(delivery)
   end

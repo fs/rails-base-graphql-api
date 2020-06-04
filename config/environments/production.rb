@@ -24,9 +24,7 @@ Rails.application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = "http://assets.example.com"
 
-  if ENV["ASSET_HOST"]
-    config.action_mailer.asset_host = ENV["ASSET_HOST"]
-  end
+  config.action_mailer.asset_host = ENV["ASSET_HOST"] if ENV["ASSET_HOST"]
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for Apache
@@ -68,14 +66,14 @@ Rails.application.configure do
     config.action_mailer.delivery_method = :smtp
 
     config.action_mailer.smtp_settings = {
-      authentication:       :plain,
+      authentication: :plain,
       enable_starttls_auto: true,
-      openssl_verify_mode:  ENV.fetch("SMTP_OPENSSL_VERIFY_MODE", nil),
-      address:              ENV.fetch("SMTP_ADDRESS", "smtp.sendgrid.net"),
-      port:                 ENV.fetch("SMTP_PORT", 587),
-      domain:               ENV.fetch("SMTP_DOMAIN", "heroku.com"),
-      user_name:            ENV.fetch("SMTP_USERNAME") { ENV.fetch("SENDGRID_USERNAME") },
-      password:             ENV.fetch("SMTP_PASSWORD") { ENV.fetch("SENDGRID_PASSWORD") }
+      openssl_verify_mode: ENV.fetch("SMTP_OPENSSL_VERIFY_MODE", nil),
+      address: ENV.fetch("SMTP_ADDRESS", "smtp.sendgrid.net"),
+      port: ENV.fetch("SMTP_PORT", 587),
+      domain: ENV.fetch("SMTP_DOMAIN", "heroku.com"),
+      user_name: ENV.fetch("SMTP_USERNAME") { ENV.fetch("SENDGRID_USERNAME") },
+      password: ENV.fetch("SMTP_PASSWORD") { ENV.fetch("SENDGRID_PASSWORD") }
     }
   end
 
