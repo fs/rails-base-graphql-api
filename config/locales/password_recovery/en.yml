@@ -1,0 +1,5 @@
+en:
+  password_recovery:
+    sent:
+      message: Instructions sent
+      detail: Password recovery instructions were sent if that account exists

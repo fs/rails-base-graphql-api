@@ -2,12 +2,10 @@ module Mutations
   class RequestPasswordRecovery < BaseMutation
     argument :email, String, required: true
 
-    type Types::AuthenticationType
+    type Types::DetailedMessageType
 
     def resolve(email:)
-      ApplicationMailer.password_recovery(User.find_by(email: email)).deliver_now
-
-      { message: "ok" }
+      RequestPasswordReset.call(email: email)
     end
   end
 end
