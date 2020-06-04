@@ -2,5 +2,6 @@ class SigninUser
   include Interactor::Organizer
 
   organize AuthenticateUser,
-           CreateJwtToken
+           CreateAccessToken,
+           CreateRefreshToken
 end

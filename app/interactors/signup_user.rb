@@ -1,6 +1,8 @@
 class SignupUser
   include Interactor::Organizer
+  include TransactionalInteractor
 
   organize CreateUser,
-           CreateJwtToken
+           CreateAccessToken,
+           CreateRefreshToken
 end

@@ -23,7 +23,8 @@ class GraphqlController < ApplicationController
   def execution_context
     {
       current_user: current_user,
-      client_uid: client_uid
+      token: token,
+      token_payload: payload
     }
   end
 

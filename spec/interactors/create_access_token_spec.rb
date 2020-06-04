@@ -2,23 +2,54 @@ require "rails_helper"
 
 describe CreateAccessToken do
   include_context "with interactor"
+  include_context "when time is frozen"
 
-  let(:initial_context) { { user: user } }
-
-  let(:user) { create :user }
-  let(:payload) { { sub: user.id, exp: 1.hour.from_now.to_i, client_uid: client_uid } }
-  let(:access_token) { JWT.encode(payload, ENV["AUTH_SECRET_TOKEN"], "HS256") }
-  let(:client_uid) { "#{user.id}-qwerty54321" }
-
-  before { allow(SecureRandom).to receive(:hex).and_return("qwerty54321") }
+  let(:initial_context) { { user: user, token_payload: token_payload.stringify_keys } }
+  let(:user) { create :user, id: 111_111 }
 
   describe ".call" do
-    it_behaves_like "success interactor"
+    context "with existing jti" do
+      let(:token_payload) { { jti: "existing_token_jti" } }
+      let(:expected_jti) { "existing_token_jti" }
+      let(:expected_token_payload) do
+        { sub: 111_111, exp: 1_589_117_400, jti: "existing_token_jti", type: "access" }
+      end
 
-    it "generates access token for user" do
-      interactor.run
+      it_behaves_like "success interactor"
 
-      expect(context.access_token).to eq(access_token)
+      it "provides previous token jti" do
+        interactor.run
+
+        expect(context.jti).to eq(expected_jti)
+      end
+
+      it "generates access token with correct payload" do
+        interactor.run
+
+        expect(context.access_token).to have_jwt_token_payload(expected_token_payload)
+      end
+    end
+
+    context "with generate jti" do
+      let(:token_payload) { {} }
+      let(:expected_jti) { "7fc6d21913811be48db74417f9a26598" }
+      let(:expected_token_payload) do
+        { sub: 111_111, exp: 1_589_117_400, jti: "7fc6d21913811be48db74417f9a26598", type: "access" }
+      end
+
+      it_behaves_like "success interactor"
+
+      it "generates new access token jti" do
+        interactor.run
+
+        expect(context.jti).to eq(expected_jti)
+      end
+
+      it "generates access token with correct payload" do
+        interactor.run
+
+        expect(context.access_token).to have_jwt_token_payload(expected_token_payload)
+      end
     end
   end
 end

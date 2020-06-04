@@ -1,14 +1,19 @@
 require "rails_helper"
 
 describe Mutations::SignUp do
+  include_context "when time is frozen"
+
   let(:response) { ApplicationSchema.execute(query, {}).as_json }
 
   let(:registered_user) { User.first }
-  let(:access_payload) { { sub: registered_user.id, exp: 1.hour.from_now.to_i, client_uid: client_uid } }
-  let(:access_token) { JWT.encode(access_payload, ENV["AUTH_SECRET_TOKEN"], "HS256") }
-  let(:refresh_payload) { { sub: registered_user.id, client_uid: client_uid, exp: 30.days.from_now.to_i } }
-  let(:refresh_token) { JWT.encode(refresh_payload, ENV["AUTH_SECRET_TOKEN"], "HS256") }
-  let(:client_uid) { "#{registered_user.id}-qwerty54321" }
+  let(:access_token) do
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTU4OTExNzQwMCwianRpIjoiZGMzYzk5NmJjNjk3NDgwNDEx"\
+    "OTRjNDYzNWEzNmJlMDQiLCJ0eXBlIjoiYWNjZXNzIn0.RnZk3U3AiEVfenc9tmSZVRWhztmjbM2uBr_JA1k2BcI"
+  end
+  let(:refresh_token) do
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTU5MTcwNTgwMCwianRpIjoiZGMzYzk5NmJjNjk3NDgwNDE" \
+    "xOTRjNDYzNWEzNmJlMDQiLCJ0eXBlIjoicmVmcmVzaCJ9.WrdbN_TLEE97yKy3zXAjKvo9eqVF4cdsRcVdrA7dS7E"
+  end
 
   let(:query) do
     <<-GRAPHQL
@@ -21,7 +26,8 @@ describe Mutations::SignUp do
             id
             email
           }
-          token
+          accessToken
+          refreshToken
         }
       }
     GRAPHQL
@@ -37,7 +43,8 @@ describe Mutations::SignUp do
               "id" => registered_user.id.to_s,
               "email" => email
             },
-            "token" => token
+            "accessToken" => access_token,
+            "refreshToken" => refresh_token
           }
         }
       }

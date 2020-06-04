@@ -1,4 +1,4 @@
 class ApplicationController < ActionController::API
   include AuthenticableUser
-  include ValidatableToken
+  include ExecutionErrorResponder
 end

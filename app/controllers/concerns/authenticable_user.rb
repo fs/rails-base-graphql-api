@@ -2,9 +2,10 @@ module AuthenticableUser
   private
 
   def current_user
-    return unless token || refresh_token_value
+    return unless token && payload
+    return execution_error(error_data: authentication_error) unless active_refresh_token?
 
-    refresh_token&.user
+    User.find_by(id: payload["sub"])
   end
 
   def token
@@ -16,8 +17,20 @@ module AuthenticableUser
   end
 
   def payload
-    @payload ||= JWT.decode token, nil, false
+    @payload ||= JWT.decode(token, ENV.fetch("AUTH_SECRET_TOKEN"), true, algorithm: "HS256").first
   rescue JWT::DecodeError
     nil
+  end
+
+  def jti
+    payload["jti"]
+  end
+
+  def active_refresh_token?
+    RefreshToken.active.exists?(jti: jti)
+  end
+
+  def authentication_error
+    { message: "Invalid credentials", status: 401, code: :unauthorized }
   end
 end

@@ -1,6 +1,8 @@
 require "rails_helper"
 
 describe Mutations::SignIn do
+  include_context "when time is frozen"
+
   let(:response) { ApplicationSchema.execute(query, {}).as_json }
   let(:query) do
     <<-GRAPHQL
@@ -9,24 +11,29 @@ describe Mutations::SignIn do
           email: "bilbo.baggins@shire.com",
           password: "#{password}"
         ) {
-          token
           me {
             id
             email
           }
+          refreshToken
+          accessToken
         }
       }
     GRAPHQL
   end
 
-  let!(:user) { create :user, email: "bilbo.baggins@shire.com", password: "TheRing" }
-  let(:access_payload) { { sub: user.id, exp: 1.hour.from_now.to_i, client_uid: client_uid } }
-  let(:access_token) { JWT.encode(access_payload, ENV["AUTH_SECRET_TOKEN"], "HS256") }
-  let(:refresh_payload) { { sub: user.id, client_uid: client_uid, exp: 30.days.from_now.to_i } }
-  let(:refresh_token) { JWT.encode(refresh_payload, ENV["AUTH_SECRET_TOKEN"], "HS256") }
-  let(:client_uid) { "#{user.id}-qwerty54321" }
+  let(:access_token) do
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiZXhwIjoxNTg5MTE3NDAwLCJqdGkiOiI3ZmM2ZDIxOTEzODExYmU" \
+    "0OGRiNzQ0MTdmOWEyNjU5OCIsInR5cGUiOiJhY2Nlc3MifQ.e-wdSHA4hdSL3NzSrQMzPb1ggFCJDgRW_MGrcXPHwPM"
+  end
+  let(:refresh_token) do
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiZXhwIjoxNTkxNzA1ODAwLCJqdGkiOiI3ZmM2ZDIxOTEzODEx" \
+    "YmU0OGRiNzQ0MTdmOWEyNjU5OCIsInR5cGUiOiJyZWZyZXNoIn0.NcsFRIy6_P5FU4iEm-28hBWRMRDMGn8ei7dKJJfpD_0"
+  end
 
-  before { allow(SecureRandom).to receive(:hex).and_return("qwerty54321") }
+  before do
+    create :user, id: 111_111, email: "bilbo.baggins@shire.com", password: "TheRing"
+  end
 
   context "with valid credentials" do
     let(:password) { "TheRing" }
@@ -34,9 +41,10 @@ describe Mutations::SignIn do
       {
         "data" => {
           "signin" => {
-            "token" => token,
+            "accessToken" => access_token,
+            "refreshToken" => refresh_token,
             "me" => {
-              "id" => user.id.to_s,
+              "id" => "111111",
               "email" => "bilbo.baggins@shire.com"
             }
           }

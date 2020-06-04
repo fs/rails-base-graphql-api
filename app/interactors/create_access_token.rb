@@ -3,30 +3,41 @@ class CreateAccessToken
 
   ACCESS_TOKEN_TTL = 1.hour
 
-  delegate :user, to: :context
+  delegate :user, :token_payload, to: :context
 
   def call
-    context.fail!(error_data: error_data) unless user
-
     context.access_token = access_token
-    context.client_uid = client_uid
+    context.jti = jti
   end
 
   private
 
   def access_token
-    JWT.encode(payload, ENV["AUTH_SECRET_TOKEN"], "HS256")
+    JWT.encode(payload, auth_secret_token, "HS256")
   end
 
   def payload
-    { sub: user.id, exp: ACCESS_TOKEN_TTL.from_now.to_i, client_uid: client_uid }
+    {
+      sub: user.id,
+      exp: ACCESS_TOKEN_TTL.from_now.to_i,
+      jti: jti,
+      type: "access"
+    }
   end
 
-  def error_data
-    { message: "Invalid credentials", status: 401, code: :unauthorized }
+  def jti
+    @jti ||= existing_jti || generate_jti
   end
 
-  def client_uid
-    @client_uid ||= "#{user.id}-#{SecureRandom.hex}"
+  def existing_jti
+    token_payload && token_payload["jti"]
+  end
+
+  def generate_jti
+    Digest::MD5.hexdigest("#{user.id}-#{Time.current.to_i}")
+  end
+
+  def auth_secret_token
+    @auth_secret_token ||= ENV.fetch("AUTH_SECRET_TOKEN")
   end
 end
