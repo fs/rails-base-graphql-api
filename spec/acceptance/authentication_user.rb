@@ -11,36 +11,32 @@ describe "Authenticate user", type: :request do
   context "with valid token" do
     let(:refresh_token) { create :refresh_token, :access, user: user }
 
-    it "return current_user id" do
-      expect(JSON.parse(response.body)["data"]["me"]["id"]).to eq("111111")
+    it_behaves_like :graphql_request, "return current user" do
+      let(:fixture_path) { "json/acceptance/current_user.json" }
     end
   end
 
   context "with invalid token" do
     let(:refresh_token) { create :refresh_token, token: "bad_token", user: user }
 
-    it "return null" do
-      expect(JSON.parse(response.body)["data"]["me"]).to eq(nil)
+    it_behaves_like :graphql_request, "return null" do
+      let(:fixture_path) { "json/acceptance/not_user.json" }
     end
   end
 
   context "with expired token" do
     let(:refresh_token) { create :refresh_token, :access, user: user, expires_at: 1.day.ago }
 
-    it "return invalid credential error" do
-      expect(JSON.parse(response.body)["errors"][0]["message"]).to eq("Invalid credentials")
-    end
-
-    it "returns status code 401" do
-      expect(JSON.parse(response.body)["errors"][0]["extensions"]["status"]).to have_http_status("401")
+    it_behaves_like :graphql_request, "return invalid credential error" do
+      let(:fixture_path) { "json/acceptance/invalid_credentials.json" }
     end
   end
 
   context "when use refresh token for receiving user" do
     let(:refresh_token) { create :refresh_token, :refresh, user: user }
 
-    it "return null" do
-      expect(JSON.parse(response.body)["data"]["me"]).to eq(nil)
+    it_behaves_like :graphql_request, "return null" do
+      let(:fixture_path) { "json/acceptance/not_user.json" }
     end
   end
 end

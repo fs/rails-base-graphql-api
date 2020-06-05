@@ -8,3 +8,7 @@ require "spec_helper"
 SimpleCov.start "rails"
 
 Dir[Rails.root.join("spec/support/**/*.rb")].sort.each { |f| require f }
+
+RSpec.configure do |config|
+  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+end
