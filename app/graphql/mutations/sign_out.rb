@@ -4,8 +4,8 @@ module Mutations
 
     type Types::UserType
 
-    def resolve
-      delete_token = SignOut.call(token: token, token_payload: token_payload, everywhere:)
+    def resolve(everywhere: nil)
+      delete_token = SignoutUser.call(token: token, token_payload: token_payload, everywhere: everywhere)
 
       if delete_token.success?
         current_user

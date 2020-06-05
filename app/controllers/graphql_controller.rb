@@ -1,6 +1,4 @@
 class GraphqlController < ApplicationController
-  before_action :validate_token!
-
   def execute
     render json: execute_query
   rescue StandardError => e
