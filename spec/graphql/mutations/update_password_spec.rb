@@ -47,7 +47,7 @@ describe Mutations::UpdatePassword do
   end
 
   context "with wrong token" do
-    let(:reset_token) { 'wrong_token' }
+    let(:reset_token) { "wrong_token" }
     let(:expected_response) do
       {
         "data" => {
