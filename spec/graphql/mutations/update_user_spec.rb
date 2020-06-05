@@ -14,12 +14,10 @@ describe Mutations::UpdateUser do
           currentPassword: "123456",
           password: "qwerty"
         ) {
-          me {
-            id
-            email
-            firstName
-            lastName
-          }
+          id
+          email
+          firstName
+          lastName
         }
       }
     GRAPHQL
@@ -29,12 +27,10 @@ describe Mutations::UpdateUser do
     {
       "data" => {
         "updateUser" => {
-          "me" => {
-            "id" => user.id.to_s,
-            "email" => "new_email_11@example.com",
-            "firstName" => "Randle",
-            "lastName" => "McMurphy"
-          }
+          "id" => user.id.to_s,
+          "email" => "new_email_11@example.com",
+          "firstName" => "Randle",
+          "lastName" => "McMurphy"
         }
       }
     }
