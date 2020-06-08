@@ -1,6 +1,6 @@
 ######################
 # Stage: Builder
-FROM ruby:2.6.5-alpine as Builder
+FROM ruby:2.6.6-alpine as Builder
 
 ARG BUNDLER_VERSION
 
@@ -40,7 +40,7 @@ RUN rm -rf $FOLDERS_TO_REMOVE
 
 ###############################
 # Stage Final
-FROM ruby:2.6.5-alpine as Final
+FROM ruby:2.6.6-alpine as Final
 
 # Add Alpine packages
 RUN apk add --update --no-cache \
