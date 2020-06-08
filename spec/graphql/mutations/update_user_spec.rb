@@ -1,8 +1,6 @@
 require "rails_helper"
 
 describe Mutations::UpdateUser do
-  let(:response) { ApplicationSchema.execute(query, execution_context).as_json }
-  let(:execution_context) { { context: schema_context } }
   let(:schema_context) { { current_user: user } }
   let(:user) { create :user, password: "123456" }
   let(:query) do
@@ -34,15 +32,5 @@ describe Mutations::UpdateUser do
         ":id" => user.id
       )
     end
-  end
-
-  it "updates user" do
-    response
-
-    expect(user).to have_attributes(
-      email: "new_email_11@example.com",
-      first_name: "Randle",
-      last_name: "McMurphy"
-    )
   end
 end
