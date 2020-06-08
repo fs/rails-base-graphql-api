@@ -1,4 +1,4 @@
-shared_examples "graphql_request" do |spec_name|
+shared_examples "graphql request" do |spec_name|
   let(:fixture_file) { File.read(File.join(RSpec.configuration.fixture_path, fixture_path)) }
   let(:parsed_fixture_file) do
     JSON.parse(respond_to?(:prepared_fixture_file) ? prepared_fixture_file : fixture_file)

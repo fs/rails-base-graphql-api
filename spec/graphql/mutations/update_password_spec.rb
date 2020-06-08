@@ -3,9 +3,7 @@ require "rails_helper"
 describe Mutations::UpdatePassword do
   include ActiveSupport::Testing::TimeHelpers
 
-  let(:response) { ApplicationSchema.execute(query, {}).as_json }
   let(:user) { create(:user, :with_reset_token) }
-  let(:token) { JWT.encode({ sub: user.id }, nil, "none") }
   let(:query) do
     <<-GRAPHQL
       mutation {
@@ -27,8 +25,9 @@ describe Mutations::UpdatePassword do
 
   context "with valid data" do
     let(:reset_token) { user.password_reset_token }
+    let(:token) { JWT.encode({ sub: user.id }, nil, "none") }
 
-    it_behaves_like "graphql_request", "returns user info" do
+    it_behaves_like "graphql request", "returns user info" do
       let(:fixture_path) { "json/acceptance/graphql/update_password.json" }
       let(:prepared_fixture_file) do
         fixture_file.gsub(
@@ -46,7 +45,7 @@ describe Mutations::UpdatePassword do
   context "with wrong token" do
     let(:reset_token) { "wrong_token" }
 
-    it_behaves_like "graphql_request", "returns error" do
+    it_behaves_like "graphql request", "returns error" do
       let(:fixture_path) { "json/acceptance/graphql/update_password_wrong.json" }
     end
   end
@@ -62,7 +61,7 @@ describe Mutations::UpdatePassword do
 
     after { travel_back }
 
-    it_behaves_like "graphql_request", "returns error" do
+    it_behaves_like "graphql request", "returns error" do
       let(:fixture_path) { "json/acceptance/graphql/update_password_expired.json" }
     end
   end
