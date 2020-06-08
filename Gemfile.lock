@@ -82,6 +82,10 @@ GEM
     dotenv-rails (2.7.5)
       dotenv (= 2.7.5)
       railties (>= 3.2, < 6.1)
+    email_spec (2.2.0)
+      htmlentities (~> 4.3.3)
+      launchy (~> 2.1)
+      mail (~> 2.7)
     erubi (1.9.0)
     factory_bot (5.1.2)
       activesupport (>= 4.2.0)
@@ -95,6 +99,7 @@ GEM
     graphql (1.10.6)
     health_check (3.0.0)
       railties (>= 5.0)
+    htmlentities (4.3.4)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     interactor (3.1.2)
@@ -221,7 +226,7 @@ GEM
     unicode-display_width (1.7.0)
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
-    websocket-extensions (0.1.4)
+    websocket-extensions (0.1.5)
     zeitwerk (2.3.0)
 
 PLATFORMS
@@ -236,6 +241,7 @@ DEPENDENCIES
   database_cleaner-active_record
   decent_exposure
   dotenv-rails
+  email_spec
   factory_bot_rails
   ffaker
   graphql

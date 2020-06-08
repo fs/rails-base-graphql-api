@@ -33,5 +33,8 @@ module RailsBaseGraphqlApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # Set default From address for all Mailers
+    config.action_mailer.default_options = { from: ENV.fetch("MAILER_SENDER_ADDRESS") }
   end
 end
