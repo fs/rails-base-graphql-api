@@ -11,7 +11,13 @@ class UpdatePassword
     private
 
     def update_user_password
-      user.update(update_user_password_form.user_attributes)
+      user.update(update_user_password_attributes)
+    end
+
+    def update_user_password_attributes
+      update_user_password_form
+        .user_attributes
+        .merge(password_reset_token: nil, password_reset_sent_at: nil)
     end
 
     def update_user_password_form
