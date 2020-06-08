@@ -24,7 +24,7 @@ describe Mutations::SignIn do
   context "with valid credentials" do
     let(:password) { "TheRing" }
 
-    it_behaves_like "graphql_request", "gets user token" do
+    it_behaves_like "graphql request", "gets user token" do
       let(:fixture_path) { "json/acceptance/graphql/signin.json" }
       let(:prepared_fixture_file) do
         fixture_file.gsub(
@@ -39,7 +39,7 @@ describe Mutations::SignIn do
   context "with invalid credentials" do
     let(:password) { "Sauron" }
 
-    it_behaves_like "graphql_request", "returns error" do
+    it_behaves_like "graphql request", "returns error" do
       let(:fixture_path) { "json/acceptance/graphql/signin_wrong.json" }
     end
   end

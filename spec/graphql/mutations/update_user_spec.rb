@@ -26,7 +26,7 @@ describe Mutations::UpdateUser do
     GRAPHQL
   end
 
-  it_behaves_like "graphql_request", "returns updated user info" do
+  it_behaves_like "graphql request", "returns updated user info" do
     let(:fixture_path) { "json/acceptance/graphql/update_user.json" }
     let(:prepared_fixture_file) do
       fixture_file.gsub(

@@ -24,7 +24,7 @@ describe Mutations::SignUp do
   context "with valid data" do
     let(:email) { "bilbo.baggins@shire.com" }
 
-    it_behaves_like "graphql_request", "registers a new user" do
+    it_behaves_like "graphql request", "registers a new user" do
       let(:fixture_path) { "json/acceptance/graphql/signup.json" }
       let(:prepared_fixture_file) do
         fixture_file.gsub(
@@ -39,7 +39,7 @@ describe Mutations::SignUp do
   context "with invalid data" do
     let(:email) { "bilbo.baggins" }
 
-    it_behaves_like "graphql_request", "returns error" do
+    it_behaves_like "graphql request", "returns error" do
       let(:fixture_path) { "json/acceptance/graphql/signup_wrong.json" }
     end
   end

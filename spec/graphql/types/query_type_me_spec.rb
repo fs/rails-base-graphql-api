@@ -17,7 +17,7 @@ describe Types::QueryType do
   end
 
   context "with current_user provided" do
-    it_behaves_like "graphql_request", "gets current_user info" do
+    it_behaves_like "graphql request", "gets current_user info" do
       let(:schema_context) { { current_user: user } }
       let(:fixture_path) { "json/acceptance/graphql/query_type_me.json" }
       let(:prepared_fixture_file) do
