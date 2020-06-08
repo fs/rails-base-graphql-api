@@ -52,7 +52,7 @@ describe Mutations::UpdatePassword do
   end
 
   context "with expired token" do
-    let(:expiration_time) { user.password_reset_sent_at + 901.seconds } # 15 minutes + 1 second
+    let(:expiration_time) { user.password_reset_sent_at + 15.minutes + 1 }
     let(:reset_token) { user.password_reset_token }
 
     before do

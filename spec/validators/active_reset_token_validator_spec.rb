@@ -19,7 +19,7 @@ describe ActiveResetTokenValidator do
 
   describe "active reset token validation" do
     context "when reset token is invalid" do
-      let(:update_time) { expiration_time + 1.second }
+      let(:update_time) { expiration_time + 1 }
 
       it "fails and adds error" do
         expect(form.errors[:password_reset_token]).to include("has expired")
