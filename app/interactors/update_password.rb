@@ -2,5 +2,6 @@ class UpdatePassword
   include Interactor::Organizer
 
   organize FindUserByToken,
-           UpdateUserPassword
+           UpdateUserPassword,
+           CreateJwtToken
 end

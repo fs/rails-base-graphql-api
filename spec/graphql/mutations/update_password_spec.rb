@@ -5,6 +5,7 @@ describe Mutations::UpdatePassword do
 
   let(:response) { ApplicationSchema.execute(query, {}).as_json }
   let(:user) { create(:user, :with_reset_token) }
+  let(:token) { JWT.encode({ sub: user.id }, nil, "none") }
   let(:query) do
     <<-GRAPHQL
       mutation {
@@ -12,6 +13,7 @@ describe Mutations::UpdatePassword do
           password: "new_password",
           resetToken: "#{reset_token}"
         ) {
+          token
           me {
             id
             email
@@ -32,7 +34,8 @@ describe Mutations::UpdatePassword do
             "email" => user.email,
             "firstName" => user.first_name,
             "lastName" => user.last_name
-          }
+          },
+          "token" => token
         }
       }
     }
