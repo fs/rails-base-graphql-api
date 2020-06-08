@@ -25,89 +25,35 @@ describe Mutations::UpdatePassword do
     GRAPHQL
   end
 
-  let(:expected_response) do
-    {
-      "data" => {
-        "updatePassword" => {
-          "me" => {
-            "id" => user.id.to_s,
-            "email" => user.email,
-            "firstName" => user.first_name,
-            "lastName" => user.last_name
-          },
-          "token" => token
-        }
-      }
-    }
-  end
-
   context "with valid data" do
     let(:reset_token) { user.password_reset_token }
 
-    it "returns user info" do
-      expect(response).to eq(expected_response)
+    it_behaves_like "graphql_request", "returns user info" do
+      let(:fixture_path) { "json/acceptance/graphql/update_password.json" }
+      let(:prepared_fixture_file) do
+        fixture_file.gsub(
+          /:id|:email|:first_name|:last_name|:token/,
+          ":id" => user.id,
+          ":email" => user.email,
+          ":first_name" => user.first_name,
+          ":last_name" => user.last_name,
+          ":token" => token
+        )
+      end
     end
   end
 
   context "with wrong token" do
     let(:reset_token) { "wrong_token" }
-    let(:expected_response) do
-      {
-        "data" => {
-          "updatePassword" => nil
-        },
-        "errors" => [
-          {
-            "message" => "Invalid credentials",
-            "extensions" => {
-              "status" => 401,
-              "code" => "unauthorized",
-              "detail" => nil
-            },
-            "locations" => [
-              {
-                "line" => 2,
-                "column" => 9
-              }
-            ],
-            "path" => ["updatePassword"]
-          }
-        ]
-      }
-    end
 
-    it "returns error" do
-      expect(response).to eq expected_response
+    it_behaves_like "graphql_request", "returns error" do
+      let(:fixture_path) { "json/acceptance/graphql/update_password_wrong.json" }
     end
   end
 
   context "with expired token" do
     let(:expiration_time) { user.password_reset_sent_at + 901.seconds } # 15 minutes + 1 second
     let(:reset_token) { user.password_reset_token }
-    let(:expected_response) do
-      {
-        "data" => {
-          "updatePassword" => nil
-        },
-        "errors" => [
-          {
-            "message" => "Record Invalid",
-            "extensions" => {
-              "status" => 422,
-              "code" => "unprocessable_entity",
-              "detail" => ["Password reset token has expired"]
-            },
-            "locations" => [
-              {
-                "line" => 2,
-                "column" => 9
-              }
-            ],
-            "path" => ["updatePassword"]
-          }
-        ]
-      }
-    end
 
     before do
       travel_to expiration_time
@@ -116,8 +62,8 @@ describe Mutations::UpdatePassword do
 
     after { travel_back }
 
-    it "returns error" do
-      expect(response).to eq expected_response
+    it_behaves_like "graphql_request", "returns error" do
+      let(:fixture_path) { "json/acceptance/graphql/update_password_expired.json" }
     end
   end
 end
