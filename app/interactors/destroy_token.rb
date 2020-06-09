@@ -5,6 +5,7 @@ class DestroyToken
 
   def call
     return if everywhere
+
     raise_unauthorized_error unless refresh_token
 
     refresh_token.destroy
