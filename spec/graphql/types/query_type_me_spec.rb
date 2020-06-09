@@ -2,6 +2,7 @@ require "rails_helper"
 
 describe Types::QueryType do
   let!(:user) { create :user }
+  let(:token_payload) { { type: "access" } }
 
   let(:query) do
     <<-GRAPHQL
@@ -18,7 +19,7 @@ describe Types::QueryType do
 
   context "with current_user provided" do
     it_behaves_like "graphql request", "gets current_user info" do
-      let(:schema_context) { { current_user: user } }
+      let(:schema_context) { { current_user: user, token_payload: token_payload.stringify_keys } }
       let(:fixture_path) { "json/acceptance/graphql/query_type_me.json" }
       let(:prepared_fixture_file) do
         fixture_file.gsub(
