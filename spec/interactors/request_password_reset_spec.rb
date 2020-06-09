@@ -14,6 +14,8 @@ describe RequestPasswordReset do
   context "when user exists" do
     let(:user) { create :user }
 
+    it_behaves_like "success interactor"
+
     it "does send email" do
       expect(ApplicationMailer).to receive(:password_recovery)
       interactor.run
@@ -21,7 +23,10 @@ describe RequestPasswordReset do
   end
 
   context "when user doesn't exist" do
-    let(:user) { build :user }
+    let(:user) { build :user, email: "user@test.it" }
+    let(:error_data) { { message: "Record not found", detail: "User with email user@test.it not found" } }
+
+    it_behaves_like "failed interactor"
 
     it "doesn't send email" do
       expect(ApplicationMailer).not_to receive(:password_recovery)
