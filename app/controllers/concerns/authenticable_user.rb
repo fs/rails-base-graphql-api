@@ -12,10 +12,6 @@ module AuthenticableUser
     @token ||= request.headers["Authorization"].to_s.split(" ").last
   end
 
-  def refresh_token_value
-    @refresh_token_value ||= request.headers["X-Refresh-Token"].to_s.split(" ").last
-  end
-
   def payload
     @payload ||= JWT.decode(token, ENV.fetch("AUTH_SECRET_TOKEN"), true, algorithm: "HS256").first
   rescue JWT::DecodeError
