@@ -3,15 +3,11 @@ require "rails_helper"
 describe Mutations::SignUp do
   include_context "when time is frozen"
 
+  before do
+    allow(JWT).to receive(:encode).and_return("jwt.token.success")
+  end
+
   let(:registered_user) { User.last }
-  let(:access_token) do
-    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTU4OTExNzQwMCwianRpIjoiZGMzYzk5NmJjNjk3NDgwNDEx"\
-    "OTRjNDYzNWEzNmJlMDQiLCJ0eXBlIjoiYWNjZXNzIn0.RnZk3U3AiEVfenc9tmSZVRWhztmjbM2uBr_JA1k2BcI"
-  end
-  let(:refresh_token) do
-    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTU5MTcwNTgwMCwianRpIjoiZGMzYzk5NmJjNjk3NDgwNDE" \
-    "xOTRjNDYzNWEzNmJlMDQiLCJ0eXBlIjoicmVmcmVzaCJ9.WrdbN_TLEE97yKy3zXAjKvo9eqVF4cdsRcVdrA7dS7E"
-  end
 
   let(:query) do
     <<-GRAPHQL
@@ -40,8 +36,8 @@ describe Mutations::SignUp do
         fixture_file.gsub(
           /:id|:accessToken|:refreshToken/,
           ":id" => registered_user.id,
-          ":accessToken" => access_token,
-          ":refreshToken" => refresh_token
+          ":accessToken" => "jwt.token.success",
+          ":refreshToken" => "jwt.token.success"
         )
       end
     end
