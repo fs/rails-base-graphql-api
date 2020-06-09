@@ -17,6 +17,7 @@ services:
       - RAILS_ENV
       - RACK_ENV
       - DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL
+      - AUTH_SECRET_TOKEN
     build:
       context: .
       args:
