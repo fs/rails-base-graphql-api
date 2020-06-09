@@ -1,4 +1,4 @@
-version: "3.4"
+version: "3.7"
 
 services:
   db:
@@ -10,7 +10,7 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
 
-  app: &app_base
+  app:
     image: ${IMAGE_NAME}
     environment:
       - DATABASE_URL=postgres://postgres:password@db
@@ -30,7 +30,6 @@ services:
       - db
     volumes:
       - ruby-bundle:/usr/local/bundle
-      - .:/app
 
 volumes:
   ruby-bundle:

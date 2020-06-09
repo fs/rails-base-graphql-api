@@ -23,3 +23,4 @@
 /config/master.key
 
 .env
+.docker-sync/*
