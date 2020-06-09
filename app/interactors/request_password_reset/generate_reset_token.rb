@@ -1,6 +1,7 @@
 class RequestPasswordReset
   class GenerateResetToken
     include Interactor
+    include TransactionalInteractor
 
     delegate :email, to: :context
 
@@ -10,10 +11,10 @@ class RequestPasswordReset
       user.save!
     end
 
+    private
+
     def user
-      context.user ||= User.find_by!(email: email)
-    rescue ActiveRecord::RecordNotFound
-      context.fail!(error_data: I18n.t("password_recovery.not_found"))
+      context.user ||= User.find_by(email: email) || context.fail!(error_data: I18n.t("password_recovery.not_found"))
     end
   end
 end
