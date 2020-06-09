@@ -13,7 +13,7 @@ class RequestPasswordReset
     def user
       context.user ||= User.find_by!(email: email)
     rescue ActiveRecord::RecordNotFound
-      context.fail!(error: I18n.t("password_recovery.not_found"))
+      context.fail!(error_data: I18n.t("password_recovery.not_found"))
     end
   end
 end
