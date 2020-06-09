@@ -2,16 +2,25 @@ require "rails_helper"
 
 describe "Authenticate user", type: :request do
   include_context "when time is frozen"
-  let(:user) { create :user, id: 111_111 }
+  let!(:user) { create :user, id: 111_111 }
+  let(:query) do
+    <<-GRAPHQL
+    query {
+      me {
+        id
+      }
+    }
+    GRAPHQL
+  end
 
   before do
-    post "/graphql", headers: { authorization: refresh_token.token }, params: { query: "query { me { id } }" }
+    post "/graphql", headers: { authorization: refresh_token.token }, params: { query: query }
   end
 
   context "with valid token" do
     let(:refresh_token) { create :refresh_token, :access, user: user }
 
-    it_behaves_like "graphql request", "return current user" do
+    it_behaves_like "full graphql request", "return current user" do
       let(:fixture_path) { "json/acceptance/current_user.json" }
     end
   end
@@ -19,7 +28,7 @@ describe "Authenticate user", type: :request do
   context "with invalid token" do
     let(:refresh_token) { create :refresh_token, token: "bad_token", user: user }
 
-    it_behaves_like "graphql request", "return null" do
+    it_behaves_like "full graphql request", "return null" do
       let(:fixture_path) { "json/acceptance/not_user.json" }
     end
   end
@@ -27,7 +36,7 @@ describe "Authenticate user", type: :request do
   context "with expired token" do
     let(:refresh_token) { create :refresh_token, :access, user: user, expires_at: 1.day.ago }
 
-    it_behaves_like "graphql request", "return invalid credential error" do
+    it_behaves_like "full graphql request", "return invalid credential error" do
       let(:fixture_path) { "json/acceptance/invalid_credentials.json" }
     end
   end
@@ -35,7 +44,7 @@ describe "Authenticate user", type: :request do
   context "when use refresh token for receiving user" do
     let(:refresh_token) { create :refresh_token, :refresh, user: user }
 
-    it_behaves_like "graphql request", "return null" do
+    it_behaves_like "full graphql request", "return null" do
       let(:fixture_path) { "json/acceptance/not_user.json" }
     end
   end

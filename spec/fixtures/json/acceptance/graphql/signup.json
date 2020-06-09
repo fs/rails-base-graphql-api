@@ -1,0 +1,12 @@
+{
+  "data": {
+    "signup": {
+      "me": {
+        "id": ":id",
+        "email": "bilbo.baggins@shire.com"
+      },
+      "accessToken": ":accessToken",
+      "refreshToken": ":refreshToken"
+    }
+  }
+}
