@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe UpdateUser do
+describe UpdateUserAttributes do
   describe ".call" do
     include_context "with interactor"
 
@@ -20,6 +20,7 @@ describe UpdateUser do
           first_name: "Arthur",
           last_name: "Dent"
         )
+        expect(context.everywhere).to be_falsey
       end
     end
 
@@ -32,6 +33,7 @@ describe UpdateUser do
         interactor.run
 
         expect(user.authenticate("qwerty")).to be_truthy
+        expect(context.everywhere).to be_truthy
       end
     end
 
