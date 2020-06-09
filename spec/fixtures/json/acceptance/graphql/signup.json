@@ -5,7 +5,8 @@
         "id": ":id",
         "email": "bilbo.baggins@shire.com"
       },
-      "token": ":token"
+      "accessToken": ":accessToken",
+      "refreshToken": ":refreshToken"
     }
   }
 }

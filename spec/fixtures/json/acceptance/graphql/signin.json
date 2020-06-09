@@ -1,9 +1,10 @@
 {
   "data": {
     "signin": {
-      "token": ":token",
+      "accessToken": ":accessToken",
+      "refreshToken": ":refreshToken",
       "me": {
-        "id": ":id",
+        "id": "111111",
         "email": "bilbo.baggins@shire.com"
       }
     }
