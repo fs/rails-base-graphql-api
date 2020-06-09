@@ -3,7 +3,7 @@ require "rails_helper"
 describe Mutations::SignUp do
   include_context "when time is frozen"
 
-  let(:registered_user) { User.first }
+  let(:registered_user) { User.last }
   let(:access_token) do
     "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTU4OTExNzQwMCwianRpIjoiZGMzYzk5NmJjNjk3NDgwNDEx"\
     "OTRjNDYzNWEzNmJlMDQiLCJ0eXBlIjoiYWNjZXNzIn0.RnZk3U3AiEVfenc9tmSZVRWhztmjbM2uBr_JA1k2BcI"
