@@ -3,8 +3,6 @@ require "rails_helper"
 describe Mutations::SignUp do
   include_context "when time is frozen"
 
-  let(:response) { ApplicationSchema.execute(query, {}).as_json }
-
   let(:registered_user) { User.first }
   let(:access_token) do
     "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTU4OTExNzQwMCwianRpIjoiZGMzYzk5NmJjNjk3NDgwNDEx"\
@@ -35,55 +33,25 @@ describe Mutations::SignUp do
 
   context "with valid data" do
     let(:email) { "bilbo.baggins@shire.com" }
-    let(:expected_response) do
-      {
-        "data" => {
-          "signup" => {
-            "me" => {
-              "id" => registered_user.id.to_s,
-              "email" => email
-            },
-            "accessToken" => access_token,
-            "refreshToken" => refresh_token
-          }
-        }
-      }
-    end
 
-    it "registers a new user" do
-      expect(response).to eq expected_response
+    it_behaves_like "graphql request", "registers a new user" do
+      let(:fixture_path) { "json/acceptance/graphql/signup.json" }
+      let(:prepared_fixture_file) do
+        fixture_file.gsub(
+          /:id|:accessToken|:refreshToken/,
+          ":id" => registered_user.id,
+          ":accessToken" => access_token,
+          ":refreshToken" => refresh_token
+        )
+      end
     end
   end
 
   context "with invalid data" do
     let(:email) { "bilbo.baggins" }
-    let(:expected_response) do
-      {
-        "data" => {
-          "signup" => nil
-        },
-        "errors" => [
-          {
-            "message" => "Record Invalid",
-            "extensions" => {
-              "status" => 422,
-              "code" => "unprocessable_entity",
-              "detail" => ["Email is invalid"]
-            },
-            "locations" => [
-              {
-                "line" => 2,
-                "column" => 9
-              }
-            ],
-            "path" => ["signup"]
-          }
-        ]
-      }
-    end
 
-    it "returns error" do
-      expect(response).to eq expected_response
+    it_behaves_like "graphql request", "returns error" do
+      let(:fixture_path) { "json/acceptance/graphql/signup_wrong.json" }
     end
   end
 end

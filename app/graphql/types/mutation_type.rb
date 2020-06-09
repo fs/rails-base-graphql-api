@@ -4,5 +4,6 @@ module Types
     field :signin, mutation: Mutations::SignIn
     field :update_token, mutation: Mutations::UpdateToken
     field :signout, mutation: Mutations::SignOut
+    field :update_user, mutation: Mutations::UpdateUser
   end
 end

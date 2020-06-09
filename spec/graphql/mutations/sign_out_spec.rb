@@ -23,7 +23,7 @@ describe Mutations::SignOut, type: :request do
   context "with valid token" do
     let(:refresh_token) { create :refresh_token, :access, user: user }
 
-    it_behaves_like "graphql request", "return current user" do
+    it_behaves_like "full graphql request", "return current user" do
       let(:fixture_path) { "json/acceptance/signout/current_user.json" }
     end
   end
@@ -31,7 +31,7 @@ describe Mutations::SignOut, type: :request do
   context "with use deleted refresh token" do
     let(:refresh_token) { create :refresh_token, token: "deleted", user: user }
 
-    it_behaves_like "graphql request", "return current user" do
+    it_behaves_like "full graphql request", "return current user" do
       let(:fixture_path) { "json/acceptance/signout/null.json" }
     end
   end
