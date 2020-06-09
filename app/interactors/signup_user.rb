@@ -3,6 +3,7 @@ class SignupUser
   include TransactionalInteractor
 
   organize CreateUser,
+           CreateRegisterActivity,
            CreateAccessToken,
            CreateRefreshToken
 end
