@@ -10,7 +10,7 @@ Screenshots/screencasts of the pull request introduced functionality.
 
 List of steps to manually test introduced functionality:
 
-* Open [GraphiQL Interface](http://localhost:3000/graphiql)
+* Open GraphiQL App
 * Make request using schema:
 ```
   query {
@@ -41,5 +41,5 @@ Notes regarding deployment the contained body of work.
 These should note any db migrations, ENV variables, services, scripts, etc.
 
 ### References
-* [GitHub Issue ####](https://github.com/fs/rails-base-graphql-api/issues/####)
+* Resolves #### Issue
 * [GitHub Pull Request ####](https://github.com/fs/rails-base-graphql-api/pull/####)
