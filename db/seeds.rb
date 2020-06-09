@@ -1,3 +1,3 @@
 User.destroy_all
 
-FactoryBot.create_list :user, 3
+FactoryBot.create_list :activity, 3
