@@ -1,0 +1,10 @@
+{
+  "data": {
+    "activities": [{
+      "id": ":id",
+      "title": ":title",
+      "body": ":body",
+      "createdAt": ":created_at"
+    }]
+  }
+}
