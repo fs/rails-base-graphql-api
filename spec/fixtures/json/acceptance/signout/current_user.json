@@ -1,7 +1,7 @@
 {
   "data": {
     "signout": {
-      "id": "111111"
+      "message": "User signed out successfully"
     }
   }
 }
