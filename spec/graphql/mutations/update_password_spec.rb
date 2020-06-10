@@ -3,7 +3,7 @@ require "rails_helper"
 describe Mutations::UpdatePassword do
   include ActiveSupport::Testing::TimeHelpers
 
-  let(:user) { create(:user, :with_reset_token) }
+  let(:user) { create(:user, :with_reset_token, email: "john.doe@example.com", first_name: "John", last_name: "Doe") }
   let(:query) do
     <<-GRAPHQL
       mutation {
@@ -31,11 +31,8 @@ describe Mutations::UpdatePassword do
       let(:fixture_path) { "json/acceptance/graphql/update_password.json" }
       let(:prepared_fixture_file) do
         fixture_file.gsub(
-          /:id|:email|:first_name|:last_name|:token/,
+          /:id|:token/,
           ":id" => user.id,
-          ":email" => user.email,
-          ":first_name" => user.first_name,
-          ":last_name" => user.last_name,
           ":token" => token
         )
       end
