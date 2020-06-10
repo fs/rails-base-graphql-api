@@ -1,12 +1,12 @@
 require "rails_helper"
 
 describe Types::QueryType do
-  let(:time) { Time.utc(2020, 6, 7, 8) }
+  include_context "when time is frozen"
+
   let!(:activity) do
     create(:activity,
            title: "User registered",
-           body: "New user registered with the next attributes: First Name - John, Last Name - Doe",
-           created_at: time)
+           body: "New user registered with the next attributes: First Name - John, Last Name - Doe")
   end
   let(:query) do
     <<-GRAPHQL
