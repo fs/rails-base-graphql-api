@@ -2,9 +2,9 @@
   "data": {
     "activities": [{
       "id": ":id",
-      "title": ":title",
-      "body": ":body",
-      "createdAt": ":created_at"
+      "title": "User registered",
+      "body": "New user registered with the next attributes: First Name - John, Last Name - Doe",
+      "createdAt": "2020-06-07T08:00:00Z"
     }]
   }
 }

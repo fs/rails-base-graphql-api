@@ -1,7 +1,13 @@
 require "rails_helper"
 
 describe Types::QueryType do
-  let!(:activity) { create(:activity) }
+  let(:time) { Time.utc(2020, 6, 7, 8) }
+  let!(:activity) do
+    create(:activity,
+           title: "User registered",
+           body: "New user registered with the next attributes: First Name - John, Last Name - Doe",
+           created_at: time)
+  end
   let(:query) do
     <<-GRAPHQL
       query {
@@ -17,14 +23,6 @@ describe Types::QueryType do
 
   it_behaves_like "graphql request", "gets activities list" do
     let(:fixture_path) { "json/acceptance/graphql/query_type_activities.json" }
-    let(:prepared_fixture_file) do
-      fixture_file.gsub(
-        /:id|:title|:body|:created_at/,
-        ":id" => activity.id,
-        ":title" => activity.title,
-        ":body" => activity.body,
-        ":created_at" => activity.created_at.iso8601
-      )
-    end
+    let(:prepared_fixture_file) { fixture_file.gsub(/:id/, ":id" => activity.id) }
   end
 end
