@@ -1,9 +1,11 @@
 module Mutations
   class SignOut < BaseMutation
+    include AuthenticableGraphqlUser
+
     argument :everywhere, Boolean, required: false
 
     type Types::MessageType
-    def resolve(everywhere: nil)
+    def resolve(everywhere: falsee)
       delete_token = SignoutUser.call(token: token, user: current_user, everywhere: everywhere)
 
       if delete_token.success?
