@@ -1,8 +1,7 @@
 require "rails_helper"
 
 describe Mutations::UpdateUser do
-  let(:response) { ApplicationSchema.execute(query, execution_context).as_json }
-  let(:execution_context) { { context: { current_user: user } } }
+  let(:schema_context) { { current_user: user } }
   let(:user) { create :user, password: "123456" }
   let(:query) do
     <<-GRAPHQL
@@ -36,17 +35,23 @@ describe Mutations::UpdateUser do
     }
   end
 
-  it "returns updated user info" do
-    expect(response).to eq(expected_response)
-  end
+  it_behaves_like "graphql request", "returns updated user info" do
+    let(:fixture_path) { "json/acceptance/graphql/update_user.json" }
+    let(:prepared_fixture_file) do
+      fixture_file.gsub(
+        /:id/,
+        ":id" => user.id
+      )
+    end
 
-  it "updates user" do
-    response
+    it "updates user" do
+      response
 
-    expect(user).to have_attributes(
-      email: "new_email_11@example.com",
-      first_name: "Randle",
-      last_name: "McMurphy"
-    )
+      expect(user).to have_attributes(
+        email: "new_email_11@example.com",
+        first_name: "Randle",
+        last_name: "McMurphy"
+      )
+    end
   end
 end

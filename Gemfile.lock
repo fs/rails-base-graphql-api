@@ -214,7 +214,7 @@ GEM
     unicode-display_width (1.7.0)
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
-    websocket-extensions (0.1.4)
+    websocket-extensions (0.1.5)
     zeitwerk (2.3.0)
 
 PLATFORMS
@@ -249,7 +249,7 @@ DEPENDENCIES
   spring-watcher-listen
 
 RUBY VERSION
-   ruby 2.6.5p114
+   ruby 2.6.6p146
 
 BUNDLED WITH
    2.1.4
