@@ -12,7 +12,7 @@ module Mutations
 
     def resolve(**user_params)
       update_user = ::UpdateUser.call(
-        user: context[:current_user], user_params: user_params
+        user: current_user, user_params: user_params
       )
 
       if update_user.success?

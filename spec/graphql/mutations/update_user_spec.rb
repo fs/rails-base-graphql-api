@@ -1,8 +1,10 @@
 require "rails_helper"
 
 describe Mutations::UpdateUser do
+  include_context "when time is frozen"
+
   let(:schema_context) { { current_user: user } }
-  let(:user) { create :user, password: "123456" }
+  let(:user) { create :user, id: 111_111, password: "123456" }
   let(:query) do
     <<-GRAPHQL
       mutation {
@@ -19,6 +21,8 @@ describe Mutations::UpdateUser do
             firstName
             lastName
           }
+          accessToken
+          refreshToken
         }
       }
     GRAPHQL
@@ -26,11 +30,5 @@ describe Mutations::UpdateUser do
 
   it_behaves_like "graphql request", "returns updated user info" do
     let(:fixture_path) { "json/acceptance/graphql/update_user.json" }
-    let(:prepared_fixture_file) do
-      fixture_file.gsub(
-        /:id/,
-        ":id" => user.id
-      )
-    end
   end
 end

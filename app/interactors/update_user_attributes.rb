@@ -5,7 +5,6 @@ class UpdateUserAttributes
 
   def call
     context.fail!(error_data: error_data) unless update_user_form.valid? && update_user
-    context.everywhere = true if update_password?
   end
 
   private
@@ -20,9 +19,5 @@ class UpdateUserAttributes
 
   def error_data
     { message: "Record Invalid", detail: update_user_form.errors.to_a }
-  end
-
-  def update_password?
-    update_user_form.user_attributes.include?(:password)
   end
 end
