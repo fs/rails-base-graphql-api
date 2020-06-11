@@ -10,9 +10,6 @@ describe SignoutUser do
       token: "token"
     }
   end
-  let(:error_data) do
-    { message: "Invalid credentials", status: 401, code: :unauthorized }
-  end
   let(:user) { create :user }
 
   before do
