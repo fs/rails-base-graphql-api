@@ -20,7 +20,6 @@ describe UpdateUserAttributes do
           first_name: "Arthur",
           last_name: "Dent"
         )
-        expect(context.everywhere).to be_falsey
       end
     end
 
@@ -33,7 +32,6 @@ describe UpdateUserAttributes do
         interactor.run
 
         expect(user.authenticate("qwerty")).to be_truthy
-        expect(context.everywhere).to be_truthy
       end
     end
 

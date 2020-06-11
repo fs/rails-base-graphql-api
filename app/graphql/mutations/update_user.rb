@@ -11,9 +11,7 @@ module Mutations
     type Types::AuthenticationType
 
     def resolve(**user_params)
-      update_user = ::UpdateUser.call(
-        user: current_user, user_params: user_params
-      )
+      update_user = ::UpdateUser.call(user: current_user, user_params: user_params)
 
       if update_user.success?
         update_user
