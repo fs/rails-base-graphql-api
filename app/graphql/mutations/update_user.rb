@@ -1,5 +1,7 @@
 module Mutations
   class UpdateUser < BaseMutation
+    include AuthenticableGraphqlUser
+
     argument :email, String, required: false
     argument :first_name, String, required: false
     argument :last_name, String, required: false

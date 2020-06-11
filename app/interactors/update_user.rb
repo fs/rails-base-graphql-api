@@ -3,5 +3,7 @@ class UpdateUser
   include TransactionalInteractor
 
   organize  UpdateUserAttributes,
-            DestroyAllTokens
+            DestroyAllTokens,
+            CreateAccessToken,
+            CreateRefreshToken
 end
