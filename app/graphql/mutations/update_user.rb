@@ -11,13 +11,19 @@ module Mutations
     type Types::AuthenticationType
 
     def resolve(**user_params)
-      update_user = ::UpdateUser.call(user: current_user, user_params: user_params)
+      update_user = update_user_interactor(user_params).constantize.call(user: current_user, user_params: user_params)
 
       if update_user.success?
         update_user
       else
         execution_error(error_data: update_user.error_data)
       end
+    end
+
+    private
+
+    def update_user_interactor(params)
+      params.include?(:password) ? "::UpdateUser" : "UpdateUserAttributes"
     end
   end
 end

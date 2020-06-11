@@ -4,6 +4,6 @@ class DestroyAllTokens
   delegate :user, to: :context
 
   def call
-    user.refresh_tokens.destroy_all if user.will_save_change_to_attribute?(:password)
+    user.refresh_tokens.destroy_all
   end
 end
