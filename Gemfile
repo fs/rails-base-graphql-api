@@ -17,6 +17,7 @@ gem "interactor"
 gem "jwt"
 gem "puma"
 gem "rack-cors"
+gem "strong_migrations"
 
 group :development do
   gem "listen"

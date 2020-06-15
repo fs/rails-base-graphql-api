@@ -209,6 +209,8 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    strong_migrations (0.6.8)
+      activerecord (>= 5)
     thor (0.20.3)
     thread_safe (0.3.6)
     tzinfo (1.2.7)
@@ -250,6 +252,7 @@ DEPENDENCIES
   simplecov
   spring
   spring-watcher-listen
+  strong_migrations
 
 RUBY VERSION
    ruby 2.6.6p146
