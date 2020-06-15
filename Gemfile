@@ -7,6 +7,7 @@ gem "pg"
 gem "rails", "6.0.3.1"
 
 # all other gems
+gem "aws-sdk-s3"
 gem "bcrypt"
 gem "bootsnap", require: false
 gem "decent_exposure"
@@ -16,6 +17,7 @@ gem "interactor"
 gem "jwt"
 gem "puma"
 gem "rack-cors"
+gem "shrine"
 
 group :development do
   gem "listen"

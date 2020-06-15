@@ -56,7 +56,25 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
+    addressable (2.7.0)
+      public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.0)
+    aws-eventstream (1.1.0)
+    aws-partitions (1.329.0)
+    aws-sdk-core (3.99.2)
+      aws-eventstream (~> 1, >= 1.0.2)
+      aws-partitions (~> 1, >= 1.239.0)
+      aws-sigv4 (~> 1.1)
+      jmespath (~> 1.0)
+    aws-sdk-kms (1.34.1)
+      aws-sdk-core (~> 3, >= 3.99.0)
+      aws-sigv4 (~> 1.1)
+    aws-sdk-s3 (1.68.1)
+      aws-sdk-core (~> 3, >= 3.99.0)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.1)
+    aws-sigv4 (1.1.4)
+      aws-eventstream (~> 1.0, >= 1.0.2)
     bcrypt (3.1.13)
     bootsnap (1.4.6)
       msgpack (~> 1.0)
@@ -67,6 +85,7 @@ GEM
       thor (~> 0.18)
     byebug (11.1.1)
     concurrent-ruby (1.1.6)
+    content_disposition (1.0.0)
     crass (1.0.6)
     database_cleaner (1.8.4)
     database_cleaner-active_record (1.8.0)
@@ -80,6 +99,8 @@ GEM
     dotenv-rails (2.7.5)
       dotenv (= 2.7.5)
       railties (>= 3.2, < 6.1)
+    down (5.1.1)
+      addressable (~> 2.5)
     erubi (1.9.0)
     factory_bot (5.1.2)
       activesupport (>= 4.2.0)
@@ -97,6 +118,7 @@ GEM
       concurrent-ruby (~> 1.0)
     interactor (3.1.2)
     jaro_winkler (1.5.4)
+    jmespath (1.4.0)
     jwt (2.2.1)
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -121,6 +143,7 @@ GEM
     parser (2.7.1.1)
       ast (~> 2.4.0)
     pg (1.2.3)
+    public_suffix (4.0.5)
     puma (4.3.5)
       nio4r (~> 2.0)
     rack (2.2.2)
@@ -192,6 +215,9 @@ GEM
     rubocop-rspec (1.38.1)
       rubocop (>= 0.68.1)
     ruby-progressbar (1.10.1)
+    shrine (3.2.1)
+      content_disposition (~> 1.0)
+      down (~> 5.1)
     simplecov (0.18.5)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -221,6 +247,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aws-sdk-s3
   bcrypt
   bootsnap
   brakeman
@@ -244,6 +271,7 @@ DEPENDENCIES
   rubocop
   rubocop-rails
   rubocop-rspec
+  shrine
   simplecov
   spring
   spring-watcher-listen
