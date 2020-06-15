@@ -10,6 +10,7 @@ gem "rails", "6.0.3.1"
 gem "bcrypt"
 gem "bootsnap", require: false
 gem "decent_exposure"
+gem "enumerize"
 gem "graphql"
 gem "health_check"
 gem "interactor"
