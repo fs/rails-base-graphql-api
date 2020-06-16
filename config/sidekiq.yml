@@ -3,5 +3,5 @@ development:
 production:
   :concurrency: 3
 :queues:
-  - defaults
+  - default
   - events
