@@ -67,6 +67,7 @@ GEM
       thor (~> 0.18)
     byebug (11.1.1)
     concurrent-ruby (1.1.6)
+    connection_pool (2.2.3)
     crass (1.0.6)
     database_cleaner (1.8.4)
     database_cleaner-active_record (1.8.0)
@@ -126,6 +127,8 @@ GEM
     rack (2.2.2)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
+    rack-protection (2.0.8.1)
+      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (6.0.3.1)
@@ -159,6 +162,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.2.1)
     rexml (3.2.4)
     rspec-core (3.9.1)
       rspec-support (~> 3.9.1)
@@ -192,6 +196,11 @@ GEM
     rubocop-rspec (1.38.1)
       rubocop (>= 0.68.1)
     ruby-progressbar (1.10.1)
+    sidekiq (6.0.7)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      rack-protection (>= 2.0.0)
+      redis (>= 4.1.0)
     simplecov (0.18.5)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -244,6 +253,7 @@ DEPENDENCIES
   rubocop
   rubocop-rails
   rubocop-rspec
+  sidekiq
   simplecov
   spring
   spring-watcher-listen
