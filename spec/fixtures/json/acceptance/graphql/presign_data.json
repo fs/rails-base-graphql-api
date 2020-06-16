@@ -1,0 +1,9 @@
+{
+  "data": {
+    "presignData": {
+      "url": "http://some-url.com",
+      "headers": "{}",
+      "fields": "{\"key\":\"value\"}"
+    }
+  }
+}
