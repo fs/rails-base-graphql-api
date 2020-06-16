@@ -5,11 +5,11 @@ module Types
     field :me, Types::UserType, null: true, method: :user
 
     def access_token
-      object.access_token || nil
+      object.access_token
     end
 
     def refresh_token
-      object.refresh_token || nil
+      object.refresh_token
     end
   end
 end
