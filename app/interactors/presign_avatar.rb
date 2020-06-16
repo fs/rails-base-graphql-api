@@ -31,9 +31,9 @@ class PresignAvatar
 
   def options
     {
-      content_disposition:    ContentDisposition.inline(filename),
-      content_type:           type,
-      content_length_range:   0..UPLOAD_SIZE_LIMIT
+      content_disposition: ContentDisposition.inline(filename),
+      content_type: type,
+      content_length_range: 0..UPLOAD_SIZE_LIMIT
     }
   end
 
