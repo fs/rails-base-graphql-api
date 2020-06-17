@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include ImageUploader::Attachment(:avatar)
+
   has_secure_password
 
   has_many :activities, dependent: :destroy
