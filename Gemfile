@@ -11,6 +11,7 @@ gem "bcrypt"
 gem "bootsnap", require: false
 gem "decent_exposure"
 gem "graphql"
+gem "graphql-batch"
 gem "health_check"
 gem "interactor"
 gem "jwt"

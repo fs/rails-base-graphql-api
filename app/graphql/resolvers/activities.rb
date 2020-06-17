@@ -3,7 +3,7 @@ module Resolvers
     type [Types::ActivityType], null: true
 
     def resolve
-      Activity.includes(:user).all
+      Activity.all
     end
   end
 end
