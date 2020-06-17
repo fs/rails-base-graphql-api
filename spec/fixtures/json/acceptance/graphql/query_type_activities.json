@@ -4,7 +4,13 @@
       "id": ":id",
       "title": "User registered",
       "body": "New user registered with the next attributes: First Name - John, Last Name - Doe",
-      "createdAt": "2020-05-10T12:30:00Z"
+      "createdAt": "2020-05-10T12:30:00Z",
+      "user": {
+        "id": ":user_id",
+        "email": "john.doe@email.me",
+        "firstName": "John",
+        "lastName": "Doe"
+      }
     }]
   }
 }
