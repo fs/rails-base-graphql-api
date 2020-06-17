@@ -1,3 +1,5 @@
+require "graphql/batch"
+
 class ApplicationSchema < GraphQL::Schema
   mutation(Types::MutationType)
   query(Types::QueryType)
@@ -5,4 +7,5 @@ class ApplicationSchema < GraphQL::Schema
   use GraphQL::Execution::Interpreter
   use GraphQL::Pagination::Connections
   use GraphQL::Analysis::AST
+  use GraphQL::Batch
 end

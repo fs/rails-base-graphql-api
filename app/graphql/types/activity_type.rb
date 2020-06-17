@@ -5,5 +5,9 @@ module Types
     field :body, String, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :user, Types::UserType, null: false
+
+    def user
+      Loaders::RecordLoader.for(User).load(object.user_id)
+    end
   end
 end
