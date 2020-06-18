@@ -14,6 +14,7 @@ describe CreateRegisterActivity do
       expect { interactor.run }.to change { user.activities.count }.by(1)
 
       expect(activity).to have_attributes(
+        event: "user_registered",
         title: "User registered",
         body: <<~TXT
           New user registered with the next attributes:
