@@ -55,6 +55,7 @@ blocks:
         commands:
           - bundle install ${BUNDLE_ARGS} --local
           - sem-service start postgres
+          - sem-service start redis
           - bin/rails db:setup
 
       jobs:
