@@ -8,7 +8,8 @@ describe Types::QueryType do
     create(:activity,
            user: user,
            title: "User registered",
-           body: "New user registered with the next attributes: First Name - John, Last Name - Doe")
+           body: "New user registered with the next attributes: First Name - John, Last Name - Doe",
+           event: :user_registered)
   end
   let(:query) do
     <<-GRAPHQL
@@ -17,6 +18,7 @@ describe Types::QueryType do
           id
           title
           body
+          event
           createdAt
           user {
             id

@@ -10,6 +10,7 @@ gem "rails", "6.0.3.2"
 gem "bcrypt"
 gem "bootsnap", require: false
 gem "decent_exposure"
+gem "enumerize"
 gem "graphql"
 gem "graphql-batch"
 gem "health_check"
@@ -18,6 +19,7 @@ gem "jwt"
 gem "puma"
 gem "rack-cors"
 gem "sidekiq"
+gem "strong_migrations"
 
 group :development do
   gem "listen"

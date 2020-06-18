@@ -11,6 +11,7 @@ class CreateRegisterActivity
 
   def activity
     user.activities.build(
+      event: :user_registered,
       title: "User registered",
       body: <<~TXT
         New user registered with the next attributes:
