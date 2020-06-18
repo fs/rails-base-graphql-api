@@ -1,5 +1,3 @@
-require "email_spec"
-require "email_spec/rspec"
 require "rails_helper"
 
 describe ApplicationMailer do

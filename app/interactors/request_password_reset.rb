@@ -5,9 +5,7 @@ class RequestPasswordReset
   delegate :email, to: :context
 
   def call
-    user.regenerate_password_reset_token
-    user.password_reset_sent_at = Time.current
-    user.save!
+    user ? generate_password_reset_token : raise_error
   end
 
   after do
@@ -17,7 +15,17 @@ class RequestPasswordReset
   private
 
   def user
-    context.user ||= User.find_by(email: email) || context.fail!(error_data: error_data)
+    @user ||= User.find_by(email: email)
+  end
+
+  def generate_password_reset_token
+    user.regenerate_password_reset_token
+    user.password_reset_sent_at = Time.current
+    user.save!
+  end
+
+  def raise_error
+    context.fail!(error_data: error_data)
   end
 
   def error_data

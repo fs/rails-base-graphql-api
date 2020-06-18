@@ -1,7 +1,6 @@
 require "rails_helper"
 
 describe Mutations::RequestPasswordRecovery do
-  let(:response) { ApplicationSchema.execute(query, {}).as_json }
   let(:query) do
     <<-GRAPHQL
       mutation {
