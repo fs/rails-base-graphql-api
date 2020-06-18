@@ -55,5 +55,3 @@ COPY --from=Builder /usr/local/bundle/ /usr/local/bundle/
 COPY --from=Builder /app/ /app/
 
 WORKDIR /app
-
-ENTRYPOINT ["bin/docker-entrypoint"]

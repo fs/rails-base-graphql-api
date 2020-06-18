@@ -1,5 +1,28 @@
 version: "3.4"
 
+x-app: &app_base
+  depends_on:
+    - db
+    - redis
+  image: ${IMAGE_NAME}
+  environment:
+    - DATABASE_URL=postgres://postgres:password@db
+    - RAILS_ENV
+    - RACK_ENV
+    - DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL
+    - AUTH_SECRET_TOKEN
+  build:
+    context: .
+    args:
+      - BUNDLE_WITHOUT="${BUNDLE_WITHOUT}"
+      - BUNDLER_VERSION=2.1.4
+      - FOLDERS_TO_REMOVE=""
+  links:
+    - db
+  volumes:
+    - ruby-bundle:/usr/local/bundle
+    - .:/app
+
 services:
   db:
     image: postgres:11-alpine
@@ -10,27 +33,20 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
 
-  app: &app_base
-    image: ${IMAGE_NAME}
-    environment:
-      - DATABASE_URL=postgres://postgres:password@db
-      - RAILS_ENV
-      - RACK_ENV
-      - DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL
-      - AUTH_SECRET_TOKEN
-    build:
-      context: .
-      args:
-        - BUNDLE_WITHOUT="${BUNDLE_WITHOUT}"
-        - BUNDLER_VERSION=2.1.4
-        - FOLDERS_TO_REMOVE=""
+  redis:
+    image: redis:6.0-rc3-alpine
+    sysctls:
+      - net.core.somaxconn=511
+  app:
+    <<: *app_base
     ports:
       - "3000:3000"
-    links:
-      - db
-    volumes:
-      - ruby-bundle:/usr/local/bundle
-      - .:/app
+    command: bin/docker-entrypoint
+  sidekiq:
+    <<: *app_base
+    depends_on:
+      - app
+    command: bundle exec sidekiq -C config/sidekiq.yml
 
 volumes:
   ruby-bundle:
