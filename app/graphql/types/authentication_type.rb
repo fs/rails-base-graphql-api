@@ -4,12 +4,6 @@ module Types
     field :refresh_token, String, null: true
     field :me, Types::UserType, null: true, method: :user
 
-    def access_token
-      object.access_token
-    end
-
-    def refresh_token
-      object.refresh_token
-    end
+    delegate :access_token, :refresh_token, to: :object
   end
 end
