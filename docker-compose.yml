@@ -46,7 +46,7 @@ services:
     <<: *app_base
     depends_on:
       - app
-    command: bundle exec sidekiq -C config/sidekiq.yml
+    command: bundle exec sidekiq
 
 volumes:
   ruby-bundle:
