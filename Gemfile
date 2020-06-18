@@ -11,6 +11,7 @@ gem "aws-sdk-s3"
 gem "bcrypt"
 gem "bootsnap", require: false
 gem "decent_exposure"
+gem "enumerize"
 gem "graphql"
 gem "health_check"
 gem "interactor"
@@ -19,6 +20,7 @@ gem "puma"
 gem "rack-cors"
 gem "shrine"
 gem "sidekiq"
+gem "strong_migrations"
 
 group :development do
   gem "listen"
