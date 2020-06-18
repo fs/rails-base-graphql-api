@@ -1,5 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "noreply@example.com"
   layout "mailer"
 
   def password_recovery(user)
