@@ -2,12 +2,11 @@ require "rails_helper"
 
 describe RequestPasswordReset do
   include_context "with interactor"
+  include_context "with mail delivery stubbed"
 
   let(:initial_context) { { email: user.email } }
 
   before do
-    delivery = instance_double(ActionMailer::MessageDelivery)
-    allow(delivery).to receive(:deliver_later)
     allow(ApplicationMailer).to receive(:password_recovery).and_return(delivery)
   end
 
@@ -16,7 +15,7 @@ describe RequestPasswordReset do
 
     it_behaves_like "success interactor"
 
-    it "does send email" do
+    it "sends email" do
       expect(ApplicationMailer).to receive(:password_recovery)
       interactor.run
     end
