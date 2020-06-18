@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2020_06_09_122433) do
   create_table "activities", force: :cascade do |t|
     t.string "title", null: false
     t.text "body", null: false
+    t.string "event", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
