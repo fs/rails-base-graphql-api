@@ -16,6 +16,7 @@ gem "interactor"
 gem "jwt"
 gem "puma"
 gem "rack-cors"
+gem "sidekiq"
 
 group :development do
   gem "listen"
