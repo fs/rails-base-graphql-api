@@ -4,7 +4,7 @@ ruby "2.6.6"
 
 # the most important stuff
 gem "pg"
-gem "rails", "6.0.3.1"
+gem "rails", "6.0.3.2"
 
 # all other gems
 gem "aws-sdk-s3"
@@ -18,6 +18,7 @@ gem "jwt"
 gem "puma"
 gem "rack-cors"
 gem "shrine"
+gem "sidekiq"
 
 group :development do
   gem "listen"
