@@ -11,9 +11,16 @@ For development process, tasks and bugs pls visit our [Pivotal Tracker](https://
 * `bin/tests` - runs RSpec tests
 * `bin/quality` - runs quality tools
 
-### For Linux/Windows users
+### Docker-sync
 
-We use `docker-sync` library to speed up performance on Mac OSX. Please install dependencies specified below or change `docker-compose.yml` to disable docker-sync.
+We use `docker-sync` library to speed up performance on Mac OSX. Please run the next commands before setup:
+
+```bash
+gem install docker-sync
+docker-sync start
+```
+
+In case you're using Linux or Windows please install dependencies specified below or change `docker-compose.yml` to disable docker-sync.
 
 ##### Linux
 

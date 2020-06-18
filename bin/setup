@@ -6,9 +6,6 @@ if [ ! -f .env ]; then
   cp .env.example .env
 fi
 
-gem install docker-sync
-docker-sync start
-
 docker-compose up --detach
 docker-compose exec app bin/rails db:create db:schema:load
 docker-compose exec app bin/rails db:seed
