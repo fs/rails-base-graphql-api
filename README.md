@@ -4,27 +4,28 @@
 
 For development process, tasks and bugs pls visit our [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2432730).
 
-### Prepare dependencies
+### Scripts
 
-Some gems may have native extensions, so you must have GCC installed on your development environment.
-Then, your need to install software dependencies:
-
-Using macOS:
-
-```bash
-brew tap Homebrew/bundle
-brew bundle
-```
-
-Using Linux:
-
-```bash
-TODO
-```
+* `bin/setup` - build Docker image and prepare DB
+* `bin/server` - to run server locally
+* `bin/tests` - runs RSpec tests
+* `bin/quality` - runs quality tools
 
 ### Bootstrap and run application
 
 1. Clone application repository
+
+```bash
+git clone git://github.com/fs/rails-base-graphql-api.git --origin rails-base-graphql-api [MY-NEW-PROJECT]
+```
+
+Create your new repo on GitHub and push master into it.
+Make sure master branch is tracking origin repo.
+
+```bash
+git remote add origin git@github.com:[MY-GITHUB-ACCOUNT]/[MY-NEW-PROJECT].git
+git push -u origin master
+```
 
 2. Run setup script
 
