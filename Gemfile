@@ -13,6 +13,7 @@ gem "bootsnap", require: false
 gem "decent_exposure"
 gem "enumerize"
 gem "graphql"
+gem "graphql-batch"
 gem "health_check"
 gem "interactor"
 gem "jwt"

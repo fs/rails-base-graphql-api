@@ -13,12 +13,10 @@ describe Mutations::UpdateUser do
           currentPassword: "123456",
           password: "qwerty"
         ) {
-          me {
-            id
-            email
-            firstName
-            lastName
-          }
+          id
+          email
+          firstName
+          lastName
         }
       }
     GRAPHQL
