@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Mutations::UpdatePassword do
-  include ActiveSupport::Testing::TimeHelpers
+  include_context "when time is frozen"
 
   let(:user) { create(:user, :with_reset_token, email: "john.doe@example.com", first_name: "John", last_name: "Doe") }
   let(:query) do
@@ -11,13 +11,14 @@ describe Mutations::UpdatePassword do
           password: "new_password",
           resetToken: "#{reset_token}"
         ) {
-          token
           me {
             id
             email
             firstName
             lastName
           }
+          accessToken,
+          refreshToken
         }
       }
     GRAPHQL
@@ -25,15 +26,23 @@ describe Mutations::UpdatePassword do
 
   context "with valid data" do
     let(:reset_token) { user.password_reset_token }
-    let(:token) { JWT.encode({ sub: user.id }, nil, "none") }
+    let(:access_token) do
+      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTU4OTExNzQwMCwianRpIjoiNzQwM2UxMjdiNGM0NWFhMjc2" \
+      "NDgzMDY1NmY0Zjg4OGYiLCJ0eXBlIjoiYWNjZXNzIn0.xgWQwhcZaU1b5GvQZI6LwhCghteBjh5s3nBB0wJNMac"
+    end
+    let(:refresh_token) do
+      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTU5MTcwNTgwMCwianRpIjoiNzQwM2UxMjdiNGM0NWFhMjc2" \
+      "NDgzMDY1NmY0Zjg4OGYiLCJ0eXBlIjoicmVmcmVzaCJ9.c1F6_O4SuXCHRbRcAMGcspTiN0gxSGE0dDMCZ79oh10"
+    end
 
     it_behaves_like "graphql request", "returns user info" do
       let(:fixture_path) { "json/acceptance/graphql/update_password.json" }
       let(:prepared_fixture_file) do
         fixture_file.gsub(
-          /:id|:token/,
+          /:id|:accessToken|:refreshToken/,
           ":id" => user.id,
-          ":token" => token
+          ":accessToken" => access_token,
+          ":refreshToken" => refresh_token
         )
       end
     end
@@ -48,15 +57,10 @@ describe Mutations::UpdatePassword do
   end
 
   context "with expired token" do
-    let(:expiration_time) { user.password_reset_sent_at + 15.minutes + 1 }
+    let(:current_time) { user.password_reset_sent_at + 15.minutes + 1 }
     let(:reset_token) { user.password_reset_token }
 
-    before do
-      travel_to expiration_time
-      freeze_time
-    end
-
-    after { travel_back }
+    before { freeze_time }
 
     it_behaves_like "graphql request", "returns error" do
       let(:fixture_path) { "json/acceptance/graphql/update_password_expired.json" }

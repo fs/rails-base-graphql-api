@@ -3,5 +3,6 @@ class UpdatePassword
 
   organize FindUserByToken,
            UpdateUserPassword,
-           CreateJwtToken
+           CreateAccessToken,
+           CreateRefreshToken
 end
