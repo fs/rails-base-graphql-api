@@ -1,8 +1,13 @@
 require "rails_helper"
 
 describe Mutations::SignUp do
-  let(:registered_user) { User.first }
-  let(:token) { JWT.encode({ sub: registered_user.id }, nil, "none") }
+  include_context "when time is frozen"
+
+  before do
+    allow(JWT).to receive(:encode).and_return("jwt.token.success")
+  end
+
+  let(:registered_user) { User.last }
 
   let(:query) do
     <<-GRAPHQL
@@ -15,7 +20,8 @@ describe Mutations::SignUp do
             id
             email
           }
-          token
+          accessToken
+          refreshToken
         }
       }
     GRAPHQL
@@ -28,9 +34,10 @@ describe Mutations::SignUp do
       let(:fixture_path) { "json/acceptance/graphql/signup.json" }
       let(:prepared_fixture_file) do
         fixture_file.gsub(
-          /:id|:token/,
+          /:id|:accessToken|:refreshToken/,
           ":id" => registered_user.id,
-          ":token" => token
+          ":accessToken" => "jwt.token.success",
+          ":refreshToken" => "jwt.token.success"
         )
       end
     end

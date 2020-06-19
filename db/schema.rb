@@ -10,20 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_04_082036) do
+ActiveRecord::Schema.define(version: 2020_06_09_122433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
 
+  create_table "activities", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "body", null: false
+    t.string "event", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_activities_on_user_id"
+  end
+
   create_table "refresh_tokens", force: :cascade do |t|
     t.string "token", null: false
     t.bigint "user_id", null: false
     t.datetime "expires_at", null: false
-    t.string "client_uid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["client_uid"], name: "index_refresh_tokens_on_client_uid"
+    t.string "jti"
+    t.index ["jti"], name: "index_refresh_tokens_on_jti"
     t.index ["token"], name: "index_refresh_tokens_on_token"
     t.index ["user_id"], name: "index_refresh_tokens_on_user_id"
   end
@@ -41,5 +51,6 @@ ActiveRecord::Schema.define(version: 2020_06_04_082036) do
     t.index ["password_reset_token"], name: "index_users_on_password_reset_token"
   end
 
+  add_foreign_key "activities", "users"
   add_foreign_key "refresh_tokens", "users"
 end
