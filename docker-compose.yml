@@ -11,6 +11,8 @@ x-app: &app_base
     - RACK_ENV
     - DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL
     - AUTH_SECRET_TOKEN
+    - MAILER_SENDER_ADDRESS
+    - PASSWORD_RECOVERY_LINK_TEMPLATE
   build:
     context: .
     args:
