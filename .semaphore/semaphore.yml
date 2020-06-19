@@ -30,6 +30,8 @@ global_job_config:
       - export DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL="true"
       - export AUTH_SECRET_TOKEN="big_secret_token"
       - export REDIS_URL="redis://redis:6379/1"
+      - export MAILER_SENDER_ADDRESS="noreply@example.com"
+      - export PASSWORD_RECOVERY_LINK_TEMPLATE="http://lvh.me:5000/password_reset?token=%{password_reset_token}"
 
       # Authenticate with DockerHub
       - echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin

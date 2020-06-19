@@ -12,6 +12,7 @@ gem "bootsnap", require: false
 gem "decent_exposure"
 gem "enumerize"
 gem "graphql"
+gem "graphql-batch"
 gem "health_check"
 gem "interactor"
 gem "jwt"
@@ -21,6 +22,7 @@ gem "sidekiq"
 gem "strong_migrations"
 
 group :development do
+  gem "letter_opener"
   gem "listen"
   gem "spring"
   gem "spring-watcher-listen"
@@ -41,5 +43,6 @@ end
 
 group :test do
   gem "database_cleaner-active_record"
+  gem "email_spec"
   gem "simplecov", require: false
 end

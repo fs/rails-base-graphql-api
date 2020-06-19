@@ -11,6 +11,8 @@ x-app: &app_base
     - RACK_ENV
     - DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL
     - AUTH_SECRET_TOKEN
+    - MAILER_SENDER_ADDRESS
+    - PASSWORD_RECOVERY_LINK_TEMPLATE
   build:
     context: .
     args:
@@ -31,12 +33,19 @@ services:
       - "5432:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
+  mailcatcher:
+    image: yappabe/mailcatcher
+    ports:
+      - "1025:1025"
+      - "1080:1080"
   redis:
     image: redis:6.0-rc3-alpine
     sysctls:
       - net.core.somaxconn=511
   app:
     <<: *app_base
+    depends_on:
+      - mailcatcher
     ports:
       - "3000:3000"
     command: bin/docker-entrypoint
