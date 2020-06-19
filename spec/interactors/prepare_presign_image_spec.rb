@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe PresignAvatar do
+describe PreparePresignImage do
   include_context "with interactor"
 
   let(:initial_context) { { filename: filename, type: file_type } }

@@ -1,4 +1,4 @@
-class PresignAvatar
+class PreparePresignImage
   include Interactor
 
   ALLOWED_TYPES = %w[image/jpeg image/png image/webp].freeze

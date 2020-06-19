@@ -6,7 +6,7 @@ module Mutations
     type Types::PresignType
 
     def resolve(filename:, type:)
-      presign_upload = PresignAvatar.call(filename: filename, type: type)
+      presign_upload = PreparePresignImage.call(filename: filename, type: type)
 
       if presign_upload.success?
         sanitized_data(presign_upload.presign_data)
