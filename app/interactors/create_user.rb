@@ -9,10 +9,6 @@ class CreateUser
     context.fail!(error_data: error_data) unless context.user.save
   end
 
-  after do
-    RegisterActivityJob.perform_later(context.user.id)
-  end
-
   private
 
   def error_data
