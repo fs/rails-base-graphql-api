@@ -2,8 +2,13 @@ class SignupUser
   include Interactor::Organizer
   include TransactionalInteractor
 
+  delegate :user, to: :context
+
   organize CreateUser,
-           CreateRegisterActivity,
            CreateAccessToken,
            CreateRefreshToken
+
+  after do
+    RegisterActivityJob.perform_later(user.id)
+  end
 end
