@@ -102,6 +102,10 @@ GEM
       railties (>= 3.2, < 6.1)
     down (5.1.1)
       addressable (~> 2.5)
+    email_spec (2.2.0)
+      htmlentities (~> 4.3.3)
+      launchy (~> 2.1)
+      mail (~> 2.7)
     enumerize (2.3.1)
       activesupport (>= 3.2)
     erubi (1.9.0)
@@ -120,12 +124,17 @@ GEM
       promise.rb (~> 0.7.2)
     health_check (3.0.0)
       railties (>= 5.0)
+    htmlentities (4.3.4)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     interactor (3.1.2)
     jaro_winkler (1.5.4)
     jmespath (1.4.0)
     jwt (2.2.1)
+    launchy (2.5.0)
+      addressable (~> 2.7)
+    letter_opener (1.7.0)
+      launchy (~> 2.2)
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -273,6 +282,7 @@ DEPENDENCIES
   database_cleaner-active_record
   decent_exposure
   dotenv-rails
+  email_spec
   enumerize
   factory_bot_rails
   ffaker
@@ -281,6 +291,7 @@ DEPENDENCIES
   health_check
   interactor
   jwt
+  letter_opener
   listen
   pg
   puma
