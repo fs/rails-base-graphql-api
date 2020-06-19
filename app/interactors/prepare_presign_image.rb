@@ -4,6 +4,9 @@ class PreparePresignImage
   ALLOWED_TYPES = %w[image/jpeg image/png image/webp].freeze
   UPLOAD_SIZE_LIMIT = 10.megabyte
 
+  PRESIGN_DATA = Struct.new(:url, :fields)
+  PRESIGN_FIELD = Struct.new(:key, :value)
+
   delegate :filename, :type, to: :context
 
   def call
@@ -14,11 +17,17 @@ class PreparePresignImage
   private
 
   def presign_data
-    { fields: {}, headers: {} }.merge(upload_params)
+    PRESIGN_DATA.new(upload_params.dig(:url), presign_fields)
+  end
+
+  def presign_fields
+    upload_params.dig(:fields).map do |key, value|
+      PRESIGN_FIELD.new(key, value)
+    end
   end
 
   def upload_params
-    storage.presign(location, **options).to_h
+    @upload_params ||= storage.presign(location, **options).slice(:url, :fields)
   end
 
   def location

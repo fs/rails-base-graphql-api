@@ -6,23 +6,13 @@ module Mutations
     type Types::PresignType
 
     def resolve(filename:, type:)
-      presign_upload = PreparePresignImage.call(filename: filename, type: type)
+      presign_image = PreparePresignImage.call(filename: filename, type: type)
 
-      if presign_upload.success?
-        sanitized_data(presign_upload.presign_data)
+      if presign_image.success?
+        presign_image.presign_data
       else
-        execution_error(error_data: presign_upload.error_data)
+        execution_error(error_data: presign_image.error_data)
       end
-    end
-
-    private
-
-    def sanitized_data(data)
-      {
-        url: data.dig(:url),
-        headers: data.dig(:headers).to_json,
-        fields: data.dig(:fields).to_json
-      }
     end
   end
 end

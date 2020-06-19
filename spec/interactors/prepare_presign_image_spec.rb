@@ -10,7 +10,7 @@ describe PreparePresignImage do
     context "with valid data" do
       let(:file_type) { "image/png" }
       let(:s3_storage) { instance_double("S3Storage", presign: presign_data) }
-      let(:presign_data) { { foo: :bar } }
+      let(:presign_data) { { url: "http://some-url.com", fields: { key: :value } } }
 
       before do
         allow(Shrine).to receive(:find_storage).and_return(s3_storage)
