@@ -10,7 +10,7 @@ class UpdateUser
   private
 
   def update_user
-    user.update(update_user_form.user_attributes)
+    user.update(update_user_form.model_attributes)
   end
 
   def update_user_form
