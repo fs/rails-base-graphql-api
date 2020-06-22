@@ -26,24 +26,11 @@ describe Mutations::UpdatePassword do
 
   context "with valid data" do
     let(:reset_token) { user.password_reset_token }
-    let(:access_token) do
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTU4OTExNzQwMCwianRpIjoiNzQwM2UxMjdiNGM0NWFhMjc2" \
-      "NDgzMDY1NmY0Zjg4OGYiLCJ0eXBlIjoiYWNjZXNzIn0.xgWQwhcZaU1b5GvQZI6LwhCghteBjh5s3nBB0wJNMac"
-    end
-    let(:refresh_token) do
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImV4cCI6MTU5MTcwNTgwMCwianRpIjoiNzQwM2UxMjdiNGM0NWFhMjc2" \
-      "NDgzMDY1NmY0Zjg4OGYiLCJ0eXBlIjoicmVmcmVzaCJ9.c1F6_O4SuXCHRbRcAMGcspTiN0gxSGE0dDMCZ79oh10"
-    end
 
     it_behaves_like "graphql request", "returns user info" do
       let(:fixture_path) { "json/acceptance/graphql/update_password.json" }
       let(:prepared_fixture_file) do
-        fixture_file.gsub(
-          /:id|:accessToken|:refreshToken/,
-          ":id" => user.id,
-          ":accessToken" => access_token,
-          ":refreshToken" => refresh_token
-        )
+        fixture_file.gsub(/:id/, ":id" => user.id)
       end
     end
   end
