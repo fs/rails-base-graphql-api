@@ -16,7 +16,7 @@ class UpdatePassword
 
     def update_user_password_attributes
       update_user_password_form
-        .user_attributes
+        .model_attributes
         .merge(password_reset_token: nil, password_reset_sent_at: nil)
     end
 
