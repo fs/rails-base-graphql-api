@@ -7,7 +7,7 @@ class UpdateUserPasswordForm
   attr_reader :user
 
   validates :password, length: { maximum: ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED }, presence: true
-  validates :password_reset_sent_at, active_reset_token: true, presence: true
+  validates :password_reset_sent_at, expiration: { timeout: 15.minutes }, presence: true
 
   def initialize(user)
     @user = user

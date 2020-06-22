@@ -40,7 +40,7 @@ describe UpdatePassword do
     let(:error_data) do
       {
         message: "Record Invalid",
-        detail: ["Password reset token has expired"]
+        detail: ["Password reset sent at has expired"]
       }
     end
 

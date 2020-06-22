@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe ActiveResetTokenValidator do
+describe ExpirationValidator do
   include_context "when time is frozen"
 
   let(:form) { UpdateUserPasswordForm.new(user) }
@@ -17,7 +17,7 @@ describe ActiveResetTokenValidator do
       let(:current_time) { expiration_time + 1 }
 
       it "fails and adds error" do
-        expect(form.errors[:password_reset_token]).to include("has expired")
+        expect(form.errors[:password_reset_sent_at]).to include("has expired")
       end
     end
 
