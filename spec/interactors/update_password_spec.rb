@@ -1,8 +1,6 @@
 require "rails_helper"
 
 describe UpdatePassword do
-  include ActiveSupport::Testing::TimeHelpers
-
   include_context "with interactor"
 
   let(:user) { create(:user, :with_reset_token) }
