@@ -2,6 +2,7 @@ class User < ApplicationRecord
   include ImageUploader::Attachment(:avatar)
 
   has_secure_password
+  has_secure_token :password_reset_token
 
   has_many :activities, dependent: :destroy
   has_many :refresh_tokens, dependent: :destroy

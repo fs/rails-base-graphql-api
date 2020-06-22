@@ -7,7 +7,7 @@ module Mutations
     argument :password, String, required: false
     argument :avatar, String, required: false
 
-    type Types::AuthenticationType
+    type Types::UserType
 
     def resolve(**user_params)
       update_user = ::UpdateUser.call(
@@ -15,7 +15,7 @@ module Mutations
       )
 
       if update_user.success?
-        update_user
+        update_user.user
       else
         execution_error(error_data: update_user.error_data)
       end

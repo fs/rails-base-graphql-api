@@ -9,8 +9,10 @@ describe Mutations::PresignData do
           type: "#{file_type}"
         ) {
           url
-          headers
-          fields
+          fields {
+            key
+            value
+          }
         }
       }
     GRAPHQL
@@ -19,7 +21,7 @@ describe Mutations::PresignData do
   context "with valid file type" do
     let(:file_type) { "image/png" }
     let(:s3_storage) { instance_double("S3Storage", presign: presign_data) }
-    let(:presign_data) { { url: "http://some-url.com", headers: {}, fields: { key: :value } } }
+    let(:presign_data) { { url: "http://some-url.com", fields: { key: :value } } }
 
     before do
       allow(Shrine).to receive(:find_storage).and_return(s3_storage)
