@@ -6,12 +6,12 @@ module Mutations
     type Types::AuthenticationType
 
     def resolve(password:, reset_token:)
-      user = ::UpdatePassword.call(password: password, reset_token: reset_token)
+      result = ::UpdatePassword.call(password: password, reset_token: reset_token)
 
-      if user.success?
-        user
+      if result.success?
+        result
       else
-        execution_error(error_data: user.error_data)
+        execution_error(error_data: result.error_data)
       end
     end
   end
