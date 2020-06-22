@@ -31,11 +31,7 @@ class PreparePresignImage
   end
 
   def location
-    uploader.send(:generate_uid, nil) + File.extname(filename)
-  end
-
-  def uploader
-    Shrine.new(:cache)
+    SecureRandom.hex + File.extname(filename)
   end
 
   def options
