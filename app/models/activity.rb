@@ -3,7 +3,7 @@ class Activity < ApplicationRecord
 
   belongs_to :user
 
-  enumerize :event, in: %w[user_registered]
+  enumerize :event, in: %i[user_registered user_updated]
 
   validates :title, :body, presence: true
 end

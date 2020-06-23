@@ -8,7 +8,7 @@ class UpdateUser
   end
 
   after do
-    RegisterActivityJob.perform_later(user.id, :update_profile)
+    RegisterActivityJob.perform_later(user.id, :user_updated)
   end
 
   private

@@ -32,7 +32,12 @@
 en:
   hello: "Hello world"
   activity:
-    update_user: |
+    user_updated: |
       User updated with the next attributes:
+        First name - #{user.first_name},
+        Last name - #{user.last_name},
+        Email - %{user.email}
+    user_registered: |
+      New user registered with the next attributes:
         First name - %{user.first_name},
         Last name - %{user.last_name}
