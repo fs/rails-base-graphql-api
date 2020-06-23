@@ -7,6 +7,10 @@ class UpdateUser
     context.fail!(error_data: error_data) unless update_user_form.valid? && update_user
   end
 
+  after do
+    RegisterActivityJob.perform_later(user.id, :update_profile)
+  end
+
   private
 
   def update_user

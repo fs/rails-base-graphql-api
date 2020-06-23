@@ -1,8 +1,8 @@
 class RegisterActivityJob < ApplicationJob
   queue_as :events
 
-  def perform(user_id)
+  def perform(user_id, event)
     user = User.find(user_id)
-    CreateRegisterActivity.call!(user: user)
+    CreateUserActivity.call!(user: user, event: event)
   end
 end
