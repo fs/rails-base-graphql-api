@@ -6,11 +6,12 @@ module Mutations
     argument :first_name, String, required: false
     argument :last_name, String, required: false
 
-    argument :avatar, String, required: false
+    argument :avatar, Types::ImageUploaderType, required: false
 
     type Types::AuthenticationType
 
     def resolve(**user_params)
+      user_params[:avatar] = user_params.delete(:avatar).to_hash
       signup_user = SignupUser.call(user_params: user_params)
 
       if signup_user.success?
