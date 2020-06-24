@@ -21,6 +21,12 @@ describe UpdateUser do
           last_name: "Dent"
         )
       end
+
+      it "schedules create activity job" do
+        expect { interactor.run }.to have_enqueued_job(RegisterActivityJob)
+          .with(user.id, :user_updated)
+          .on_queue("events")
+      end
     end
 
     context "when updating password" do
