@@ -32,4 +32,5 @@
 en:
   hello: "Hello world"
   activity:
+    user_logged_in: "User logged in with the next attributes:\n First name - %{first_name},\n Last name - %{last_name}\n"
     user_registered: "New user registered with the next attributes:\n First name - %{first_name},\n Last name - %{last_name}\n"
