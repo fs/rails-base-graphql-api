@@ -31,9 +31,7 @@ describe Mutations::SignUp do
           me {
             id
             email
-            avatar {
-              id
-            }
+            avatarUrl
           }
           accessToken
           refreshToken
@@ -49,9 +47,9 @@ describe Mutations::SignUp do
       let(:fixture_path) { "json/acceptance/graphql/signup.json" }
       let(:prepared_fixture_file) do
         fixture_file.gsub(
-          /:id|:avatar_id|:accessToken|:refreshToken/,
+          /:id|:avatar_url|:accessToken|:refreshToken/,
           ":id" => registered_user.id,
-          ":avatar_id" => registered_user.avatar.id,
+          ":avatar_url" => registered_user.avatar.url,
           ":accessToken" => "jwt.token.success",
           ":refreshToken" => "jwt.token.success"
         )

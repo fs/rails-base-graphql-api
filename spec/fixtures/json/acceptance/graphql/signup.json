@@ -4,9 +4,7 @@
       "me": {
         "id": ":id",
         "email": "bilbo.baggins@shire.com",
-        "avatar": {
-          "id": ":avatar_id"
-        }
+        "avatarUrl": ":avatar_url"
       },
       "accessToken": ":accessToken",
       "refreshToken": ":refreshToken"
