@@ -1,0 +1,48 @@
+{
+  "name": "rails_base_graphql_api",
+  "env": {
+    "AUTH_SECRET_TOKEN": {
+      "required": true
+    },
+    "CORS_ORIGINS": {
+      "required": true
+    },
+    "LANG": {
+      "required": true
+    },
+    "MAILER_SENDER_ADDRESS": {
+      "required": true
+    },
+    "RACK_ENV": {
+      "required": true
+    },
+    "RAILS_ENV": {
+      "required": true
+    },
+    "RAILS_LOG_TO_STDOUT": {
+      "required": true
+    },
+    "RAILS_SERVE_STATIC_FILES": {
+      "required": true
+    },
+    "SECRET_KEY_BASE": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "Free"
+    },
+    "worker": {
+      "quantity": 0,
+      "size": "Free"
+    }
+  },
+  "addons": ["heroku-postgresql"],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+}
