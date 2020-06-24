@@ -1,10 +1,4 @@
 #!/usr/bin/env sh
 
 docker-compose up --detach
-
-if [ $# -ge 1 ]
-then
-  docker-compose exec app bin/rspec "$@"
-else
-  docker-compose exec app bin/rspec spec
-fi
+docker-compose exec app bin/rspec ${@:-spec}
