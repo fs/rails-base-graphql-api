@@ -11,8 +11,6 @@ module Mutations
     type Types::AuthenticationType
 
     def resolve(**user_params)
-      user_params[:avatar] = user_params[:avatar].to_hash if user_params.key?(:avatar)
-
       signup_user = SignupUser.call(user_params: user_params)
 
       if signup_user.success?
