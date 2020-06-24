@@ -32,5 +32,5 @@
 en:
   hello: "Hello world"
   activity:
-    user_updated: "User updated with the next attributes:\n First name - %{user.first_name},\n Last name - %{user.last_name},\n Email - %{user.email}\n"
+    user_updated: "User updated with the next attributes:\n First name - %{first_name},\n Last name - %{last_name},\n Email - %{email}\n"
     user_registered: "New user registered with the next attributes:\n First name - %{first_name},\n Last name - %{last_name}\n"
