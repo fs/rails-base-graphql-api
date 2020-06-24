@@ -11,7 +11,7 @@ describe SignupUser do
 
       it "schedules create activity job" do
         expect { interactor.run }.to have_enqueued_job(RegisterActivityJob)
-          .with(created_user_id)
+          .with(created_user_id, :user_registered)
           .on_queue("events")
       end
     end
