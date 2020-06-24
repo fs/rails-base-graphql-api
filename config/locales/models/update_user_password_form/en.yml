@@ -1,0 +1,4 @@
+en:
+  errors:
+    messages:
+      time_expired: "has expired"

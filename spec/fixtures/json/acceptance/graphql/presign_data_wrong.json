@@ -1,0 +1,19 @@
+{
+  "data": {
+    "presignData": null
+  },
+  "errors": [
+    {
+      "message": "Wrong file type",
+      "extensions": {
+        "status": 415,
+        "code": "unsupported_media_type",
+        "detail": null
+      },
+      "locations": [
+        { "line": 2, "column": 9 }
+      ],
+      "path": ["presignData"]
+    }
+  ]
+}
