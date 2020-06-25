@@ -3,6 +3,7 @@ require "rails_helper"
 describe Mutations::SignIn do
   include_context "when time is frozen"
 
+  let(:user_id) { 111_111 }
   let(:query) do
     <<-GRAPHQL
       mutation {
@@ -31,7 +32,7 @@ describe Mutations::SignIn do
   end
 
   before do
-    create :user, id: 111_111, email: "bilbo.baggins@shire.com", password: "TheRing"
+    create :user, id: user_id, email: "bilbo.baggins@shire.com", password: "TheRing"
   end
 
   context "with valid credentials" do
@@ -51,9 +52,21 @@ describe Mutations::SignIn do
 
   context "with invalid credentials" do
     let(:password) { "Sauron" }
+    let(:event) { :user_login_attempt_failed }
+    let(:schema_options) do
+      {
+        context: respond_to?(:schema_context) ? schema_context : {}
+      }
+    end
 
     it_behaves_like "graphql request", "returns error" do
       let(:fixture_path) { "json/acceptance/graphql/signin_wrong.json" }
+    end
+
+    it "schedules activity job" do
+      expect { ApplicationSchema.execute(query, schema_options) }.to have_enqueued_job(RegisterActivityJob)
+        .with(user_id, event)
+        .on_queue("events")
     end
   end
 end
