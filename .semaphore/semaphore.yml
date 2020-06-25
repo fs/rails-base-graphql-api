@@ -56,7 +56,7 @@ blocks:
   - name: Run
     task:
       secrets:
-        - name: docker-secrets
+        - name: github-docker-secrets
 
       prologue:
         commands:
