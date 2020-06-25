@@ -9,6 +9,7 @@ describe UpdateUser do
 
     context "with valid data" do
       let(:user_params) { { email: "dent@gmail.com", first_name: "Arthur", last_name: "Dent" } }
+      let(:user_id) { user.id }
 
       it_behaves_like "success interactor"
 
