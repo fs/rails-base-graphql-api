@@ -63,10 +63,8 @@ describe Mutations::SignIn do
       let(:fixture_path) { "json/acceptance/graphql/signin_wrong.json" }
     end
 
-    it "schedules activity job" do
-      expect { ApplicationSchema.execute(query, schema_options) }.to have_enqueued_job(RegisterActivityJob)
-        .with(user_id, event)
-        .on_queue("events")
+    it_behaves_like "activity source" do
+      let(:source) { ApplicationSchema.execute(query, schema_options) }
     end
   end
 end

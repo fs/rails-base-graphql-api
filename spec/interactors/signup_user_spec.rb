@@ -10,7 +10,9 @@ describe SignupUser do
     context "when organizer succeeds" do
       include_context "with stubbed organizer"
 
-      it_behaves_like "activity source"
+      it_behaves_like "activity source" do
+        let(:source) { interactor.run }
+      end
     end
 
     context "when organizer failures" do
