@@ -7,15 +7,15 @@ describe RegisterActivityJob do
     let!(:user) { create :user, id: user_id }
 
     it "calls interactor to create activity" do
-      expect(CreateRegisterActivity).to receive(:call!).with(user: user)
+      expect(CreateUserActivity).to receive(:call!).with(user: user, event: :user_registered)
 
-      described_class.perform_now(user_id)
+      described_class.perform_now(user_id, :user_registered)
     end
   end
 
   context "when user does not exist" do
     it "raises" do
-      expect { described_class.perform_now(user_id) }.to raise_error(ActiveRecord::RecordNotFound)
+      expect { described_class.perform_now(user_id, :user_registered) }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 end
