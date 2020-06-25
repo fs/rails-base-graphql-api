@@ -6,6 +6,8 @@ module Mutations
     argument :first_name, String, required: false
     argument :last_name, String, required: false
 
+    argument :avatar, Types::ImageUploaderType, required: false
+
     type Types::AuthenticationType
 
     def resolve(**user_params)
