@@ -3,7 +3,8 @@
     "signup": {
       "me": {
         "id": ":id",
-        "email": "bilbo.baggins@shire.com"
+        "email": "bilbo.baggins@shire.com",
+        "avatarUrl": ":avatar_url"
       },
       "accessToken": ":accessToken",
       "refreshToken": ":refreshToken"

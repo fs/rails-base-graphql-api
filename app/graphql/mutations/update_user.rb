@@ -5,6 +5,7 @@ module Mutations
     argument :last_name, String, required: false
     argument :current_password, String, required: false
     argument :password, String, required: false
+    argument :avatar, Types::ImageUploaderType, required: false
 
     type Types::UserType
 

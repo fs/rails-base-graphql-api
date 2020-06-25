@@ -8,17 +8,30 @@ describe Mutations::SignUp do
   end
 
   let(:registered_user) { User.last }
+  let(:uploader) { ImageUploader.new(:cache) }
+  let(:avatar_image_path) { Rails.root.join("spec/fixtures/images/avatar.jpg") }
+  let(:uploaded_file) { uploader.upload(File.open(avatar_image_path, binmode: true)) }
+  let(:avatar_id) { uploaded_file.id }
 
   let(:query) do
     <<-GRAPHQL
       mutation {
         signup(
           email: "#{email}",
-          password: "TheRing"
+          password: "TheRing",
+          avatar: {
+            id: "#{avatar_id}",
+            metadata: {
+              size: 1098178,
+              filename: "avatar.jpg",
+              mimeType: "image/jpg"
+            }
+          }
         ) {
           me {
             id
             email
+            avatarUrl
           }
           accessToken
           refreshToken
@@ -34,8 +47,9 @@ describe Mutations::SignUp do
       let(:fixture_path) { "json/acceptance/graphql/signup.json" }
       let(:prepared_fixture_file) do
         fixture_file.gsub(
-          /:id|:accessToken|:refreshToken/,
+          /:id|:avatar_url|:accessToken|:refreshToken/,
           ":id" => registered_user.id,
+          ":avatar_url" => registered_user.avatar.url,
           ":accessToken" => "jwt.token.success",
           ":refreshToken" => "jwt.token.success"
         )
