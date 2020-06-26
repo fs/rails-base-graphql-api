@@ -5,9 +5,12 @@ module Types
     field :first_name, String, null: true
     field :last_name, String, null: true
     field :avatar_url, String, null: true
-    field :activities, [ActivityType], null: true
+    field :activities, [Types::ActivityType], null: true do
+      argument :first, Integer, required: false
+      argument :skip, Integer, required: false
+    end
 
-    def activities
+    def activities(first:, skip:)
       Loaders::AssociationLoader.for(User, :activities).load(object)
     end
 
