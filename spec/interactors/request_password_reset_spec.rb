@@ -13,7 +13,7 @@ describe RequestPasswordReset do
   context "when user exists" do
     let(:user) { create :user }
     let(:user_id) { user.id }
-    let(:event) { :reset_password_request }
+    let(:event) { :reset_password_requested }
 
     it_behaves_like "success interactor"
 

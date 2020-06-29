@@ -10,7 +10,7 @@ class RequestPasswordReset
 
   after do
     ApplicationMailer.password_recovery(user).deliver_later
-    RegisterActivityJob.perform_later(user.id, :reset_password_request)
+    RegisterActivityJob.perform_later(user.id, :reset_password_requested)
   end
 
   private
