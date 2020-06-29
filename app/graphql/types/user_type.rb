@@ -11,9 +11,7 @@ module Types
     end
 
     def activities(first: nil, skip: nil)
-      Loaders::AssociationLoader.for(User, :activities).load(object).then do |items|
-        items.offset(skip).limit(first)
-      end
+      object.activities.offset(skip).limit(first)
     end
 
     def avatar_url
