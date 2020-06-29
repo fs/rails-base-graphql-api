@@ -10,6 +10,6 @@ class UpdatePassword
            CreateRefreshToken
 
   after do
-    RegisterActivityJob.perform_later(user.id, :user_updated_password)
+    RegisterActivityJob.perform_later(user.id, :user_reset_password)
   end
 end
