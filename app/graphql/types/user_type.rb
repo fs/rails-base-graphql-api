@@ -11,7 +11,7 @@ module Types
     end
 
     def activities(first: nil, skip: nil)
-      object.activities.offset(skip).limit(first)
+      BaseFilteredQuery.new(object.activities, {}, { offset: skip, limit: first }).all
     end
 
     def avatar_url
