@@ -3,5 +3,6 @@ module Types
     value "USER LOGGED IN", value: "user_logged_in"
     value "USER REGISTERED", value: "user_registered"
     value "RESET PASSWORD REQUEST", value: "reset_password_request"
+    value "USER UPDATED", value: "user_updated"
   end
 end
