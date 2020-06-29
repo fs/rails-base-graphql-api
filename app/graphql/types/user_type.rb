@@ -10,8 +10,10 @@ module Types
       argument :skip, Integer, required: false
     end
 
-    def activities(first:, skip:)
-      Loaders::AssociationLoader.for(User, :activities).load(object)
+    def activities(first: nil, skip: nil)
+      Loaders::AssociationLoader.for(User, :activities).load(object).then do |items|
+        items.offset(skip).limit(first)
+      end
     end
 
     def avatar_url
