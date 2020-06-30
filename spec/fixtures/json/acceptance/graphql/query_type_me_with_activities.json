@@ -1,0 +1,17 @@
+{
+  "data": {
+    "me": {
+      "activities":
+      [
+        {
+        "event": "USER_UPDATED",
+        "id": ":activity_id"
+        }
+      ],
+      "id": ":id",
+      "email": ":email",
+      "firstName": ":first_name",
+      "lastName": ":last_name"
+    }
+  }
+}

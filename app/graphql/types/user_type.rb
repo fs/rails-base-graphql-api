@@ -6,11 +6,7 @@ module Types
     field :last_name, String, null: true
     field :avatar_url, String, null: true
 
-    field :events, resolver: Resolvers::Activities
-
-    def activities
-      Loaders::AssociationLoader.for(User, :activities).load(object)
-    end
+    field :activities, resolver: Resolvers::Activities
 
     def avatar_url
       object.avatar.url

@@ -15,22 +15,16 @@ describe FilteredActivitiesQuery do
 
     it { is_expected.to match_array([activity_1, activity_2]) }
 
-    context "when filtered by event" do
-      let(:filter_params) { { event: nil } }
+    context "when param is user_updated" do
+      let(:filter_params) { { events: [:user_updated] } }
 
-      it { is_expected.to match_array([activity_1, activity_2]) }
+      it { is_expected.to match_array([activity_2]) }
+    end
 
-      context "when param is user_updated" do
-        let(:filter_params) { { event: [:user_updated] } }
+    context "when param is user_registered" do
+      let(:filter_params) { { events: [:user_registered] } }
 
-        it { is_expected.to match_array([activity_2]) }
-      end
-
-      context "when param is user_registered" do
-        let(:filter_params) { { event: [:user_registered] } }
-
-        it { is_expected.to match_array([activity_1]) }
-      end
+      it { is_expected.to match_array([activity_1]) }
     end
   end
 end

@@ -1,6 +1,6 @@
 module Resolvers
   class Activities < Resolvers::Base
-    argument :event, [Types::ActivityEventType], required: false
+    argument :events, [Types::ActivityEventType], required: false
 
     type [Types::ActivityType], null: true
 

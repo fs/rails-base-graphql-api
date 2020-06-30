@@ -1,9 +1,9 @@
 class FilteredActivitiesQuery < BaseFilteredQuery
-  ALLOWED_PARAMS = %i(event).freeze
+  ALLOWED_PARAMS = [:events].freeze
 
   private
 
-  def by_event(relation, event)
-    relation.where(event: event)
+  def by_events(relation, events)
+    relation.where(event: events)
   end
 end
