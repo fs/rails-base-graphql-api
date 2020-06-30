@@ -5,7 +5,8 @@ module Types
     field :first_name, String, null: true
     field :last_name, String, null: true
     field :avatar_url, String, null: true
-    field :activities, [ActivityType], null: true
+
+    field :events, resolver: Resolvers::Activities
 
     def activities
       Loaders::AssociationLoader.for(User, :activities).load(object)
