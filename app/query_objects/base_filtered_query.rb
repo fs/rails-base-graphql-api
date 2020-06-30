@@ -11,7 +11,6 @@ class BaseFilteredQuery
       .limit(pagination_params[:limit])
   end
 
-
   private
 
   attr_reader :filter_params, :pagination_params, :relation
