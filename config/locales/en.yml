@@ -36,3 +36,4 @@ en:
     user_logged_in: "User logged in with the next attributes:\n First name - %{first_name},\n Last name - %{last_name}\n"
     user_registered: "New user registered with the next attributes:\n First name - %{first_name},\n Last name - %{last_name}\n"
     user_reset_password: "User reset password"
+    reset_password_requested: "User requested reset password instructions"
