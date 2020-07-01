@@ -6,7 +6,7 @@ class BaseFilteredQuery
 
   def all
     filter_params.reduce(relation) do |relation, (key, value)|
-      send("by_#{key}", relation, value)
+      public_send("by_#{key}", relation, value)
     end
   end
 
