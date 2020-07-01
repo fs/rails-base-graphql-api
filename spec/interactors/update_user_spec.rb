@@ -9,6 +9,8 @@ describe UpdateUser do
 
     context "with valid data" do
       let(:user_params) { { email: "dent@gmail.com", first_name: "Arthur", last_name: "Dent" } }
+      let(:user_id) { user.id }
+      let(:event) { :user_updated }
 
       it_behaves_like "success interactor"
 
@@ -21,6 +23,8 @@ describe UpdateUser do
           last_name: "Dent"
         )
       end
+
+      it_behaves_like "activity source"
     end
 
     context "when updating password" do
