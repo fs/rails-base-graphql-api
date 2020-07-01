@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.4"
 
 x-app: &app_base
   depends_on:
