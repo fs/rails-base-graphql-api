@@ -10,8 +10,10 @@ For development process, tasks and bugs pls visit our [Pivotal Tracker](https://
 * `bin/server` - to run server locally
 * `bin/tests` - runs RSpec tests
 * `bin/quality` - runs quality tools
+* `bin/docker-sync` - install docker-sync library to speed up performance on Mac OSX
 
 ### Bootstrap and run application
+
 
 1. Clone application repository
 
@@ -27,13 +29,19 @@ git remote add origin git@github.com:[MY-GITHUB-ACCOUNT]/[MY-NEW-PROJECT].git
 git push -u origin master
 ```
 
-2. Run setup script
+2. Run docker-sync setup script (optional, for Mac OSX users)
+
+```bash
+bin/docker-sync
+```
+
+3. Run setup script
 
 ```bash
 bin/setup
 ```
 
-3. Run test and quality suits to make sure all dependencies are satisfied and applications works correctly before making changes.
+4. Run test and quality suits to make sure all dependencies are satisfied and applications works correctly before making changes.
 
 ```bash
 bin/tests
