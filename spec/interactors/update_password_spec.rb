@@ -8,6 +8,8 @@ describe UpdatePassword do
 
   context "when token valid" do
     let(:reset_token) { user.password_reset_token }
+    let(:user_id) { user.id }
+    let(:event) { :user_reset_password }
 
     it_behaves_like "success interactor"
 
@@ -19,6 +21,8 @@ describe UpdatePassword do
         password_reset_sent_at: nil
       )
     end
+
+    it_behaves_like "activity source"
   end
 
   context "when token is wrong" do
