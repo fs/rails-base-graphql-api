@@ -23,7 +23,6 @@ x-app: &app_base
     - db
   volumes:
     - ruby-bundle:/usr/local/bundle
-    - .:/app
 
 services:
   db:
@@ -54,6 +53,8 @@ services:
     <<: *app_base
     depends_on:
       - app
+    environment:
+      - REDIS_URL
     command: bundle exec sidekiq
 
 volumes:

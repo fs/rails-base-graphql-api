@@ -61,6 +61,7 @@ blocks:
       prologue:
         commands:
           - docker pull "${IMAGE_NAME}"
+          - cp docker-compose.linux.yml docker-compose.override.yml
           - docker-compose up --detach
 
       jobs:

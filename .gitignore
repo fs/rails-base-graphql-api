@@ -23,3 +23,5 @@
 /config/master.key
 
 .env
+.docker-sync/*
+docker-compose.override.yml
