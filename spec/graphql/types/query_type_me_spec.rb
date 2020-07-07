@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Types::QueryType do
-  let!(:user) { create :user }
+  let!(:user) { create :user, :with_data }
   let(:token_payload) { { type: "access" } }
   let!(:activity) { create :activity, user: user, event: :user_updated }
 
@@ -56,11 +56,8 @@ describe Types::QueryType do
         let(:fixture_path) { "json/acceptance/graphql/query_type_me_with_activities.json" }
         let(:prepared_fixture_file) do
           fixture_file.gsub(
-            /:id|:email|:first_name|:last_name|:activity_id/,
+            /:id|:activity_id/,
             ":id" => user.id,
-            ":email" => user.email,
-            ":first_name" => user.first_name,
-            ":last_name" => user.last_name,
             ":activity_id" => activity.id
           )
         end

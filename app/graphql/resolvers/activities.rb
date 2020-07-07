@@ -9,7 +9,7 @@ module Resolvers
     end
 
     def raw_relation
-      Activity.all
+      object ? Activity.where(user_id: object.id) : Activity.all
     end
   end
 end

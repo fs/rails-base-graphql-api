@@ -9,9 +9,9 @@
         }
       ],
       "id": ":id",
-      "email": ":email",
-      "firstName": ":first_name",
-      "lastName": ":last_name"
+      "email": "adam@serwer.com",
+      "firstName": "Adam",
+      "lastName": "Serwer"
     }
   }
 }
