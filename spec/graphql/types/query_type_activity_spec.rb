@@ -15,16 +15,20 @@ describe Types::QueryType do
     <<-GRAPHQL
       query {
         activities {
-          id
-          title
-          body
-          event
-          createdAt
-          user {
-            id
-            email
-            firstName
-            lastName
+          edges {
+            node {
+              id
+              title
+              body
+              event
+              createdAt
+              user {
+                id
+                email
+                firstName
+                lastName
+              }
+            }
           }
         }
       }
