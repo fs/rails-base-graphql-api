@@ -40,6 +40,11 @@ For development process, tasks and bugs pls visit our [Pivotal Tracker](https://
   }
 ```
 3. Use this token to send the following requests. Token sent to the "Authorization" in the header
+#### Header example
+
+```
+Authorization: Bearer <token>
+```
 
 ### Bootstrap and run application
 
