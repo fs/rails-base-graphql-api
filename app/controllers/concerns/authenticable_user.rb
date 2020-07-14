@@ -9,11 +9,11 @@ module AuthenticableUser
   end
 
   def authorization_header
-    @authorization_header ||= request.headers["Authorization"].to_s.split(" ")
+    Hash[*request.headers["Authorization"].to_s.split(" ")]
   end
 
   def token
-    @token ||= authorization_header.last if authorization_header.first == "Bearer"
+    @token ||= authorization_header["Bearer"]
   end
 
   def payload
