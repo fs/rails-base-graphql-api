@@ -8,12 +8,8 @@ module AuthenticableUser
     User.find_by(id: payload["sub"])
   end
 
-  def authorization_header
-    Hash[*request.headers["Authorization"].to_s.split(" ")]
-  end
-
   def token
-    @token ||= authorization_header["Bearer"]
+    @token ||= request.headers["Authorization"].to_s.match(/Bearer (.*)/).to_a.last
   end
 
   def payload
