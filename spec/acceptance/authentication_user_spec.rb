@@ -14,7 +14,7 @@ describe "Authenticate user", type: :request do
   end
 
   before do
-    post "/graphql", headers: { authorization: refresh_token.token }, params: { query: query }
+    post "/graphql", headers: { authorization: "Bearer #{refresh_token.token}" }, params: { query: query }
   end
 
   context "with valid token" do
