@@ -35,11 +35,11 @@
       "size": "Free"
     },
     "worker": {
-      "quantity": 0,
+      "quantity": 1,
       "size": "Free"
     }
   },
-  "addons": ["heroku-postgresql"],
+  "addons": ["heroku-postgresql", "heroku-redis"],
   "buildpacks": [
     {
       "url": "heroku/ruby"
