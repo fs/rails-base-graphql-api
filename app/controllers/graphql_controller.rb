@@ -1,5 +1,9 @@
 class GraphqlController < ApplicationController
   def execute
+    ApplicationPrinter.new.print(GraphQL.parse(params[:query])).split("\n").each do |log|
+      Rails.logger.info(log)
+    end
+
     render json: execute_query
   rescue StandardError => e
     raise e unless Rails.env.development?
