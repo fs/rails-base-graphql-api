@@ -9,7 +9,7 @@ module AuthenticableUser
   end
 
   def token
-    @token ||= request.headers["Authorization"].to_s.split(" ").last
+    @token ||= request.headers["Authorization"].to_s.match(/Bearer (.*)/).to_a.last
   end
 
   def payload
