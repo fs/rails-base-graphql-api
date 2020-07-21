@@ -1,6 +1,6 @@
 class GraphqlController < ApplicationController
   def execute
-    ApplicationPrinter.new.print(GraphQL.parse(params[:query])).split("\n").each do |log|
+    print_log.split("\n").each do |log|
       Rails.logger.info(log)
     end
 
@@ -50,5 +50,9 @@ class GraphqlController < ApplicationController
     error = { error: { message: exception.message, backtrace: exception.backtrace }, data: {} }
 
     render json: error, status: :internal_server_error
+  end
+
+  def print_log
+    ApplicationPrinter.new.print(GraphQL.parse(params[:query]))
   end
 end
