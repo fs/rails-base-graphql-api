@@ -106,11 +106,11 @@ To upload docker image use `docker push` command:
 ```bash
 docker push docker.pkg.github.com/fs/rails-base-graphql-api/final:TAG_NAME
 ```
-More detailed info about image uploading you can find in [GitHup Packages docs](https://docs.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-docker-for-use-with-github-packages#publishing-a-package)
+More details about image uploading you can find in [GitHup Packages docs](https://docs.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-docker-for-use-with-github-packages#publishing-a-package)
 
 #### Semaphore CI
 
-To use GitHub Packages on Semaphore CI you can store Personal Access Token as the secret. After that add it to you `.semaphore.yml` config:
+To use GitHub Packages on Semaphore CI you can store Personal Access Token as the secret. After that add it to your `.semaphore.yml` config:
 ```
 secrets:
   - name: github-docker-secrets
