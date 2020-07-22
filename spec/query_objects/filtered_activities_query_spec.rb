@@ -21,10 +21,10 @@ describe FilteredActivitiesQuery do
       it { is_expected.to match_array([activity_2]) }
     end
 
-    context "when param is user_registered" do
-      let(:filter_params) { { events: [:user_registered] } }
+    context "when param is empty" do
+      let(:filter_params) { { events: [] } }
 
-      it { is_expected.to match_array([activity_1]) }
+      it { is_expected.to be_empty }
     end
   end
 end
