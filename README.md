@@ -106,7 +106,7 @@ To upload docker image use `docker push` command:
 ```bash
 docker push docker.pkg.github.com/fs/rails-base-graphql-api/final:TAG_NAME
 ```
-More details about image uploading you can find in [GitHup Packages docs](https://docs.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-docker-for-use-with-github-packages#publishing-a-package)
+More details about image uploading you can find at [GitHup Packages docs](https://docs.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-docker-for-use-with-github-packages#publishing-a-package)
 
 #### Semaphore CI
 
