@@ -11,32 +11,75 @@ describe Types::QueryType do
            body: "New user registered with the next attributes: First Name - John, Last Name - Doe",
            event: :user_registered)
   end
-  let(:query) do
-    <<-GRAPHQL
-      query {
-        activities {
-          edges {
-            node {
-              id
-              title
-              body
-              event
-              createdAt
-              user {
+  let!(:activity_2) do
+    create(:activity,
+           user: user,
+           title: "User Updated",
+           body: "New user updated with the next attributes: First Name - John, Last Name - Doe",
+           event: :user_updated)
+  end
+
+  context "when first activity" do
+    let(:query) do
+      <<-GRAPHQL
+        query {
+          activities(first: 1) {
+            edges {
+              cursor
+              node {
                 id
-                email
-                firstName
-                lastName
+                title
+                body
+                event
+                createdAt
+                user {
+                  id
+                  email
+                  firstName
+                  lastName
+                }
               }
             }
           }
         }
-      }
-    GRAPHQL
+      GRAPHQL
+    end
+
+    it_behaves_like "graphql request", "get first activity" do
+      let(:fixture_path) { "json/acceptance/graphql/first_page_query_type_activities.json" }
+      let(:prepared_fixture_file) { fixture_file.gsub(/:id|:user_id/, ":id" => activity.id, ":user_id" => user.id) }
+    end
   end
 
-  it_behaves_like "graphql request", "gets activities list" do
-    let(:fixture_path) { "json/acceptance/graphql/query_type_activities.json" }
-    let(:prepared_fixture_file) { fixture_file.gsub(/:id|:user_id/, ":id" => activity.id, ":user_id" => user.id) }
+  context "when activity after cursor" do
+    let(:query) do
+      <<-GRAPHQL
+        query {
+          activities(first: 1, after: "MQ") {
+            edges {
+              cursor
+              node {
+                id
+                title
+                body
+                event
+                createdAt
+                user {
+                  id
+                  email
+                  firstName
+                  lastName
+                }
+              }
+            }
+          }
+        }
+      GRAPHQL
+    end
+
+    it_behaves_like "graphql request", "get second activity" do
+      let(:fixture_path) { "json/acceptance/graphql/second_page_query_type_activities.json" }
+      let(:prepared_fixture_file) { fixture_file.gsub(/:id|:user_id/, ":id" => activity_2.id, ":user_id" => user.id) }
+    end
   end
 end

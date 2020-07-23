@@ -2,6 +2,7 @@
   "data": {
     "activities": {
       "edges": [{
+        "cursor": "MQ",
         "node": {
           "id": ":id",
           "title": "User registered",
