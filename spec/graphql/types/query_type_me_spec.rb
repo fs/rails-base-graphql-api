@@ -43,8 +43,12 @@ describe Types::QueryType do
               firstName
               lastName
               activities(events: [USER_UPDATED]){
-                id
-                event
+                edges {
+                  node {
+                    id
+                    event
+                  }
+                }
               }
             }
           }

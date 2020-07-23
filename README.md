@@ -13,36 +13,39 @@ For development process, tasks and bugs pls visit our [Pivotal Tracker](https://
 * `bin/docker-sync` - install docker-sync library to speed up performance on Mac OSX
 
 ### Staging Environments
-  1. App [path](https://rails-base-graphql-api.herokuapp.com/)
-  2. Graphql query [path](https://rails-base-graphql-api.herokuapp.com/graphql)
+GraphQL query base path
+```bash
+https://rails-base-graphql-api.herokuapp.com/graphql
+```
 
-#### Apps and extensions for graphql
+#### Apps and extensions for GraphQL
 
-1. Electron-based wrapper around Graphql [Graphiql](https://www.electronjs.org/apps/graphiql)
+1. Electron-based wrapper around GraphQL [GraphiQL](https://www.electronjs.org/apps/graphiql)
 2. Chrome extension [Altair GraphQL Client](https://chrome.google.com/webstore/detail/altair-graphql-client/flnheeellpciglgpaodhkhmapeljopja)
 
-#### How to start working with graphql:
-1. Choose your favorite tool for working with graphql
-2. Create a request for signup and get access_token
-```
-  mutation {
-    signup(
-      email: "{email}",
-      password: "{password}",
-      }
-    ) {
-      me {
-        id
-        email
-      }
-      accessToken
+#### How to start working with GraphQL:
+1. Choose your favorite tool for working with GraphQL
+2. Create a request for signup to get access and refresh tokens
+```ruby
+# query
+mutation signup($email: String!, $password: String!) {
+  signup(email: $email, password: $password) {
+    me {
+      id
+      email
     }
+    accessToken
+    refreshToken
   }
+}
+
+# query variables
+{ "email": "user@example.com", "password": "password" }
 ```
 3. Use this token to send the following requests. Token sent to the "Authorization" in the header
 #### Header example
 
-```
+```ruby
 Authorization: Bearer <token>
 ```
 
@@ -85,4 +88,33 @@ bin/tests
 
 ```bash
 bin/server
+```
+
+### Github registry
+
+We use Github Packages to store docker images. To use them you need to create [Personal Access Token](https://docs.github.com/en/packages/publishing-and-managing-packages/about-github-packages#about-tokens) with the appropriate scopes(**read_packages** - to download images, **write_packages** - to upload). Authenticate to GitHub Packages with docker using `docker login` command:
+
+```bash
+cat ~/TOKEN.txt | docker login https://docker.pkg.github.com -u USERNAME --password-stdin
+```
+where `TOKEN.txt` - file with personal access token and `USERNAME` - your GitHub username
+
+After that you can download docker image with the `docker pull` command:
+```bash
+docker pull docker.pkg.github.com/fs/rails-base-graphql-api/final:TAG_NAME
+```
+where `TAG_NAME` - name of the branch
+
+To upload docker image use `docker push` command:
+```bash
+docker push docker.pkg.github.com/fs/rails-base-graphql-api/final:TAG_NAME
+```
+More details about image uploading you can find at [GitHup Packages docs](https://docs.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-docker-for-use-with-github-packages#publishing-a-package)
+
+#### Semaphore CI
+
+To use GitHub Packages on Semaphore CI you can store Personal Access Token as the secret. After that add it to your `.semaphore.yml` config:
+```
+secrets:
+  - name: github-docker-secrets
 ```
