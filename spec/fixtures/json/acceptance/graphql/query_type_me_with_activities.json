@@ -1,13 +1,16 @@
 {
   "data": {
     "me": {
-      "activities":
-      [
-        {
-        "event": "USER_UPDATED",
-        "id": ":activity_id"
-        }
-      ],
+      "activities": {
+        "edges": [
+          {
+            "node": {
+              "event": "USER_UPDATED",
+              "id": ":activity_id"
+            }
+          }
+        ]
+      },
       "id": ":id",
       "email": "adam@serwer.com",
       "firstName": "Adam",
