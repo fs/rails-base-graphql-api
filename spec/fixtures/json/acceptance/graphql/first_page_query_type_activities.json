@@ -16,7 +16,13 @@
             "lastName": "Doe"
           }
         }
-      }]
+      }],
+      "pageInfo": {
+        "endCursor": "MQ",
+        "hasNextPage": true,
+        "hasPreviousPage": false,
+        "startCursor": "MQ"
+      }
     }
   }
 }

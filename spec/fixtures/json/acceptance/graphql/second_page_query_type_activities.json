@@ -4,7 +4,7 @@
       "edges": [{
         "cursor": "Mg",
         "node": {
-          "id": ":id",
+          "id": ":first_id",
           "title": "User Updated",
           "event": "USER_UPDATED",
           "body": "New user updated with the next attributes: First Name - John, Last Name - Doe",
@@ -16,7 +16,29 @@
             "lastName": "Doe"
           }
         }
-      }]
+      },
+      {
+        "cursor": "Mw",
+        "node": {
+          "id": ":second_id",
+          "title": "User Updated",
+          "event": "USER_UPDATED",
+          "body": "New user updated with the next attributes: First Name - John, Last Name - Doe",
+          "createdAt": "2020-05-10T12:30:00Z",
+          "user": {
+            "id": ":user_id",
+            "email": "john.doe@email.me",
+            "firstName": "John",
+            "lastName": "Doe"
+          }
+        }
+      }],
+      "pageInfo": {
+        "endCursor": "Mw",
+        "hasNextPage": false,
+        "hasPreviousPage": true,
+        "startCursor": "Mg"
+      }
     }
   }
 }
