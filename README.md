@@ -89,3 +89,32 @@ bin/tests
 ```bash
 bin/server
 ```
+
+### Github registry
+
+We use Github Packages to store docker images. To use them you need to create [Personal Access Token](https://docs.github.com/en/packages/publishing-and-managing-packages/about-github-packages#about-tokens) with the appropriate scopes(**read_packages** - to download images, **write_packages** - to upload). Authenticate to GitHub Packages with docker using `docker login` command:
+
+```bash
+cat ~/TOKEN.txt | docker login https://docker.pkg.github.com -u USERNAME --password-stdin
+```
+where `TOKEN.txt` - file with personal access token and `USERNAME` - your GitHub username
+
+After that you can download docker image with the `docker pull` command:
+```bash
+docker pull docker.pkg.github.com/fs/rails-base-graphql-api/final:TAG_NAME
+```
+where `TAG_NAME` - name of the branch
+
+To upload docker image use `docker push` command:
+```bash
+docker push docker.pkg.github.com/fs/rails-base-graphql-api/final:TAG_NAME
+```
+More details about image uploading you can find at [GitHup Packages docs](https://docs.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-docker-for-use-with-github-packages#publishing-a-package)
+
+#### Semaphore CI
+
+To use GitHub Packages on Semaphore CI you can store Personal Access Token as the secret. After that add it to your `.semaphore.yml` config:
+```
+secrets:
+  - name: github-docker-secrets
+```
