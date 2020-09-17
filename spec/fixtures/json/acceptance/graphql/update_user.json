@@ -4,7 +4,8 @@
       "id": ":id",
       "email": "new_email_11@example.com",
       "firstName": "Randle",
-      "lastName": "McMurphy"
+      "lastName": "McMurphy",
+      "avatarUrl": ":avatar_url"
     }
   }
 }

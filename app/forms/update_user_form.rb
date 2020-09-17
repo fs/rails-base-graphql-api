@@ -1,5 +1,5 @@
 class UpdateUserForm < ApplicationForm
-  USER_ATTRIBUTES = %i[first_name last_name email password].freeze
+  USER_ATTRIBUTES = %i[first_name last_name email password avatar].freeze
   ATTRIBUTES = (USER_ATTRIBUTES + %i[current_password]).freeze
 
   attr_accessor(*ATTRIBUTES)
