@@ -10,7 +10,6 @@ gem "rails", "6.0.3.3"
 gem "aws-sdk-s3"
 gem "bcrypt"
 gem "bootsnap", require: false
-gem "decent_exposure"
 gem "enumerize"
 gem "graphql"
 gem "graphql-batch"
