@@ -4,7 +4,7 @@ ruby "2.6.6"
 
 # the most important stuff
 gem "pg"
-gem "rails", "6.0.3.3"
+gem "rails", "~> 6.0.3.4"
 
 # all other gems
 gem "aws-sdk-s3"
