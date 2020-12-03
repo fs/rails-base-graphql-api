@@ -2,8 +2,6 @@
 
 ## Getting Started
 
-For development process, tasks and bugs pls visit our [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2432730).
-
 ### Scripts
 
 * `bin/setup` - build Docker image and prepare DB
