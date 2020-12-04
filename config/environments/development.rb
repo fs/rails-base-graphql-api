@@ -25,6 +25,8 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  config.action_controller.default_url_options = { host: ENV.fetch("HOST", "localhost:5000") }
+
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 

@@ -36,8 +36,8 @@ end
 
 def filesystem_storages
   {
-    cache: Shrine::Storage::FileSystem.new("public", prefix: "/uploads/cache"),
-    store: Shrine::Storage::FileSystem.new("public", prefix: "/uploads")
+    cache: LocalStorage.new("public", prefix: "/uploads/cache"),
+    store: LocalStorage.new("public", prefix: "/uploads")
   }
 end
 
