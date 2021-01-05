@@ -1,6 +1,7 @@
 module Loaders
   class RecordLoader < GraphQL::Batch::Loader
     def initialize(model)
+      super()
       @model = model
     end
 

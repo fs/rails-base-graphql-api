@@ -11,14 +11,14 @@ describe Types::QueryType do
            body: "New user registered with the next attributes: First Name - John, Last Name - Doe",
            event: :user_registered)
   end
-  let!(:activity_2) do
+  let!(:activity2) do
     create(:activity,
            user: user,
            title: "User Updated",
            body: "New user updated with the next attributes: First Name - John, Last Name - Doe",
            event: :user_updated)
   end
-  let!(:activity_3) do
+  let!(:activity3) do
     create(:activity,
            user: user,
            title: "User Updated",
@@ -101,8 +101,8 @@ describe Types::QueryType do
       let(:prepared_fixture_file) do
         fixture_file.gsub(
           /:first_id|:second_id|:user_id/,
-          ":first_id" => activity_2.id,
-          ":second_id" => activity_3.id,
+          ":first_id" => activity2.id,
+          ":second_id" => activity3.id,
           ":user_id" => user.id
         )
       end

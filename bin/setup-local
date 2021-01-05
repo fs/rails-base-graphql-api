@@ -1,0 +1,54 @@
+#!/usr/bin/env sh
+
+set -e
+
+# Setup dependencies on macOS
+if [ `uname -s` = "Darwin" ]; then
+  echo "Install Homebrew dependencies ..."
+  if [ -x "$(command -v brew)" ]; then
+    brew bundle check --no-upgrade || brew bundle --no-upgrade
+  fi
+
+  echo "Install Ruby ..."
+  RUBY_VERSION=$(<.ruby-version)
+  MAJOR_RUBY_VERSION=$(echo $RUBY_VERSION | cut -d'.' -f1 | bc)
+  XCODE_VERSION=$(pkgutil --pkg-info=com.apple.pkg.CLTools_Executables | awk '/version:/ {print $2}')
+  MAJOR_XCODE_VERSION=$(echo $XCODE_VERSION | cut -d'.' -f1 | bc)
+  if [ -x "$(command -v rbenv)" ] && [ -z "$(rbenv versions --bare | grep $RUBY_VERSION)" ]; then
+    # GFLAGS changed in XCode 12 and older ruby versions should be installed with
+    # https://github.com/rbenv/ruby-build/issues/1489
+    if [ $MAJOR_XCODE_VERSION -ge 12 ] && [ $MAJOR_RUBY_VERSION -lt 3 ]; then
+      CFLAGS="-Wno-error=implicit-function-declaration" rbenv install $RUBY_VERSION
+    else
+      rbenv install $RUBY_VERSION
+    fi
+  fi
+fi
+
+# Setup specific Bundler options if this is CI
+if [ "$CI" ]; then
+  BUNDLER_ARGS="--without development staging production"
+fi
+
+# Make sure we have Bundler installed
+echo "Install Bundler ..."
+gem install bundler --conservative
+
+# Set up Ruby dependencies via Bundler into .bundle folder
+echo "Install gems ..."
+rm -f .bundle/config
+
+bundle check --path .bundle > /dev/null 2>&1 ||
+  bundle install --path=.bundle $BUNDLER_ARGS
+
+# Set up configurable environment variables
+if [ ! -f .env ]; then
+  cp .env.example .env
+fi
+
+# Set up database and add any development seed data
+echo "Setup database"
+bin/rails db:setup
+
+# Clean log files and tmp directory
+bin/rails log:clear tmp:clear

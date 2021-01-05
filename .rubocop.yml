@@ -5,6 +5,7 @@ require:
 AllCops:
   TargetRubyVersion: 2.6
   DisplayCopNames: true
+  NewCops: enable
   Exclude:
     - bin/**/*
     - db/**/*
@@ -42,7 +43,7 @@ RSpec/RepeatedDescription:
 RSpec/MessageSpies:
   EnforcedStyle: receive
 
-Capybara/FeatureMethods:
+RSpec/MultipleMemoizedHelpers:
   Enabled: false
 
 Style/AndOr:
