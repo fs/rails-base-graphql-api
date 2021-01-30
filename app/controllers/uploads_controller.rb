@@ -5,7 +5,7 @@ class UploadsController < ApplicationController
 
   private
 
-  def set_rack_response(status, headers, body)
+  def set_rack_response((status, headers, body))
     self.status = status
     self.headers.merge!(headers)
     self.response_body = body
