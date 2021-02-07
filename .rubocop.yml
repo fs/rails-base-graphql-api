@@ -88,6 +88,10 @@ Style/HashTransformValues:
 Style/ExponentialNotation:
   Enabled: true
 
+Style/RedundantSelf:
+  Exclude:
+    - 'app/controllers/uploads_controller.rb'
+
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
@@ -121,3 +125,7 @@ Lint/RaiseException:
 
 Lint/StructNewOverride:
   Enabled: true
+
+Naming/AccessorMethodName:
+  Exclude:
+    - 'app/controllers/uploads_controller.rb'
