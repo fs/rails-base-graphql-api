@@ -45,5 +45,5 @@ def local_storages
   Rails.env.test? ? memory_storages : filesystem_storages
 end
 
-Shrine.storages = s3_options.values.all? ? amazon_s3_storages : local_storages
-Shrine.plugin :upload_endpoint unless s3_options.values.all?
+Shrine.storages = s3_options.values.all?(&:present?) ? amazon_s3_storages : local_storages
+Shrine.plugin :upload_endpoint unless s3_options.values.all?(&:present?)
