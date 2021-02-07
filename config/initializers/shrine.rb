@@ -46,4 +46,8 @@ def local_storages
 end
 
 Shrine.storages = s3_options.values.all?(&:present?) ? amazon_s3_storages : local_storages
-Shrine.plugin :upload_endpoint unless s3_options.values.all?(&:present?)
+unless s3_options.values.all?(&:present?)
+  Shrine.plugin :upload_endpoint, upload_context: -> (request) do
+    { key: request.params["key"] }
+  end
+end
