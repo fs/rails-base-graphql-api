@@ -13,6 +13,7 @@ gem "bootsnap", require: false
 gem "enumerize"
 gem "graphql"
 gem "graphql-batch"
+gem "graphql-rails_logger"
 gem "health_check"
 gem "interactor"
 gem "jwt"
