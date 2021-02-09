@@ -44,6 +44,8 @@ services:
       - net.core.somaxconn=511
   app:
     <<: *app_base
+    stdin_open: true
+    tty: true
     depends_on:
       - mailcatcher
     ports:
