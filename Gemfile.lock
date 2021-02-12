@@ -1,6 +1,12 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    action_policy (0.5.5)
+      ruby-next-core (>= 0.11.0)
+    action_policy-graphql (0.5.2)
+      action_policy (>= 0.5.0)
+      graphql (>= 1.9.3)
+      ruby-next-core (>= 0.10.0)
     actioncable (6.0.3.5)
       actionpack (= 6.0.3.5)
       nio4r (~> 2.0)
@@ -240,6 +246,7 @@ GEM
       rubocop (>= 0.72.0)
     rubocop-rspec (1.38.1)
       rubocop (>= 0.68.1)
+    ruby-next-core (0.12.0)
     ruby-progressbar (1.10.1)
     shrine (3.3.0)
       content_disposition (~> 1.0)
@@ -280,6 +287,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  action_policy-graphql
   aws-sdk-s3
   bcrypt
   bootsnap
@@ -304,7 +312,7 @@ DEPENDENCIES
   pg
   puma
   rack-cors
-  rails (~> 6.0.3.4)
+  rails (~> 6.0.3.5)
   rspec-rails
   rubocop
   rubocop-rails
