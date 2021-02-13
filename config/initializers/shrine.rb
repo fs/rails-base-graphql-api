@@ -51,7 +51,3 @@ else
   Shrine.plugin :upload_endpoint, upload_context: ->(request) { { key: request.params["key"] } }
   Shrine.storages = local_storages
 end
-
-unless s3_options.values.all?(&:present?)
-  Shrine.plugin :upload_endpoint, upload_context: ->(request) { { key: request.params["key"] } }
-end
