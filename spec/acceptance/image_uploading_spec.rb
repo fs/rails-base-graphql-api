@@ -9,15 +9,16 @@ describe "Upload image", type: :request do
       content_disposition: "inline; filename='avatar.png'; filename*=UTF-8''avatar.png",
       content_type: "image/png",
       content_length_range: "0..10485760",
-      file: fixture_file_upload(avatar_image_path, 'image/png')
+      file: fixture_file_upload(avatar_image_path, "image/png")
     }
   end
 
   before { post "/images/upload", params: params }
+
   after { Shrine.storages[:cache].clear! }
 
   it "uploads image" do
-    expect(Shrine.storages[:cache].exists?(file_key)).to be_truthy
+    expect(Shrine.storages[:cache].store).to have_key(file_key)
   end
 
   it "returns 204 status" do
