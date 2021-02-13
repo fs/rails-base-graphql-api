@@ -1,12 +1,6 @@
 module Mutations
   class SignUp < BaseMutation
-    argument :email, String, required: true
-    argument :password, String, required: true
-
-    argument :first_name, String, required: false
-    argument :last_name, String, required: false
-
-    argument :avatar, Types::ImageUploaderType, required: false
+    argument :input, Types::SignUpAttributes, required: true
 
     type Types::AuthenticationType
 
