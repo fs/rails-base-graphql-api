@@ -1,12 +1,11 @@
 module Mutations
   class PresignData < BaseMutation
-    argument :filename, String, required: true
-    argument :type, String, required: true
+    argument :input, Types::PresignDataInput, required: true
 
     type Types::PresignType
 
-    def resolve(filename:, type:)
-      presign_image = PreparePresignImage.call(filename: filename, type: type)
+    def resolve(input:)
+      presign_image = PreparePresignImage.call(input.to_hash)
 
       if presign_image.success?
         presign_image.presign_data

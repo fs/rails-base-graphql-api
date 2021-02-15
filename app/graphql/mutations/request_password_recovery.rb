@@ -1,11 +1,11 @@
 module Mutations
   class RequestPasswordRecovery < BaseMutation
-    argument :email, String, required: true
+    argument :input, Types::RequestPasswordRecoveryInput, required: true
 
     type Types::DetailedMessageType
 
-    def resolve(email:)
-      RequestPasswordReset.call(email: email)
+    def resolve(input:)
+      RequestPasswordReset.call(input.to_hash)
 
       {
         message: I18n.t("password_recovery.sent.message"),

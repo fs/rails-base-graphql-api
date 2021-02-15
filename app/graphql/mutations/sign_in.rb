@@ -1,12 +1,11 @@
 module Mutations
   class SignIn < BaseMutation
-    argument :email, String, required: true
-    argument :password, String, required: true
+    argument :input, Types::SignInInput, required: true
 
     type Types::AuthenticationType
 
-    def resolve(email:, password:)
-      singin_user = SigninUser.call(email: email, password: password)
+    def resolve(input:)
+      singin_user = SigninUser.call(input.to_hash)
 
       if singin_user.success?
         singin_user
