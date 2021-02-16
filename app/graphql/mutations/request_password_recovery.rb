@@ -5,7 +5,7 @@ module Mutations
     type Types::DetailedMessageType
 
     def resolve(input:)
-      RequestPasswordReset.call(input.to_hash)
+      RequestPasswordReset.call(input.to_h)
 
       {
         message: I18n.t("password_recovery.sent.message"),

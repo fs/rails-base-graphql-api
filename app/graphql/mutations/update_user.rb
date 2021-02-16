@@ -6,7 +6,7 @@ module Mutations
 
     def resolve(input:)
       update_user = ::UpdateUser.call(
-        user: context[:current_user], user_params: input.to_hash
+        user: context[:current_user], user_params: input.to_h
       )
 
       if update_user.success?

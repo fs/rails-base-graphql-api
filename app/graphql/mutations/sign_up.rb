@@ -5,7 +5,7 @@ module Mutations
     type Types::AuthenticationType
 
     def resolve(input:)
-      signup_user = SignupUser.call(user_params: input.to_hash)
+      signup_user = SignupUser.call(user_params: input.to_h)
 
       if signup_user.success?
         signup_user

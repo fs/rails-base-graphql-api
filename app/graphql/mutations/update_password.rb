@@ -5,7 +5,7 @@ module Mutations
     type Types::AuthenticationType
 
     def resolve(input:)
-      result = ::UpdatePassword.call(input.to_hash)
+      result = ::UpdatePassword.call(input.to_h)
 
       if result.success?
         result

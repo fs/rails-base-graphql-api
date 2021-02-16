@@ -5,7 +5,7 @@ module Mutations
     type Types::PresignType
 
     def resolve(input:)
-      presign_image = PreparePresignImage.call(input.to_hash)
+      presign_image = PreparePresignImage.call(input.to_h)
 
       if presign_image.success?
         presign_image.presign_data
