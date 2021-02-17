@@ -34,9 +34,6 @@ describe Mutations::UpdatePassword do
 
     it_behaves_like "graphql request", "returns user info" do
       let(:fixture_path) { "json/acceptance/graphql/update_password.json" }
-      let(:prepared_fixture_file) do
-        fixture_file.gsub(/:id/, ":id" => user.id)
-      end
     end
   end
 
