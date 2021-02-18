@@ -5,11 +5,21 @@ class LocalStorage < Shrine::Storage::FileSystem
     {
       method: :post,
       url: images_upload_url(default_url_options),
-      fields: { key: id }.merge(options)
+      fields: { key: [storage_key, id].join("/") }.merge(options)
     }
   end
 
+  def url(id, **_options)
+    req = ActionDispatch::Request.new("HTTP_HOST" => ENV["HOST"])
+
+    [req.url, prefix, id].join("/")
+  end
+
   private
+
+  def storage_key
+    Shrine.storages.key(self)
+  end
 
   def url_helpers
     Rails.application.routes.url_helpers

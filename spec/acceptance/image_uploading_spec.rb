@@ -3,9 +3,10 @@ require "rails_helper"
 describe "Upload image", type: :request do
   let(:avatar_image_path) { Rails.root.join("spec/fixtures/images/avatar.jpg") }
   let(:file_key) { "c379cbc5050227055116049764dc283b.png" }
+  let(:storage_key) { "cache" }
   let(:params) do
     {
-      key: file_key,
+      key: "#{storage_key}/#{file_key}",
       content_disposition: "inline; filename='avatar.png'; filename*=UTF-8''avatar.png",
       content_type: "image/png",
       content_length_range: "0..10485760",
