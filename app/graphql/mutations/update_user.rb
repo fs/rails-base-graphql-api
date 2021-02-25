@@ -1,17 +1,12 @@
 module Mutations
   class UpdateUser < BaseMutation
-    argument :email, String, required: false
-    argument :first_name, String, required: false
-    argument :last_name, String, required: false
-    argument :current_password, String, required: false
-    argument :password, String, required: false
-    argument :avatar, Types::ImageUploaderType, required: false
+    argument :input, Types::UpdateUserInput, required: true
 
     type Types::UserType
 
-    def resolve(**user_params)
+    def resolve(input:)
       update_user = ::UpdateUser.call(
-        user: context[:current_user], user_params: user_params
+        user: context[:current_user], user_params: input.to_h
       )
 
       if update_user.success?

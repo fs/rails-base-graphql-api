@@ -8,7 +8,11 @@ describe Mutations::SignOut, type: :request do
   let(:query) do
     <<-GRAPHQL
     mutation {
-      signout(everywhere: #{everywhere})
+      signout(
+        input: {
+          everywhere: #{everywhere}
+        }
+      )
       {
         message
       }
