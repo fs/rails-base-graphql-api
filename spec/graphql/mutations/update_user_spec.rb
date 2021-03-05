@@ -12,19 +12,21 @@ describe Mutations::UpdateUser do
     <<-GRAPHQL
       mutation {
         updateUser (
-          email: "new_email_11@example.com",
-          firstName: "Randle",
-          lastName: "McMurphy",
-          currentPassword: "123456",
-          password: "qwerty",
-          avatar: {
-            id: "#{avatar_id}",
-            metadata: {
-              size: 1098178,
-              filename: "avatar.jpg",
-              mimeType: "image/jpg"
+          input: {
+            email: "new_email_11@example.com",
+            firstName: "Randle",
+            lastName: "McMurphy",
+            currentPassword: "123456",
+            password: "qwerty",
+            avatar: {
+              id: "#{avatar_id}",
+              metadata: {
+                size: 1098178,
+                filename: "avatar.jpg",
+                mimeType: "image/jpg"
+              }
             }
-          }
+        }
         ) {
           id
           email
@@ -38,6 +40,7 @@ describe Mutations::UpdateUser do
 
   it_behaves_like "graphql request", "returns updated user info" do
     let(:fixture_path) { "json/acceptance/graphql/update_user.json" }
+
     let(:prepared_fixture_file) do
       fixture_file.gsub(
         /:id|:avatar_url/,

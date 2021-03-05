@@ -17,14 +17,16 @@ describe Mutations::SignUp do
     <<-GRAPHQL
       mutation {
         signup(
-          email: "#{email}",
-          password: "TheRing",
-          avatar: {
-            id: "#{avatar_id}",
-            metadata: {
-              size: 1098178,
-              filename: "avatar.jpg",
-              mimeType: "image/jpg"
+          input: {
+            email: "#{email}",
+            password: "TheRing",
+            avatar: {
+              id: "#{avatar_id}",
+              metadata: {
+                size: 1098178,
+                filename: "avatar.jpg",
+                mimeType: "image/jpg"
+              }
             }
           }
         ) {

@@ -3,13 +3,18 @@ require "rails_helper"
 describe Mutations::UpdatePassword do
   include_context "when time is frozen"
 
-  let(:user) { create(:user, :with_reset_token, email: "john.doe@example.com", first_name: "John", last_name: "Doe") }
+  let(:user) do
+    create(:user, :with_reset_token, id: 111_111, email: "john.doe@example.com", first_name: "John", last_name: "Doe")
+  end
+
   let(:query) do
     <<-GRAPHQL
       mutation {
         updatePassword(
-          password: "new_password",
-          resetToken: "#{reset_token}"
+          input: {
+            password: "new_password",
+            resetToken: "#{reset_token}"
+          }
         ) {
           me {
             id
@@ -29,9 +34,6 @@ describe Mutations::UpdatePassword do
 
     it_behaves_like "graphql request", "returns user info" do
       let(:fixture_path) { "json/acceptance/graphql/update_password.json" }
-      let(:prepared_fixture_file) do
-        fixture_file.gsub(/:id/, ":id" => user.id)
-      end
     end
   end
 

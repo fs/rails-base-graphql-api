@@ -1,17 +1,11 @@
 module Mutations
   class SignUp < BaseMutation
-    argument :email, String, required: true
-    argument :password, String, required: true
-
-    argument :first_name, String, required: false
-    argument :last_name, String, required: false
-
-    argument :avatar, Types::ImageUploaderType, required: false
+    argument :input, Types::SignUpInput, required: true
 
     type Types::AuthenticationType
 
-    def resolve(**user_params)
-      signup_user = SignupUser.call(user_params: user_params)
+    def resolve(input:)
+      signup_user = SignupUser.call(user_params: input.to_h)
 
       if signup_user.success?
         signup_user
