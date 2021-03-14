@@ -88,6 +88,23 @@ bin/tests
 bin/server
 ```
 
+#### Useful commands
+
+Run `rails c` console:
+```bash
+docker-compose exec app bin/rails c
+```
+
+Connect to postgres:
+```bash
+docker-compose exec app bin/rails db # password: "password"
+```
+
+View Rails logs:
+```bash
+docker-compose logs app
+```
+
 ### Github registry
 
 We use Github Packages to store docker images. To use them you need to create [Personal Access Token](https://docs.github.com/en/packages/publishing-and-managing-packages/about-github-packages#about-tokens) with the appropriate scopes(**read_packages** - to download images, **write_packages** - to upload). Authenticate to GitHub Packages with docker using `docker login` command:
