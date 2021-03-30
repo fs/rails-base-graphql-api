@@ -117,7 +117,7 @@ describe Types::QueryType do
   end
 
   context "with authorized user" do
-    let!(:user) { create :user, :with_data }
+    let!(:user) { create(:user, :with_data) }
     let(:token_payload) { { type: "access" } }
 
     it_behaves_like "graphql request", "includes user private activities to result" do
