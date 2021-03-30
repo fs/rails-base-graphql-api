@@ -14,14 +14,21 @@ describe Types::QueryType do
   let!(:activity_2) do
     create(:activity,
            user: user,
-           title: "User Updated",
-           body: "New user updated with the next attributes: First Name - John, Last Name - Doe",
-           event: :user_updated)
+           title: "User Logged in",
+           body: "User logged in",
+           event: :user_logged_in)
   end
   let!(:activity_3) do
     create(:activity,
            user: user,
-           title: "User Updated",
+           title: "User Logged in",
+           body: "User logged in",
+           event: :user_logged_in)
+  end
+  let!(:private_activity) do
+    create(:activity,
+           user: user,
+           title: "User updated",
            body: "New user updated with the next attributes: First Name - John, Last Name - Doe",
            event: :user_updated)
   end
@@ -105,6 +112,59 @@ describe Types::QueryType do
           ":second_id" => activity_3.id,
           ":user_id" => user.id
         )
+      end
+    end
+  end
+
+  context "with authorized user" do
+    let!(:user) { create(:user, :with_data) }
+    let(:token_payload) { { type: "access" } }
+
+    it_behaves_like "graphql request", "includes user private activities to result" do
+      let(:schema_context) { { current_user: user, token_payload: token_payload.stringify_keys } }
+      let(:fixture_path) { "json/acceptance/graphql/authorized_query_type_activities.json" }
+      let(:prepared_fixture_file) do
+        fixture_file.gsub(
+          /:id_1|:id_2|:id_3|:id_4|:user_id|:email|:first_name|:last_name/,
+          ":id_1" => activity.id,
+          ":id_2" => activity_2.id,
+          ":id_3" => activity_3.id,
+          ":id_4" => private_activity.id,
+          ":user_id" => user.id,
+          ":email" => user.email,
+          ":first_name" => user.first_name,
+          ":last_name" => user.last_name
+        )
+      end
+      let(:query) do
+        <<-GRAPHQL
+          query {
+            activities {
+              edges {
+                cursor
+                node {
+                  id
+                  title
+                  body
+                  event
+                  createdAt
+                  user {
+                    id
+                    email
+                    firstName
+                    lastName
+                  }
+                }
+              }
+              pageInfo {
+                endCursor
+                startCursor
+                hasPreviousPage
+                hasNextPage
+              }
+            }
+          }
+        GRAPHQL
       end
     end
   end
