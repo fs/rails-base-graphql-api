@@ -36,8 +36,8 @@ class PreparePresignImage
 
   def options
     {
-      content_disposition: ContentDisposition.inline(filename),
-      content_type: type,
+      "Content-Disposition": ContentDisposition.inline(filename),
+      "Content-Type": type,
       content_length_range: 0..UPLOAD_SIZE_LIMIT
     }
   end

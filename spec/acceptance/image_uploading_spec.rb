@@ -7,8 +7,8 @@ describe "Upload image", type: :request do
   let(:params) do
     {
       key: "#{storage_key}/#{file_key}",
-      content_disposition: "inline; filename='avatar.png'; filename*=UTF-8''avatar.png",
-      content_type: "image/png",
+      "Content-Disposition": "inline; filename='avatar.png'; filename*=UTF-8''avatar.png",
+      "Content-Type": "image/png",
       content_length_range: "0..10485760",
       file: fixture_file_upload(avatar_image_path, "image/png")
     }
