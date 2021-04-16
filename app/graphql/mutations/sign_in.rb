@@ -1,11 +1,17 @@
 module Mutations
   class SignIn < BaseMutation
-    argument :input, Types::SignInInput, required: true
+    argument :email, String, required: false
+    argument :password, String, required: false
+    argument :google_auth_code, String, required: false
 
     type Types::AuthenticationType
 
-    def resolve(input:)
-      singin_user = SigninUser.call(input.to_h)
+    def resolve(**params)
+      singin_user = SigninUser.call(
+        email: params[:email],
+        password: params[:password],
+        google_auth_code: params[:google_auth_code]
+      )
 
       if singin_user.success?
         singin_user
