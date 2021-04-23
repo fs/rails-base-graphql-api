@@ -9,7 +9,7 @@ module Resolvers
     end
 
     def raw_relation
-      object ? Activity.where(user_id: object.id) : Activity.all
+      authorized_scope(Activity.all, with: ::ActivityPolicy)
     end
   end
 end

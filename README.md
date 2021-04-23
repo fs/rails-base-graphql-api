@@ -26,8 +26,8 @@ https://rails-base-graphql-api.herokuapp.com/graphql
 2. Create a request for signup to get access and refresh tokens
 ```ruby
 # query
-mutation signup($email: String!, $password: String!) {
-  signup(email: $email, password: $password) {
+mutation SignUp($input: SignupInput!) {
+  signup(input: $input) {
     me {
       id
       email
@@ -38,7 +38,14 @@ mutation signup($email: String!, $password: String!) {
 }
 
 # query variables
-{ "email": "user@example.com", "password": "password" }
+{
+  "input": {
+	"email": "john.tolkien@example.com",
+  	"password": "654321",
+  	"firstName": "John",
+  	"lastName": "Tolkien"
+  }
+}
 ```
 3. Use this token to send the following requests. Token sent to the "Authorization" in the header
 #### Header example
@@ -86,6 +93,23 @@ bin/tests
 
 ```bash
 bin/server
+```
+
+#### Useful commands
+
+Run `rails c` console:
+```bash
+docker-compose exec app bin/rails c
+```
+
+Connect to postgres:
+```bash
+docker-compose exec app bin/rails db # password: "password"
+```
+
+View Rails logs:
+```bash
+docker-compose logs app
 ```
 
 ### Github registry

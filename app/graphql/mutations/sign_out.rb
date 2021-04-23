@@ -2,11 +2,11 @@ module Mutations
   class SignOut < BaseMutation
     include AuthenticableGraphqlUser
 
-    argument :everywhere, Boolean, required: false
+    argument :input, Types::SignOutInput, required: true
 
     type Types::MessageType
-    def resolve(everywhere: false)
-      SignoutUser.call(token: token, user: current_user, everywhere: everywhere)
+    def resolve(input:)
+      SignoutUser.call(token: token, user: current_user, everywhere: input.everywhere)
 
       {
         message: "User signed out successfully"

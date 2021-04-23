@@ -36,8 +36,8 @@ end
 
 def filesystem_storages
   {
-    cache: Shrine::Storage::FileSystem.new("public", prefix: "/uploads/cache"),
-    store: Shrine::Storage::FileSystem.new("public", prefix: "/uploads")
+    cache: LocalStorage.new("public", prefix: "/uploads/cache"),
+    store: LocalStorage.new("public", prefix: "/uploads")
   }
 end
 
@@ -45,4 +45,9 @@ def local_storages
   Rails.env.test? ? memory_storages : filesystem_storages
 end
 
-Shrine.storages = s3_options.values.all?(&:present?) ? amazon_s3_storages : local_storages
+if s3_options.values.all?(&:present?)
+  Shrine.storages = amazon_s3_storages
+else
+  Shrine.plugin :upload_endpoint, upload_context: ->(request) { { key: request.params["key"] } }
+  Shrine.storages = local_storages
+end

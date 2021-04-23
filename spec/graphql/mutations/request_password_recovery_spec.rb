@@ -4,7 +4,11 @@ describe Mutations::RequestPasswordRecovery do
   let(:query) do
     <<-GRAPHQL
       mutation {
-        requestPasswordRecovery(email: "zaphod.beeblebrox@gmail.com") {
+        requestPasswordRecovery(
+          input: {
+            email: "zaphod.beeblebrox@gmail.com"
+          }
+        ) {
           message
           detail
         }

@@ -4,15 +4,17 @@ ruby "2.6.6"
 
 # the most important stuff
 gem "pg"
-gem "rails", "~> 6.0.3.4"
+gem "rails", "~> 6.0.3.5"
 
 # all other gems
+gem "action_policy-graphql"
 gem "aws-sdk-s3"
 gem "bcrypt"
 gem "bootsnap", require: false
 gem "enumerize"
 gem "graphql"
 gem "graphql-batch"
+gem "graphql-rails_logger"
 gem "health_check"
 gem "interactor"
 gem "jwt"

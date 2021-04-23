@@ -5,8 +5,10 @@ describe Mutations::PresignData do
     <<-GRAPHQL
       mutation {
         presignData (
-          filename: "avatar.png",
-          type: "#{file_type}"
+          input: {
+            filename: "avatar.png",
+            type: "#{file_type}"
+          }
         ) {
           url
           fields {
