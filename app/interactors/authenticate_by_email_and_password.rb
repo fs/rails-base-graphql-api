@@ -1,6 +1,6 @@
 class AuthenticateByEmailAndPassword
-	include Interactor
-  
+  include Interactor
+
   delegate :email, :password, to: :context
 
   def call

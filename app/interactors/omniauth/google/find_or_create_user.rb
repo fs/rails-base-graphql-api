@@ -22,7 +22,7 @@ module Omniauth
       end
 
       def create_user
-        User.create()
+        User.create
       end
 
       def error_data

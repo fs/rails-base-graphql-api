@@ -1,8 +1,8 @@
 class AuthenticateByGoogleAuthCode
-	include Interactor::Organizer
+  include Interactor::Organizer
 
   organize Omniauth::Google::BuildAuthClient,
-    Omniauth::Google::ExchangeAuthCode,
-    Omniauth::Google::FetchUserInfo,
-    Omniauth::Google::FindOrCreateUser 
+           Omniauth::Google::ExchangeAuthCode,
+           Omniauth::Google::FetchUserInfo,
+           Omniauth::Google::FindOrCreateUser
 end
