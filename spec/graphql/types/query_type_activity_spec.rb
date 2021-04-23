@@ -127,8 +127,8 @@ describe Types::QueryType do
         fixture_file.gsub(
           /:id_1|:id_2|:id_3|:id_4|:user_id|:email|:first_name|:last_name/,
           ":id_1" => activity.id,
-          ":id_2" => activity_2.id,
-          ":id_3" => activity_3.id,
+          ":id_2" => activity2.id,
+          ":id_3" => activity3.id,
           ":id_4" => private_activity.id,
           ":user_id" => user.id,
           ":email" => user.email,
