@@ -17,7 +17,7 @@ module Omniauth
         @user ||= User.find_or_create_by(email: email).tap do |user|
           user.first_name = given_name
           user.last_name = family_name
-          user.password = Devise.friendly_token(20)
+          user.password = SecureRandom.hex(20)
         end
       end
 

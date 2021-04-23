@@ -4,8 +4,8 @@ class AuthenticateUser
   delegate :email, :password, :google_auth_code, to: :context
 
   def call
-    context.fail!(error_data: error_data) unless authenticated?
-    context.user = user
+    context.fail!(error_data: error_data) if authenticate.failure?
+    context.user = authenticate.user
   end
 
   private
@@ -15,17 +15,9 @@ class AuthenticateUser
       if email
         AuthenticateByEmailAndPassword.call(email: email, password: password)
       else
-        AuthenticateByGoogleAuthCode.call(google_auth_code: google_auth_code)
+        AuthenticateByGoogleAuthCode.call(auth_code: google_auth_code)
       end
     end
-  end
-
-  def authenticated?
-    user&.authenticate(password)
-  end
-
-  def user
-    @user ||= User.find_by(email: email)
   end
 
   def error_data
