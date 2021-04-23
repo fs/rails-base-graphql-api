@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+set -e
+
+docker-compose up --detach
+docker-compose exec app bin/rubocop
+docker-compose exec app bin/brakeman --quiet --skip-libs --exit-on-warn --no-pager
+docker-compose exec app bin/bundle-audit update
+docker-compose exec app bin/bundle-audit

@@ -1,6 +1,0 @@
-#!/usr/bin/env sh
-
-set -e
-
-bin/quality-local
-bin/rspec spec

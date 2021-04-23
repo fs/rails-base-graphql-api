@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-
-bin/rails server --port 3000 --binding lvh.me
