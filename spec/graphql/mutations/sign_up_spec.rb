@@ -66,4 +66,12 @@ describe Mutations::SignUp do
       let(:fixture_path) { "json/acceptance/graphql/signup_wrong.json" }
     end
   end
+
+  context "with invalid avatar" do
+    let(:avatar_image_path) { Rails.root.join("spec/fixtures/files/text.txt") }
+
+    it_behaves_like "graphql request", "returns error" do
+      let(:fixture_path) { "json/acceptance/graphql/signup_wrong_file.json" }
+    end
+  end
 end
