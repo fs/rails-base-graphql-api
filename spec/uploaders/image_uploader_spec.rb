@@ -25,7 +25,7 @@ describe ImageUploader do
     let(:error_messages) do
       {
         avatar: [
-          "type must be one of: image/jpeg, image/png, image/webp, image/tiff",
+          "type must be one of: image/jpeg, image/png, image/webp",
           "extension must be one of: jpg, jpeg, png, webp"
         ]
       }
@@ -42,7 +42,7 @@ describe ImageUploader do
     let(:error_messages) do
       {
         avatar: [
-          "type must be one of: image/jpeg, image/png, image/webp, image/tiff"
+          "type must be one of: image/jpeg, image/png, image/webp"
         ]
       }
     end
