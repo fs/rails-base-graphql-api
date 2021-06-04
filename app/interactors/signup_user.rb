@@ -6,9 +6,11 @@ class SignupUser
 
   organize CreateUser,
            CreateAccessToken,
-           CreateRefreshToken
+           CreateRefreshToken,
+           CreatePossessionToken
 
   after do
     RegisterActivityJob.perform_later(user.id, :user_registered)
+    ApplicationMailer.confirm_user(context.possession_token).deliver_later
   end
 end

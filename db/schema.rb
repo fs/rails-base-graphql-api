@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_17_151148) do
+ActiveRecord::Schema.define(version: 2021_06_04_145805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -24,6 +24,14 @@ ActiveRecord::Schema.define(version: 2020_06_17_151148) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_activities_on_user_id"
+  end
+
+  create_table "possession_tokens", force: :cascade do |t|
+    t.string "value", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_possession_tokens_on_user_id"
   end
 
   create_table "refresh_tokens", force: :cascade do |t|
@@ -45,13 +53,15 @@ ActiveRecord::Schema.define(version: 2020_06_17_151148) do
     t.string "password_digest", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.text "avatar_data"
     t.string "password_reset_token"
     t.datetime "password_reset_sent_at"
+    t.text "avatar_data"
+    t.datetime "confirmed_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["password_reset_token"], name: "index_users_on_password_reset_token"
   end
 
   add_foreign_key "activities", "users"
+  add_foreign_key "possession_tokens", "users"
   add_foreign_key "refresh_tokens", "users"
 end
