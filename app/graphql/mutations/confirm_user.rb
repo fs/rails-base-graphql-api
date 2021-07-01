@@ -2,6 +2,8 @@ module Mutations
   class ConfirmUser < BaseMutation
     argument :value, String, required: true
 
+    type Types::UserType
+
     def resolve(options)
       result = ::ConfirmUser.call(options)
 

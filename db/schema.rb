@@ -53,9 +53,9 @@ ActiveRecord::Schema.define(version: 2021_06_04_145805) do
     t.string "password_digest", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "avatar_data"
     t.string "password_reset_token"
     t.datetime "password_reset_sent_at"
-    t.text "avatar_data"
     t.datetime "confirmed_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["password_reset_token"], name: "index_users_on_password_reset_token"
