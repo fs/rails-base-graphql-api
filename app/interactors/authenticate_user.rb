@@ -1,21 +1,23 @@
 class AuthenticateUser
   include Interactor
 
-  delegate :email, :password, to: :context
+  delegate :email, :password, :google_auth_code, to: :context
 
   def call
-    context.fail!(error_data: error_data) unless authenticated?
-    context.user = user
+    context.fail!(error_data: error_data) if authenticate.failure?
+    context.user = authenticate.user
   end
 
   private
 
-  def authenticated?
-    user&.authenticate(password)
-  end
-
-  def user
-    @user ||= User.find_by(email: email)
+  def authenticate
+    @authenticate ||= begin
+      if email
+        AuthenticateByEmailAndPassword.call(email: email, password: password)
+      else
+        AuthenticateByGoogleAuthCode.call(auth_code: google_auth_code)
+      end
+    end
   end
 
   def error_data

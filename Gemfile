@@ -12,6 +12,7 @@ gem "aws-sdk-s3"
 gem "bcrypt"
 gem "bootsnap", require: false
 gem "enumerize"
+gem "google-api-client"
 gem "graphql"
 gem "graphql-batch"
 gem "graphql-rails_logger"

@@ -7,10 +7,8 @@ describe Mutations::SignIn do
     <<-GRAPHQL
       mutation {
         signin (
-          input: {
-            email: "bilbo.baggins@shire.com",
-            password: "#{password}"
-          }
+          email: "bilbo.baggins@shire.com",
+          password: "#{password}"
         ) {
           me {
             id
