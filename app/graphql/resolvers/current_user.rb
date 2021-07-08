@@ -1,6 +1,6 @@
 module Resolvers
   class CurrentUser < Resolvers::Base
-    type Types::UserType, null: true
+    type Types::CurrentUserType, null: true
 
     def resolve
       current_user if type == "access"
