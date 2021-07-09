@@ -1,5 +1,5 @@
 class PossessionToken < ApplicationRecord
   belongs_to :user
 
-  validates :value, :user_id, presence: true
+  validates :value, presence: true, uniqueness: true
 end

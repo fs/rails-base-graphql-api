@@ -1,8 +1,6 @@
 class CreatePossessionToken
   include Interactor
 
-  TOKEN_LENGTH = 40
-
   delegate :user, to: :context
 
   def call
@@ -14,11 +12,18 @@ class CreatePossessionToken
   def possession_token
     PossessionToken.create(
       user_id: user.id,
-      value: value
+      value: generate_value
     )
   end
 
-  def value
-    SecureRandom.hex(TOKEN_LENGTH)
+  def generate_value
+    generated_value = SecureRandom.hex(token_length)
+    return generated_value unless PossessionToken.where(value: generated_value).exists?
+
+    generate_value
+  end
+
+  def token_length
+    ENV.fetch("CONFIRMATION_TOKEN_LENGTH", 40).to_i
   end
 end
