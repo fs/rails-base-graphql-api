@@ -11,7 +11,9 @@ describe Mutations::ConfirmUser do
     <<-GRAPHQL
       mutation {
         confirmUser (
-          value: "#{possession_token.value}"
+          input: {
+            value: "#{possession_token.value}"
+          }
         ) {
           id
           confirmedAt
