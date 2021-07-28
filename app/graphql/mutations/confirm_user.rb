@@ -1,11 +1,11 @@
 module Mutations
   class ConfirmUser < BaseMutation
-    argument :value, String, required: true
+    argument :input, Types::ConfirmUserInput, required: true
 
     type Types::CurrentUserType
 
-    def resolve(options)
-      result = ::ConfirmUser.call(options)
+    def resolve(input:)
+      result = ::ConfirmUser.call(value: input.value)
 
       if result.success?
         result.user
