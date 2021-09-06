@@ -5,12 +5,12 @@ module Mutations
     type Types::AuthenticationType
 
     def resolve(input:)
-      singin_user = SigninUser.call(input.to_h)
+      signin_user = SigninUser.call(input.to_h)
 
-      if singin_user.success?
-        singin_user
+      if signin_user.success?
+        signin_user
       else
-        execution_error(error_data: singin_user.error_data)
+        execution_error(error_data: signin_user.error_data)
       end
     end
   end
