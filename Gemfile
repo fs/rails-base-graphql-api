@@ -4,7 +4,7 @@ ruby "2.6.6"
 
 # the most important stuff
 gem "pg"
-gem "rails", "~> 6.0.4"
+gem "rails", "~> 6.0.4.1"
 
 # all other gems
 gem "action_policy-graphql"
