@@ -10,4 +10,14 @@ class ApplicationMailer < ActionMailer::Base
 
     mail(to: user.email)
   end
+
+  def confirm_user(possession_token)
+    @user = possession_token.user
+    @confirmation_link = format(
+      ENV.fetch("CONFIRM_USER_LINK_TEMPLATE"),
+      token_value: possession_token.value
+    )
+
+    mail(to: @user.email)
+  end
 end

@@ -36,8 +36,8 @@ describe "Authenticate user", type: :request do
   context "with expired token" do
     let(:refresh_token) { create :refresh_token, :access, user: user, expires_at: 1.day.ago }
 
-    it_behaves_like "full graphql request", "return invalid credential error" do
-      let(:fixture_path) { "json/acceptance/invalid_credentials.json" }
+    it_behaves_like "full graphql request", "return null" do
+      let(:fixture_path) { "json/acceptance/not_user.json" }
     end
   end
 

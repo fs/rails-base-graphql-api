@@ -21,6 +21,9 @@ Rails/UnknownEnv:
 Rails/HasManyOrHasOneDependent:
   Enabled: true
 
+Rails/UniqueValidationWithoutIndex:
+  Enabled: false
+
 Rails/HasAndBelongsToMany:
   Enabled: false
 

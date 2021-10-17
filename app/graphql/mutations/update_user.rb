@@ -2,7 +2,7 @@ module Mutations
   class UpdateUser < BaseMutation
     argument :input, Types::UpdateUserInput, required: true
 
-    type Types::UserType
+    type Types::CurrentUserType
 
     def resolve(input:)
       update_user = ::UpdateUser.call(
