@@ -39,7 +39,7 @@ echo "Install gems ..."
 rm -f .bundle/config
 
 bundle check --path .bundle > /dev/null 2>&1 ||
-  bundle install --path=.bundle $BUNDLER_ARGS
+  bundle config set --local path '.bundle' && bundle install $BUNDLER_ARGS
 
 # Set up configurable environment variables
 if [ ! -f .env ]; then
