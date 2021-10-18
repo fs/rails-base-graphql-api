@@ -17,11 +17,11 @@ class PreparePresignImage
   private
 
   def presign_data
-    PRESIGN_DATA.new(upload_params.dig(:url), presign_fields)
+    PRESIGN_DATA.new(upload_params[:url], presign_fields)
   end
 
   def presign_fields
-    upload_params.dig(:fields).map do |key, value|
+    upload_params[:fields].map do |key, value|
       PRESIGN_FIELD.new(key, value)
     end
   end

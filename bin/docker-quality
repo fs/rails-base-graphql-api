@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+set -e
+
+docker-compose up --detach
+docker-compose exec app bin/quality
