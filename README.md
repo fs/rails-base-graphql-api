@@ -4,10 +4,15 @@
 
 ### Scripts
 
-* `bin/setup` - build Docker image and prepare DB
+* `bin/setup` - install required packages and gems locally and prepare DB
 * `bin/server` - to run server locally
 * `bin/tests` - runs RSpec tests
 * `bin/quality` - runs quality tools
+
+* `bin/docker-setup` - build Docker image and prepare DB
+* `bin/docker-server` - to run server locally via Docker
+* `bin/docker-tests` - runs RSpec tests via Docker
+* `bin/docker-quality` - runs quality tools via Docker
 * `bin/docker-sync` - install docker-sync library to speed up performance on Mac OSX
 
 ### Staging Environments
@@ -82,11 +87,21 @@ bin/docker-sync
 ```bash
 bin/setup
 ```
+or if you'd like to use Docker:
+```bash
+bin/docker-setup
+```
 
 4. Run test and quality suits to make sure all dependencies are satisfied and applications works correctly before making changes.
 
 ```bash
 bin/tests
+bin/quality
+```
+or with Docker:
+```bash
+bin/docker-tests
+bin/docker-quality
 ```
 
 4. Run application
@@ -94,8 +109,12 @@ bin/tests
 ```bash
 bin/server
 ```
+or
+```bash
+bin/docker-server
+```
 
-#### Useful commands
+#### Useful commands to work with Docker
 
 Run `rails c` console:
 ```bash
