@@ -1,10 +1,10 @@
 class LocalStorage < Shrine::Storage::FileSystem
   CONVERSION_FIELDS = {
-    cache_control: 'Cache-Control',
-    content_disposition: 'Content-Disposition',
-    content_encoding: 'Content-Encoding',
-    content_length_range: 'content-length-range',
-    content_type: 'Content-Type'
+    cache_control: "Cache-Control",
+    content_disposition: "Content-Disposition",
+    content_encoding: "Content-Encoding",
+    content_length_range: "content-length-range",
+    content_type: "Content-Type"
   }.freeze
 
   delegate :images_upload_url, to: :url_helpers
