@@ -49,5 +49,6 @@ end
 group :test do
   gem "database_cleaner-active_record"
   gem "email_spec"
+  gem "n_plus_one_control"
   gem "simplecov", require: false
 end
