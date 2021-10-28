@@ -9,6 +9,7 @@ class ApplicationSchema < GraphQL::Schema
   use GraphQL::Analysis::AST
   use GraphQL::Batch
   use GraphQL::Execution::Errors
+  use GraphQL::PersistedQueries, store: :redis_with_local_cache, compiled_queries: true
 
   rescue_from(ActiveRecord::RecordNotFound) do |_err, _obj, _args, _ctx, field|
     raise GraphQL::ExecutionError.new("#{field.type.unwrap.graphql_name} not found",
