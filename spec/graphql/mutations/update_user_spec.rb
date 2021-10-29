@@ -28,11 +28,13 @@ describe Mutations::UpdateUser do
             }
         }
         ) {
-          id
-          email
-          firstName
-          lastName
-          avatarUrl
+          me {
+            id
+            email
+            firstName
+            lastName
+            avatarUrl
+          }
         }
       }
     GRAPHQL

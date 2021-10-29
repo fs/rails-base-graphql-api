@@ -2,16 +2,12 @@ module Mutations
   class ConfirmUser < BaseMutation
     argument :input, Types::ConfirmUserInput, required: true
 
-    type Types::CurrentUserType
+    type Types::Payloads::ConfirmUserPayload
 
     def resolve(input:)
       result = ::ConfirmUser.call(value: input.value)
 
-      if result.success?
-        result.user
-      else
-        execution_error(error_date: result.error_date)
-      end
+      result.success? ? result : execution_error(error_data: result.error_data)
     end
   end
 end

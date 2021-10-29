@@ -2,7 +2,7 @@ module Mutations
   class RequestPasswordRecovery < BaseMutation
     argument :input, Types::RequestPasswordRecoveryInput, required: true
 
-    type Types::DetailedMessageType
+    type Types::Payloads::RequestPasswordRecoveryPayload
 
     def resolve(input:)
       result = RequestPasswordReset.call(input.to_h)

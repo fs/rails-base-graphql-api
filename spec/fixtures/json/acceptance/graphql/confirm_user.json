@@ -1,8 +1,10 @@
 {
   "data": {
     "confirmUser": {
-      "id": "123456",
-      "confirmedAt": "2020-05-10T12:30:00Z"
+      "me": {
+        "id": "123456",
+        "confirmedAt": "2020-05-10T12:30:00Z"
+      }
     }
   }
 }

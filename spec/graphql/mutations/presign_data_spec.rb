@@ -10,10 +10,12 @@ describe Mutations::PresignData do
             type: "#{file_type}"
           }
         ) {
-          url
-          fields {
-            key
-            value
+          data {
+            url
+            fields {
+              key
+              value
+            }
           }
         }
       }

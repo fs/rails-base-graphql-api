@@ -15,8 +15,10 @@ describe Mutations::ConfirmUser do
             value: "#{possession_token.value}"
           }
         ) {
-          id
-          confirmedAt
+          me {
+            id
+            confirmedAt
+          }
         }
       }
     GRAPHQL
