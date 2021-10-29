@@ -12,7 +12,7 @@ NPlusOneControl.verbose = false
 #     users (SELECT): 2 != 3
 #     events (INSERT): 1 != 2
 #
-self.show_table_stats = true
+NPlusOneControl.show_table_stats = true
 
 # Ignore matching queries
 NPlusOneControl.ignore = /^(BEGIN|COMMIT|SAVEPOINT|RELEASE)/
@@ -39,7 +39,7 @@ end
 # Set it to nil to disable tracing.
 #
 # In Rails apps, we use Rails.backtrace_cleaner by default.
-NPlusOneControl.backtrace_cleaner = ->(locations_array) { do_some_filtering(locations_array) }
+# NPlusOneControl.backtrace_cleaner = ->(locations_array) { do_some_filtering(locations_array) }
 
 # You can also specify the number of backtrace lines to show.
 # MOTE: It could be specified via NPLUSONE_BACKTRACE env var
