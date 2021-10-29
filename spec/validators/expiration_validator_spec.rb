@@ -22,7 +22,7 @@ describe ExpirationValidator do
     end
 
     context "when reset token is valid" do
-      let(:current_time) { expiration_time }
+      let(:current_time) { expiration_time - 1 }
 
       it "succeeds" do
         expect(form.errors).to be_empty
