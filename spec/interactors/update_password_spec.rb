@@ -53,8 +53,6 @@ describe UpdatePassword do
       freeze_time
     end
 
-    after { travel_back }
-
     it_behaves_like "failed interactor"
   end
 end

@@ -18,7 +18,7 @@ class CreatePossessionToken
 
   def generate_value
     generated_value = SecureRandom.hex(token_length)
-    return generated_value unless PossessionToken.where(value: generated_value).exists?
+    return generated_value unless PossessionToken.exists?(value: generated_value)
 
     generate_value
   end
