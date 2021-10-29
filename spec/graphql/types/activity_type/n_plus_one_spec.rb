@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Types::QueryType, :n_plus_one do
+describe Types::ActivityType, :n_plus_one do
   let!(:user) { create :user }
 
   let(:query) do
@@ -23,7 +23,5 @@ describe Types::QueryType, :n_plus_one do
 
   populate { |n| create_list :activity, n, user: user }
 
-  specify do
-    expect { ApplicationSchema.execute(query, {}).as_json }.to perform_constant_number_of_queries
-  end
+  include_examples "performs constant number of queries request"
 end
