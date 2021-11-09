@@ -1,11 +1,13 @@
 {
   "data": {
     "presignData": {
-      "url": "http://some-url.com",
-      "fields": [{
-        "key": "key",
-        "value": "value"
-      }]
+      "data": {
+        "url": "http://some-url.com",
+        "fields": [{
+          "key": "key",
+          "value": "value"
+        }]
+      }
     }
   }
 }

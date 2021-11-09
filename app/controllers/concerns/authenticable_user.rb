@@ -3,7 +3,7 @@ module AuthenticableUser
 
   def current_user
     return unless token && payload
-    return execution_error(error_data: authentication_error) unless active_refresh_token?
+    return unless active_refresh_token?
 
     User.find_by(id: payload["sub"])
   end
@@ -24,9 +24,5 @@ module AuthenticableUser
 
   def active_refresh_token?
     RefreshToken.active.exists?(jti: jti)
-  end
-
-  def authentication_error
-    { message: "Invalid credentials", status: 401, code: :unauthorized }
   end
 end

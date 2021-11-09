@@ -11,12 +11,10 @@ class AuthenticateUser
   private
 
   def authenticate
-    @authenticate ||= begin
-      if email
-        AuthenticateByEmailAndPassword.call(email: email, password: password)
-      else
-        AuthenticateByGoogleAuthCode.call(auth_code: google_auth_code)
-      end
+    @authenticate ||= if email
+      AuthenticateByEmailAndPassword.call(email: email, password: password)
+    else
+      AuthenticateByGoogleAuthCode.call(auth_code: google_auth_code)
     end
   end
 end

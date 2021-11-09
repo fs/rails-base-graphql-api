@@ -18,7 +18,7 @@ module Omniauth
           user.first_name = given_name
           user.last_name = family_name
           user.password = SecureRandom.hex(20)
-          user.avatar = URI.open(picture)
+          user.avatar = URI.open(picture) if picture.present?
         end
       end
 

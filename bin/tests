@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
 
-docker-compose up --detach
-docker-compose exec app bin/rspec ${@:-spec}
+set -e
+
+bin/rspec spec

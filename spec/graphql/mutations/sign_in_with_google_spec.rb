@@ -42,7 +42,7 @@ describe Mutations::SignIn do
                     id: "562193987123901",
                     locale: "ru",
                     name: "Adam Serwer",
-                    picture: "spec/fixtures/images/avatar.jpg",
+                    picture: "https://lh3.googleusercontent.com/a-/HdwuiSKjnjwdd-c-JD7wJwJhdw9x0_JvRc=s32-c",
                     verified_email: true
   end
   let(:google_env_variables) do

@@ -2,9 +2,13 @@ require:
   - rubocop-rspec
   - rubocop-rails
 
+inherit_gem:
+  action_policy: config/rubocop-rspec.yml
+
 AllCops:
   TargetRubyVersion: 2.6
   DisplayCopNames: true
+  NewCops: enable
   Exclude:
     - bin/**/*
     - db/**/*
@@ -20,6 +24,9 @@ Rails/UnknownEnv:
 
 Rails/HasManyOrHasOneDependent:
   Enabled: true
+
+Rails/UniqueValidationWithoutIndex:
+  Enabled: false
 
 Rails/HasAndBelongsToMany:
   Enabled: false
@@ -42,7 +49,7 @@ RSpec/RepeatedDescription:
 RSpec/MessageSpies:
   EnforcedStyle: receive
 
-Capybara/FeatureMethods:
+RSpec/Capybara:
   Enabled: false
 
 Style/AndOr:
@@ -121,3 +128,7 @@ Lint/RaiseException:
 
 Lint/StructNewOverride:
   Enabled: true
+
+Security/Open:
+  Enabled: false
+

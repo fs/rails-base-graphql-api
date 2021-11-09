@@ -4,7 +4,8 @@ module Mutations
 
     argument :input, Types::SignOutInput, required: true
 
-    type Types::MessageType
+    type Types::Payloads::SignOutPayload
+
     def resolve(input:)
       SignoutUser.call(token: token, user: current_user, everywhere: input.everywhere)
 

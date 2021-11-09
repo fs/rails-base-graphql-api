@@ -68,11 +68,11 @@ blocks:
       - name: Run RSpec
         commands:
           - docker-compose exec app bin/rails db:create db:schema:load
-          - bin/tests
+          - bin/docker-tests
 
       - name: Run Quality
         commands:
-          - bin/quality
+          - bin/docker-quality
 
 promotions:
   - name: Deploy to Heroku

@@ -4,7 +4,7 @@ ruby "2.6.6"
 
 # the most important stuff
 gem "pg"
-gem "rails", "~> 6.0.3.7"
+gem "rails", "~> 6.0.4.1"
 
 # all other gems
 gem "action_policy-graphql"
@@ -15,11 +15,13 @@ gem "enumerize"
 gem "google-api-client"
 gem "graphql"
 gem "graphql-batch"
+gem "graphql-persisted_queries"
 gem "graphql-rails_logger"
 gem "health_check"
 gem "interactor"
 gem "jwt"
 gem "newrelic_rpm"
+gem "open-uri"
 gem "puma"
 gem "rack-cors"
 gem "shrine"
@@ -49,5 +51,6 @@ end
 group :test do
   gem "database_cleaner-active_record"
   gem "email_spec"
+  gem "n_plus_one_control"
   gem "simplecov", require: false
 end
