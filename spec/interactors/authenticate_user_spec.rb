@@ -4,21 +4,51 @@ describe AuthenticateUser do
   include_context "with interactor"
 
   let(:initial_context) do
-    { email: "user@example.com", password: password }
+    { email: email, password: password, google_auth_code: google_auth_code }
   end
 
-  let!(:user) { create :user, email: "user@example.com", password: "password" }
+  let(:email) { "user@flatstack.com" }
+  let(:google_auth_code) { nil }
+
+  let!(:user) { create :user, email: "user@flatstack.com", password: "password" }
 
   describe ".call" do
-    context "with valid credentials" do
+    let(:expected_context) { Interactor::Context.new(user: user) }
+
+    context "with classic auth" do
       let(:password) { "password" }
+
+      before do
+        allow(AuthenticateByEmailAndPassword).to receive(:call).and_return(expected_context)
+      end
 
       it_behaves_like "success interactor"
 
       it "provides user instance" do
+        expect(AuthenticateByEmailAndPassword)
+          .to receive(:call).with(email: email, password: password)
         interactor.run
 
         expect(context.user).to eq(user)
+      end
+    end
+
+    context "with valid credentials" do
+      let(:password) { nil }
+      let(:email) { nil }
+      let(:google_auth_code) { "token" }
+
+      before do
+        allow(AuthenticateByGoogleAuthCode).to receive(:call).and_return(expected_context)
+      end
+
+      it_behaves_like "success interactor"
+
+      it "provides user instance" do
+        expect(AuthenticateByGoogleAuthCode)
+          .to receive(:call).with(auth_code: google_auth_code)
+
+        interactor.run
       end
     end
 

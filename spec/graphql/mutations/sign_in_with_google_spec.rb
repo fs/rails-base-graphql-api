@@ -9,7 +9,9 @@ describe Mutations::SignIn do
     <<-GRAPHQL
       mutation {
         signin (
-          googleAuthCode: "#{auth_code}",
+          input: {
+            googleAuthCode: "#{auth_code}"
+          }
         ) {
           me {
             id
@@ -40,7 +42,7 @@ describe Mutations::SignIn do
                     id: "562193987123901",
                     locale: "ru",
                     name: "Adam Serwer",
-                    picture: "https://lh3.googleusercontent.com/a-/HdwuiSKjnjwdd-c-JD7wJwJhdw9x0_JvRc=s32-c",
+                    picture: "spec/fixtures/images/avatar.jpg",
                     verified_email: true
   end
   let(:google_env_variables) do
