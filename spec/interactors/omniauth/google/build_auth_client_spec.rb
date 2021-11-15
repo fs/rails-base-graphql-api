@@ -8,7 +8,7 @@ describe Omniauth::Google::BuildAuthClient do
       access_token: nil,
       access_type: :offline,
       additional_parameters: {},
-      authorization_uri: instance_of(Addressable::URI),
+      authorization_uri: expected_authorization_uri,
       client_id: "google_client_id",
       client_secret: "google_client_secret",
       code: "random_authorization_code",
@@ -20,35 +20,31 @@ describe Omniauth::Google::BuildAuthClient do
       issuer: nil,
       password: nil,
       principal: nil,
-      redirect_uri: instance_of(Addressable::URI),
+      redirect_uri: expected_redirect_uri,
       refresh_token: nil,
       scope: nil,
       state: nil,
       target_audience: nil,
-      token_credential_uri: instance_of(Addressable::URI),
+      token_credential_uri: expected_token_credential_uri,
       username: nil
     }
   end
   let(:expected_authorization_uri) do
-    "https://accounts.google.com/o/oauth2/auth?" \
-      "access_type=offline&" \
-      "client_id=google_client_id&" \
-      "redirect_uri=postmessage&" \
-      "response_type=code"
+    Addressable::URI.parse("https://accounts.google.com/o/oauth2/auth?" \
+                           "access_type=offline&" \
+                           "client_id=google_client_id&" \
+                           "redirect_uri=postmessage&" \
+                           "response_type=code")
   end
-  let(:expected_redirect_uri) { "postmessage" }
-  let(:expected_token_credential_uri) { "https://oauth2.googleapis.com/token" }
+  let(:expected_redirect_uri) { Addressable::URI.parse("postmessage") }
+  let(:expected_token_credential_uri) { Addressable::URI.parse("https://oauth2.googleapis.com/token") }
   let(:auth_code) { "random_authorization_code" }
 
   describe ".call" do
     it "builds auth client" do
       context
-
       expect(context.auth_client).to be_instance_of(Signet::OAuth2::Client)
       expect(context.auth_client).to have_attributes(expected_attributes)
-      expect(context.auth_client.authorization_uri.to_s).to eq(expected_authorization_uri)
-      expect(context.auth_client.redirect_uri.to_s).to eq(expected_redirect_uri)
-      expect(context.auth_client.token_credential_uri.to_s).to eq(expected_token_credential_uri)
     end
   end
 end
