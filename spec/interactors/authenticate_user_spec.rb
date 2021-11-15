@@ -33,7 +33,7 @@ describe AuthenticateUser do
       end
     end
 
-    context "with valid credentials" do
+    context "with Google auth" do
       let(:password) { nil }
       let(:email) { nil }
       let(:google_auth_code) { "token" }
