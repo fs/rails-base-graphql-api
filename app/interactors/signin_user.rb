@@ -3,7 +3,7 @@ class SigninUser
 
   delegate :user, to: :context
 
-  organize AuthenticateUser,
+  organize AuthenticateByEmailAndPassword,
            CreateAccessToken,
            CreateRefreshToken
 
