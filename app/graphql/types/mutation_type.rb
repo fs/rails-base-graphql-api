@@ -9,5 +9,6 @@ module Types
     field :presign_data, mutation: Mutations::PresignData
     field :update_password, mutation: Mutations::UpdatePassword
     field :confirm_user, mutation: Mutations::ConfirmUser
+    field :omniauth_signin_or_signup, mutation: Mutations::OmniauthSignInOrSignUp
   end
 end

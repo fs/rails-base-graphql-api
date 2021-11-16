@@ -8,9 +8,9 @@ describe Mutations::SignIn do
   let(:query) do
     <<-GRAPHQL
       mutation {
-        signin (
+        omniauthSigninOrSignup (
           input: {
-            googleAuthCode: "#{auth_code}"
+            authCode: "#{auth_code}"
           }
         ) {
           me {

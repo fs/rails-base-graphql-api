@@ -1,7 +1,7 @@
-class AuthenticateUser
+class OmniauthAuthenticateUser
   include Interactor
 
-  delegate :email, :password, to: :context
+  delegate :auth_code, to: :context
 
   def call
     context.fail!(error_data: authenticate.error_data) if authenticate.failure?
@@ -11,6 +11,6 @@ class AuthenticateUser
   private
 
   def authenticate
-    @authenticate ||= AuthenticateByEmailAndPassword.call(email: email, password: password)
+    @authenticate ||= AuthenticateByGoogleAuthCode.call(auth_code: auth_code)
   end
 end
