@@ -1,13 +1,13 @@
 require "rails_helper"
 
-describe AuthenticateUser do
+describe AuthenticateByEmailAndPassword do
   include_context "with interactor"
 
   let(:initial_context) do
-    { email: "user@example.com", password: password }
+    { email: "user@flatstack.com", password: password }
   end
 
-  let!(:user) { create :user, email: "user@example.com", password: "password" }
+  let!(:user) { create :user, email: "user@flatstack.com", password: "password" }
 
   describe ".call" do
     context "with valid credentials" do

@@ -1,4 +1,4 @@
-class AuthenticateUser
+class AuthenticateByEmailAndPassword
   include Interactor
 
   delegate :email, :password, to: :context

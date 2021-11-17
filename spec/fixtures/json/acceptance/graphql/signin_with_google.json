@@ -1,0 +1,12 @@
+{
+  "data": {
+    "omniauthSigninOrSignup": {
+      "accessToken": ":accessToken",
+      "refreshToken": ":refreshToken",
+      "me": {
+        "id": ":id",
+        "email": "adam@serwer.com"
+      }
+    }
+  }
+}

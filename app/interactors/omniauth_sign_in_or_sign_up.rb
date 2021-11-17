@@ -1,9 +1,9 @@
-class SigninUser
+class OmniauthSignInOrSignUp
   include Interactor::Organizer
 
   delegate :user, to: :context
 
-  organize AuthenticateByEmailAndPassword,
+  organize OmniauthAuthenticateUser,
            CreateAccessToken,
            CreateRefreshToken
 

@@ -129,3 +129,6 @@ Lint/RaiseException:
 Lint/StructNewOverride:
   Enabled: true
 
+Security/Open:
+  Enabled: false
+
