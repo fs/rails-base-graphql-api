@@ -63,11 +63,11 @@ blocks:
           - docker pull "${IMAGE_NAME}"
           - cp docker-compose.linux.yml docker-compose.override.yml
           - docker-compose up --detach
+          - docker-compose exec app bin/rails db:create db:schema:load
 
       jobs:
       - name: Run RSpec
         commands:
-          - docker-compose exec app bin/rails db:create db:schema:load
           - bin/docker-tests
 
       - name: Run Quality
