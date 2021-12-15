@@ -57,7 +57,7 @@ services:
       - app
     environment:
       - REDIS_URL
-    command: bundle exec sidekiq
+    command: sh -c './bin/wait-for app:3000 -- bundle exec sidekiq'
 
 volumes:
   ruby-bundle:
