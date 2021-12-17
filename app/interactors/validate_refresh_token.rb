@@ -4,7 +4,7 @@ class ValidateRefreshToken
   delegate :token, :token_payload, to: :context
 
   def call
-    raise_unauthorized_error unless token_payload["type"] == "refresh"
+    raise_unauthorized_error unless token_payload[:type] == "refresh"
     destroy_same_tokens unless refresh_token
 
     refresh_token.destroy
@@ -17,7 +17,7 @@ class ValidateRefreshToken
   end
 
   def destroy_same_tokens
-    RefreshToken.where(jti: token_payload["jti"]).destroy_all
+    RefreshToken.where(jti: token_payload[:jti]).destroy_all
 
     raise_unauthorized_error
   end

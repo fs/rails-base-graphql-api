@@ -9,7 +9,7 @@ module Resolvers
     private
 
     def type
-      context[:token_payload] && context[:token_payload]["type"]
+      context[:token_payload][:type]
     end
   end
 end
