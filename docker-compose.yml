@@ -17,7 +17,7 @@ x-app: &app_base
     context: .
     args:
       - BUNDLE_WITHOUT="${BUNDLE_WITHOUT}"
-      - BUNDLER_VERSION=2.1.4
+      - BUNDLER_VERSION=2.2.28
       - FOLDERS_TO_REMOVE=""
   links:
     - db

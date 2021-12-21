@@ -4,7 +4,7 @@ describe CreateAccessToken do
   include_context "with interactor"
   include_context "when time is frozen"
 
-  let(:initial_context) { { user: user, token_payload: token_payload.stringify_keys } }
+  let(:initial_context) { { user: user, token_payload: token_payload } }
   let(:user) { create :user, id: 111_111 }
 
   describe ".call" do
@@ -12,7 +12,12 @@ describe CreateAccessToken do
       let(:token_payload) { { jti: "existing_token_jti" } }
       let(:expected_jti) { "existing_token_jti" }
       let(:expected_token_payload) do
-        { sub: 111_111, exp: 1_589_117_400, jti: "existing_token_jti", type: "access" }
+        {
+          "sub" => 111_111,
+          "exp" => 1_589_117_400,
+          "jti" => "existing_token_jti",
+          "type" => "access"
+        }
       end
 
       it_behaves_like "success interactor"
@@ -34,7 +39,12 @@ describe CreateAccessToken do
       let(:token_payload) { {} }
       let(:expected_jti) { "7fc6d21913811be48db74417f9a26598" }
       let(:expected_token_payload) do
-        { sub: 111_111, exp: 1_589_117_400, jti: "7fc6d21913811be48db74417f9a26598", type: "access" }
+        {
+          "sub" => 111_111,
+          "exp" => 1_589_117_400,
+          "jti" => "7fc6d21913811be48db74417f9a26598",
+          "type" => "access"
+        }
       end
 
       it_behaves_like "success interactor"

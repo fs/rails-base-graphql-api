@@ -20,7 +20,7 @@ describe Types::QueryType do
 
   context "with current_user provided" do
     it_behaves_like "graphql request", "gets current_user info" do
-      let(:schema_context) { { current_user: user, token_payload: token_payload.stringify_keys } }
+      let(:schema_context) { { current_user: user, token_payload: token_payload } }
       let(:fixture_path) { "json/acceptance/graphql/query_type_me.json" }
       let(:prepared_fixture_file) do
         fixture_file.gsub(
@@ -56,7 +56,7 @@ describe Types::QueryType do
       end
 
       it_behaves_like "graphql request", "gets current_user info" do
-        let(:schema_context) { { current_user: user, token_payload: token_payload.stringify_keys } }
+        let(:schema_context) { { current_user: user, token_payload: token_payload } }
         let(:fixture_path) { "json/acceptance/graphql/query_type_me_with_activities.json" }
         let(:prepared_fixture_file) do
           fixture_file.gsub(

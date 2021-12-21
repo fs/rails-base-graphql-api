@@ -30,7 +30,7 @@ class CreateAccessToken
   end
 
   def existing_jti
-    token_payload && token_payload["jti"]
+    token_payload && token_payload[:jti]
   end
 
   def generate_jti

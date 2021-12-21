@@ -121,7 +121,7 @@ describe Types::QueryType do
     let(:token_payload) { { type: "access" } }
 
     it_behaves_like "graphql request", "includes user private activities to result" do
-      let(:schema_context) { { current_user: user, token_payload: token_payload.stringify_keys } }
+      let(:schema_context) { { current_user: user, token_payload: token_payload } }
       let(:fixture_path) { "json/acceptance/graphql/authorized_query_type_activities.json" }
       let(:prepared_fixture_file) do
         fixture_file.gsub(
