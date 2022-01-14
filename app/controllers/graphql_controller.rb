@@ -30,6 +30,8 @@ class GraphqlController < ApplicationController
   end
 
   def trigger_events
+    return if execute_query.context[:trigger_events].blank?
+
     execute_query.context[:trigger_events].reject(&:blank?).each do |trigger_event|
       ActiveSupport::Notifications.instrument trigger_event.event, trigger_event.options
     end
