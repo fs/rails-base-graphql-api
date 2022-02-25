@@ -6,6 +6,7 @@ ARG BUNDLER_VERSION
 
 RUN apk add --update --no-cache \
     build-base \
+    gcompat \
     postgresql-dev \
     git \
     imagemagick \
@@ -45,6 +46,7 @@ FROM ruby:2.6.6-alpine as Final
 # Add Alpine packages
 RUN apk add --update --no-cache \
     build-base \
+    gcompat \
     postgresql-client \
     imagemagick \
     tzdata \
