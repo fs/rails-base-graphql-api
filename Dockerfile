@@ -1,12 +1,14 @@
 ######################
 # Stage: Builder
-FROM ruby:2.6.6-alpine as Builder
+FROM ruby:2.7.5-alpine as Builder
 
 ARG BUNDLER_VERSION
 
 RUN apk add --update --no-cache \
     build-base \
     gcompat \
+    ruby \
+    ruby-dev \
     postgresql-dev \
     git \
     imagemagick \
@@ -25,15 +27,12 @@ ENV BUNDLE_WITHOUT ${BUNDLE_WITHOUT}
 
 RUN bundle config set without ${BUNDLE_WITHOUT}
 
-COPY Gemfile* /app/
+COPY . /app/
 RUN bundle install -j4 --retry 3 \
  # Remove unneeded files (cached *.gem, *.o, *.c)
  && rm -rf /usr/local/bundle/cache/*.gem \
  && find /usr/local/bundle/gems/ -name "*.c" -delete \
  && find /usr/local/bundle/gems/ -name "*.o" -delete
-
-# Add the Rails app
-COPY . /app/
 
 # Remove folders not needed in resulting image
 ARG FOLDERS_TO_REMOVE
@@ -41,12 +40,14 @@ RUN rm -rf $FOLDERS_TO_REMOVE
 
 ###############################
 # Stage Final
-FROM ruby:2.6.6-alpine as Final
+FROM ruby:2.7.5-alpine as Final
 
 # Add Alpine packages
 RUN apk add --update --no-cache \
     build-base \
     gcompat \
+    ruby \
+    ruby-dev \
     postgresql-client \
     imagemagick \
     tzdata \
