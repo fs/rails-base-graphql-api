@@ -7,8 +7,6 @@ ARG BUNDLER_VERSION
 RUN apk add --update --no-cache \
     build-base \
     gcompat \
-    ruby \
-    ruby-dev \
     postgresql-dev \
     git \
     imagemagick \
@@ -46,8 +44,6 @@ FROM ruby:2.7.5-alpine as Final
 RUN apk add --update --no-cache \
     build-base \
     gcompat \
-    ruby \
-    ruby-dev \
     postgresql-client \
     imagemagick \
     tzdata \
