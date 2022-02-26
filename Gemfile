@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby File.read('.ruby-version').strip
+ruby File.read(".ruby-version").strip
 
 # the most important stuff
 gem "pg"
