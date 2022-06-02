@@ -1,5 +1,5 @@
 module Types
   class RequestPasswordRecoveryInput < Types::BaseInputObject
-    argument :email, String, required: true
+    argument :email, SquishedString, required: true
   end
 end
