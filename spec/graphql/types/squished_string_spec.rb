@@ -14,7 +14,6 @@ describe Types::SquishedString do
       let(:input_value) { "  String  with \t  extra \n whitespaces  " }
 
       it { is_expected.to eq("String with extra whitespaces") }
-
     end
 
     context "with not string provided" do
