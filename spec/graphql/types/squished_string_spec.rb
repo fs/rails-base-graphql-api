@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe Types::SquishedString do
   describe "#coerce_input" do
-    subject { described_class.coerce_input(input_value, {}) }
+    subject(:method) { described_class.coerce_input(input_value, {}) }
 
     context "with regular string" do
       let(:input_value) { "String without extra whitespaces" }
@@ -20,7 +20,7 @@ describe Types::SquishedString do
       let(:input_value) { 42 }
 
       it "raises graphql error" do
-        expect { subject }.to raise_error(::GraphQL::CoercionError, "42 is not a valid string")
+        expect { method }.to raise_error(::GraphQL::CoercionError, "42 is not a valid string")
       end
     end
   end
