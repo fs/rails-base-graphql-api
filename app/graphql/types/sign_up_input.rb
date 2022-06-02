@@ -3,8 +3,8 @@ module Types
     argument :email, SquishedString, required: true
     argument :password, String, required: true
 
-    argument :first_name, String, required: false
-    argument :last_name, String, required: false
+    argument :first_name, SquishedString, required: false
+    argument :last_name, SquishedString, required: false
 
     argument :avatar, Types::ImageUploaderType, required: false
   end
