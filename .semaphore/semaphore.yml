@@ -34,7 +34,7 @@ global_job_config:
       - export PASSWORD_RECOVERY_LINK_TEMPLATE="http://lvh.me:5000/password_reset?token=%{password_reset_token}"
 
       # Authenticate with DockerHub
-      - echo "${DOCKER_PASSWORD}" | docker login https://docker.pkg.github.com -username "${DOCKER_USERNAME}" --password-stdin
+      - echo "${DOCKER_PASSWORD}" | docker login https://docker.pkg.github.com --username "${DOCKER_USERNAME}" --password-stdin
 
       - checkout
 
