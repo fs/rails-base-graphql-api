@@ -36,8 +36,7 @@ jobs:
           bundler-cache: true
 
       - name: Run quality checks
-        run: |
-          bin/quality
+        run: bin/quality
 
       - name: Setup db
         run: |
