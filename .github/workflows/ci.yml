@@ -1,0 +1,48 @@
+name: CI
+on:
+  pull_request:
+  push:
+    branches:
+      - 'master'
+      - 'github-actions'
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: postgres://postgres:@localhost:5432/test
+      REDIS_URL: redis://localhost:6379/0
+      RAILS_ENV: test
+    services:
+      postgres:
+        image: postgres:11
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis
+        ports: ['6379:6379']
+        options: --entrypoint redis-server
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Run quality checks
+        run: |
+          bin/quality
+
+      - name: Setup db
+        run: |
+          sudo apt-get -yqq install libpq-dev
+          bin/rails db:create db:schema:load
+
+      - name: Run tests
+        run: bin/tests
