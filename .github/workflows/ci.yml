@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - 'master'
-      - 'github-actions'
 
 jobs:
   ci:
@@ -41,7 +40,7 @@ jobs:
       - name: Setup db
         run: |
           sudo apt-get -yqq install libpq-dev
-          bin/rails db:create db:schema:load
+          bin/rails db:setup
 
       - name: Run tests
         run: bin/tests
