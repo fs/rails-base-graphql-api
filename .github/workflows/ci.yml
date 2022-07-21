@@ -39,7 +39,6 @@ jobs:
 
       - name: Setup db
         run: |
-          sudo apt-get -yqq install libpq-dev
           bin/rails db:setup
 
       - name: Run tests
