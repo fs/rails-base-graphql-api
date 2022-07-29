@@ -1,0 +1,46 @@
+name: CI
+on:
+  pull_request:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432
+      REDIS_URL: redis://localhost:6379/0
+      RAILS_ENV: test
+    services:
+      postgres:
+        image: postgres
+        ports: ['5432:5432']
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis
+        ports: ['6379:6379']
+        options: --entrypoint redis-server
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Run quality checks
+        run: bin/quality
+
+      - name: Setup db
+        run: bin/rails db:setup
+
+      - name: Run tests
+        run: bin/tests
