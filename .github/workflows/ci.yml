@@ -9,13 +9,15 @@ jobs:
   ci:
     runs-on: ubuntu-latest
     env:
-      DATABASE_URL: postgres://postgres:@localhost:5432/test
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432
       REDIS_URL: redis://localhost:6379/0
       RAILS_ENV: test
     services:
       postgres:
-        image: postgres:11@sha256:85d79cba2d4942dad7c99f84ec389a5b9cc84fb07a3dcd3aff0fb06948cdc03b
+        image: postgres
         ports: ['5432:5432']
+        env:
+          POSTGRES_PASSWORD: postgres
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -38,8 +40,7 @@ jobs:
         run: bin/quality
 
       - name: Setup db
-        run: |
-          bin/rails db:setup
+        run: bin/rails db:setup
 
       - name: Run tests
         run: bin/tests
