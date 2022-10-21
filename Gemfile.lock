@@ -98,7 +98,7 @@ GEM
     database_cleaner-active_record (1.8.0)
       activerecord
       database_cleaner (~> 1.8.0)
-    date (3.2.1)
+    date (3.2.2)
     declarative (0.0.20)
     diff-lcs (1.3)
     docile (1.3.2)
@@ -229,6 +229,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.6.0)
     rack (2.2.3)
+    rack-attack (6.6.0)
+      rack (>= 1.0, < 3)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
     rack-test (1.1.0)
@@ -388,6 +390,7 @@ DEPENDENCIES
   open-uri
   pg
   puma
+  rack-attack
   rack-cors
   rails (~> 6.0.4.6)
   rspec-rails

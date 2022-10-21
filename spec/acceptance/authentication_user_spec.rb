@@ -5,11 +5,11 @@ describe "Authenticate user", type: :request do
   let!(:user) { create :user, id: 111_111 }
   let(:query) do
     <<-GRAPHQL
-    query {
-      me {
-        id
+      query {
+        me {
+          id
+        }
       }
-    }
     GRAPHQL
   end
 
