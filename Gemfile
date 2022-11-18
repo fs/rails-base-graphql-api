@@ -3,8 +3,8 @@ source "https://rubygems.org"
 ruby File.read(".ruby-version").strip
 
 # the most important stuff
-gem "pg", "~> 1.2.0"
-gem "rails", "~> 6.0.4.6"
+gem "pg"
+gem "rails", "~> 6.0.4.0"
 
 # all other gems
 gem "action_policy-graphql"

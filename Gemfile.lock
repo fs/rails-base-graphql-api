@@ -383,10 +383,10 @@ DEPENDENCIES
   n_plus_one_control
   newrelic_rpm
   open-uri
-  pg (~> 1.2.0)
+  pg
   puma
   rack-cors
-  rails (~> 6.0.4.6)
+  rails (~> 6.0.4.0)
   rspec-rails
   rubocop
   rubocop-graphql
