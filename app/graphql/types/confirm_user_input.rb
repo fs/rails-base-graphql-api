@@ -1,5 +1,7 @@
 module Types
   class ConfirmUserInput < Types::BaseInputObject
-    argument :value, String, required: true
+    description "Data input for user confirmation flow"
+
+    argument :value, String, "Token", required: true
   end
 end

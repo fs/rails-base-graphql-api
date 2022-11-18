@@ -1,6 +1,8 @@
 module Types
   class PresignFieldType < Types::BaseObject
-    field :key, String, null: false
-    field :value, String, null: false
+    description "Data type for presign fields"
+
+    field :key, String, "Key", null: false
+    field :value, String, "Value", null: false
   end
 end

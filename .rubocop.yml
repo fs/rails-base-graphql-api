@@ -1,4 +1,5 @@
 require:
+  - rubocop-graphql
   - rubocop-rspec
   - rubocop-rails
 

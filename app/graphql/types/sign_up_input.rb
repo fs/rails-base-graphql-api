@@ -1,11 +1,11 @@
 module Types
   class SignUpInput < Types::BaseInputObject
-    argument :email, String, required: true
-    argument :password, String, required: true
+    description "Data input to sign up"
 
-    argument :first_name, String, required: false
-    argument :last_name, String, required: false
-
-    argument :avatar, Types::ImageUploaderType, required: false
+    argument :avatar, Types::ImageUploaderType, "URL to avatar image", required: false
+    argument :email, String, "Email", required: true
+    argument :first_name, String, "First Name", required: false
+    argument :last_name, String, "Last Name", required: false
+    argument :password, String, "Password", required: true
   end
 end

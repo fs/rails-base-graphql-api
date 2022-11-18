@@ -1,6 +1,8 @@
 module Types
   class SignInInput < Types::BaseInputObject
-    argument :email, String, required: true
-    argument :password, String, required: true
+    description "Data input to sign in"
+
+    argument :email, String, "Email", required: true
+    argument :password, String, "Password", required: true
   end
 end

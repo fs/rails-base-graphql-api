@@ -1,5 +1,7 @@
 module Loaders
   class RecordLoader < GraphQL::Batch::Loader
+    description "Loads 1-1 record association lazily"
+
     def initialize(model)
       super()
 

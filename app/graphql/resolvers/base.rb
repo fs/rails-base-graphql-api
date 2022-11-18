@@ -1,5 +1,7 @@
 module Resolvers
   class Base < GraphQL::Schema::Resolver
+    description "Data resolver base"
+
     include ActionPolicy::GraphQL::Behaviour
     include TriggerableEvents
 

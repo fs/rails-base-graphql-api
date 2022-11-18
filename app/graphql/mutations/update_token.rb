@@ -1,5 +1,7 @@
 module Mutations
   class UpdateToken < BaseMutation
+    description "Update short live access token mutation"
+
     include AuthenticableGraphqlUser
 
     type Types::Payloads::UpdateTokenPayload

@@ -1,7 +1,9 @@
 module Types
   module Payloads
     class ConfirmUserPayload < Types::BaseObject
-      field :me, Types::CurrentUserType, null: false, method: :user
+      description "Data payload on user confirmation mutation"
+
+      field :me, Types::CurrentUserType, "Current User", null: false, method: :user
     end
   end
 end

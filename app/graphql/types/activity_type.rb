@@ -1,11 +1,14 @@
 module Types
   class ActivityType < Types::BaseObject
-    field :id, ID, null: false
-    field :title, String, null: false
-    field :body, String, null: false
-    field :event, ActivityEventType, null: false
-    field :created_at, GraphQL::Types::ISO8601DateTime, null: false
-    field :user, Types::UserType, null: false
+    description "Data type for Activity object"
+
+    field :id, ID, "ID", null: false
+
+    field :body, String, "Body", null: false
+    field :created_at, GraphQL::Types::ISO8601DateTime, "Created datetime", null: false
+    field :event, ActivityEventType, "Event type from Enum", null: false
+    field :title, String, "Title", null: false
+    field :user, Types::UserType, "Activity initiator", null: false
 
     def user
       Loaders::RecordLoader.for(User).load(object.user_id)

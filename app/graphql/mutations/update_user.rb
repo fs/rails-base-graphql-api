@@ -1,6 +1,8 @@
 module Mutations
   class UpdateUser < BaseMutation
-    argument :input, Types::UpdateUserInput, required: true
+    description "Update user info mutation"
+
+    argument :input, Types::UpdateUserInput, "Data Input", required: true
 
     type Types::Payloads::UpdateUserPayload
 

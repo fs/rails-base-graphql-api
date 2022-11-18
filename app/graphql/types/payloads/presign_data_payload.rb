@@ -1,7 +1,9 @@
 module Types
   module Payloads
     class PresignDataPayload < Types::BaseObject
-      field :data, Types::PresignType, null: false, method: :presign_data
+      description "Data payload on presign file data mutation"
+
+      field :data, Types::PresignType, "Data", null: false, method: :presign_data
     end
   end
 end

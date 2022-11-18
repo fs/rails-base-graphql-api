@@ -1,8 +1,10 @@
 module Mutations
   class SignOut < BaseMutation
+    description "Signout mutation"
+
     include AuthenticableGraphqlUser
 
-    argument :input, Types::SignOutInput, required: true
+    argument :input, Types::SignOutInput, "Data Input", required: true
 
     type Types::Payloads::SignOutPayload
 
