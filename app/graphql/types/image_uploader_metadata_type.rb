@@ -4,6 +4,6 @@ module Types
 
     argument :filename, String, "Filename", required: true
     argument :mime_type, String, "Filetype", required: true
-    argument :size, Integer, "Size in KB", required: true
+    argument :size, Integer, "Size in bytes", required: true
   end
 end
