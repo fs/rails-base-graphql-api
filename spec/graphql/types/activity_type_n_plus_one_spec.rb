@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Types::ActivityType, :n_plus_one do
-  let!(:user) { create :user }
+  let!(:user) { create(:user) }
 
   let(:query) do
     <<-GRAPHQL
@@ -21,7 +21,7 @@ describe Types::ActivityType, :n_plus_one do
     GRAPHQL
   end
 
-  populate { |n| create_list :activity, n, user: user }
+  populate { |n| create_list(:activity, n, user: user) }
 
   include_examples "performs constant number of queries request"
 end

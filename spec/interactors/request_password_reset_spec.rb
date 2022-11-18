@@ -11,7 +11,7 @@ describe RequestPasswordReset do
   end
 
   context "when user exists" do
-    let(:user) { create :user }
+    let(:user) { create(:user) }
     let(:user_id) { user.id }
     let(:event) { :reset_password_requested }
 
@@ -26,7 +26,7 @@ describe RequestPasswordReset do
   end
 
   context "when user doesn't exist" do
-    let(:user) { build :user, email: "user@test.it" }
+    let(:user) { build(:user, email: "user@test.it") }
     let(:error_data) { { message: "Record not found", detail: "User with email user@test.it not found" } }
 
     it_behaves_like "failed interactor"

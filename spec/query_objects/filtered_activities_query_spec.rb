@@ -5,8 +5,8 @@ require "rails_helper"
 describe FilteredActivitiesQuery do
   subject(:query) { described_class.new(Activity.all, filter_params) }
 
-  let!(:activity1) { create :activity }
-  let!(:activity2) { create :activity, event: :user_updated }
+  let!(:activity1) { create(:activity) }
+  let!(:activity2) { create(:activity, event: :user_updated) }
 
   let(:filter_params) { {} }
 

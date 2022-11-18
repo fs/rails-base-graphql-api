@@ -18,7 +18,7 @@ class LocalStorage < Shrine::Storage::FileSystem
   end
 
   def url(id, **_options)
-    req = ActionDispatch::Request.new("HTTP_HOST" => ENV["HOST"])
+    req = ActionDispatch::Request.new("HTTP_HOST" => ENV.fetch("HOST", nil))
 
     [req.url, prefix, id].join("/")
   end

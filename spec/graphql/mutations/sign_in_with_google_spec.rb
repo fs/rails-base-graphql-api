@@ -24,11 +24,9 @@ describe Mutations::SignIn do
     GRAPHQL
   end
 
-  let(:auth_code) { "4/0UDCw-secret_random_string" }
+  let!(:user) { create(:user, :with_data) }
 
-  let(:access_token) { CreateAccessToken.call(user: user).access_token }
-  let(:refresh_token) { RefreshToken.last }
-  let!(:user) { create :user, :with_data }
+  let(:auth_code) { "4/0UDCw-secret_random_string" }
 
   let(:client_secrets_double) { instance_double ::Google::APIClient::ClientSecrets }
   let(:auth_client_double) { instance_double Signet::OAuth2::Client }
@@ -81,8 +79,8 @@ describe Mutations::SignIn do
         fixture_file.gsub(
           /:id|:accessToken|:refreshToken/,
           ":id" => user.id,
-          ":accessToken" => access_token,
-          ":refreshToken" => refresh_token.token
+          ":accessToken" => CreateAccessToken.call(user: user).access_token,
+          ":refreshToken" => RefreshToken.last.token
         )
       end
     end

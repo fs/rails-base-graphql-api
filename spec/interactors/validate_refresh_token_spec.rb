@@ -15,7 +15,7 @@ describe ValidateRefreshToken do
   let(:token_payload) { { type: "refresh", jti: "jti" } }
 
   before do
-    create :refresh_token, jti: "jti"
+    create(:refresh_token, jti: "jti")
   end
 
   describe ".call" do
@@ -43,8 +43,8 @@ describe ValidateRefreshToken do
 
     context "with two refresh tokens with the same jti" do
       before do
-        create :refresh_token, jti: "jti"
-        create :refresh_token, jti: "other_jti"
+        create(:refresh_token, jti: "jti")
+        create(:refresh_token, jti: "other_jti")
       end
 
       let(:token) { nil }

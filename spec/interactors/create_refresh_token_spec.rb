@@ -6,9 +6,9 @@ describe CreateRefreshToken do
 
   let(:initial_context) { { user: user, jti: jti } }
 
-  let(:user) { create :user, id: 111_111 }
+  let(:user) { create(:user, id: 111_111) }
   let(:refresh_token) do
-    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiZXhwIjoxNTkxNzA1ODAwLCJqdGkiOiJqdG"\
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiZXhwIjoxNTkxNzA1ODAwLCJqdGkiOiJqdG" \
       "kiLCJ0eXBlIjoicmVmcmVzaCJ9.rLewPTwiODP_ZkGvSN7h_WHGC1xv2DC7r_ne-cggcVo"
   end
   let(:saved_refresh_token) { RefreshToken.last }

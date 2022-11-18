@@ -49,6 +49,10 @@ RSpec/RepeatedDescription:
 RSpec/MessageSpies:
   EnforcedStyle: receive
 
+RSpec/MultipleMemoizedHelpers:
+  AllowSubject: true
+  Max: 10
+
 RSpec/Capybara:
   Enabled: false
 
@@ -131,4 +135,3 @@ Lint/StructNewOverride:
 
 Security/Open:
   Enabled: false
-

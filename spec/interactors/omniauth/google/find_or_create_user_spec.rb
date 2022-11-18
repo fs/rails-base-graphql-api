@@ -7,10 +7,10 @@ describe Omniauth::Google::FindOrCreateUser do
   let(:initial_context) { { user_info: user_info } }
 
   let(:user_info) do
-    instance_double "Google::Apis::Oauth2V2::Userinfo", given_name: "FirstName",
-                                                        family_name: "LastName",
-                                                        email: "user@flatstack.com",
-                                                        picture: "spec/fixtures/images/avatar.jpg"
+    instance_double Google::Apis::Oauth2V2::Userinfo, given_name: "FirstName",
+                                                      family_name: "LastName",
+                                                      email: "user@flatstack.com",
+                                                      picture: "spec/fixtures/images/avatar.jpg"
   end
 
   describe ".call" do
@@ -31,7 +31,7 @@ describe Omniauth::Google::FindOrCreateUser do
     end
 
     context "when user exists" do
-      let!(:user) { create :user, email: "user@flatstack.com", first_name: "Carlee", last_name: "Eleanor" }
+      let!(:user) { create(:user, email: "user@flatstack.com", first_name: "Carlee", last_name: "Eleanor") }
 
       it "creates user" do
         interactor.run

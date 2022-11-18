@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe ActivityPolicy do
-  let(:user) { build_stubbed :user, first_name: first_name }
+  let(:user) { build_stubbed(:user, first_name: first_name) }
   let(:context) { { user: user } }
 
   describe "#relation_scope" do
