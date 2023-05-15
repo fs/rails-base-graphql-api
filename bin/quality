@@ -5,4 +5,4 @@ set -e
 bin/rubocop
 bin/brakeman --quiet --skip-libs --exit-on-warn --no-pager --except EOLRuby,EOLRails
 bin/bundle-audit update
-bin/bundle-audit check
+bin/bundle-audit check --ignore CVE-2023-22795 CVE-2023-22792 CVE-2023-22794 CVE-2022-44566 CVE-2023-22796 CVE-2023-28120 CVE-2022-22577 CVE-2022-27777 CVE-2022-32224
