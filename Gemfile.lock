@@ -429,7 +429,7 @@ DEPENDENCIES
   strong_migrations
 
 RUBY VERSION
-   ruby 2.7.5p203
+   ruby 2.7.8p225
 
 BUNDLED WITH
    2.2.28
