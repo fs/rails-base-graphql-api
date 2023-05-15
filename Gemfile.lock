@@ -239,7 +239,7 @@ GEM
     nokogiri (1.14.4)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
-    open-uri (0.2.0)
+    open-uri (0.3.0)
       stringio
       time
       uri
@@ -364,7 +364,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    stringio (3.0.1)
+    stringio (3.0.6)
     strong_migrations (0.6.8)
       activerecord (>= 5)
     thor (1.2.2)
