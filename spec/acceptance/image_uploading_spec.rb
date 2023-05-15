@@ -10,7 +10,7 @@ describe "Upload image", type: :request do
       content_disposition: "inline; filename='avatar.png'; filename*=UTF-8''avatar.png",
       content_type: "image/png",
       content_length_range: "0..10485760",
-      file: fixture_file_upload(avatar_image_path, "image/png")
+      file: Rack::Test::UploadedFile.new(avatar_image_path, "image/png")
     }
   end
 

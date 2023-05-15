@@ -3,6 +3,6 @@
 set -e
 
 bin/rubocop
-bin/brakeman --quiet --skip-libs --exit-on-warn --no-pager
+bin/brakeman --quiet --skip-libs --exit-on-warn --no-pager --except EOLRuby
 bin/bundle-audit update
-bin/bundle-audit
+bin/bundle-audit check

@@ -4,7 +4,7 @@ ruby File.read(".ruby-version").strip
 
 # the most important stuff
 gem "pg"
-gem "rails", "~> 6.0.4.6"
+gem "rails", "~> 6.1.7"
 
 # all other gems
 gem "action_policy-graphql"
