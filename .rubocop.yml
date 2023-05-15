@@ -2,6 +2,7 @@ require:
   - rubocop-graphql
   - rubocop-rspec
   - rubocop-rails
+  - rubocop-factory_bot
 
 inherit_gem:
   action_policy: config/rubocop-rspec.yml

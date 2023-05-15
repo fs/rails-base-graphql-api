@@ -14,12 +14,12 @@ describe ActivityPolicy do
 
     before { create(:activity, :private) }
 
-    it { is_expected.to match_array([own_private_event, public_event]) }
+    it { is_expected.to contain_exactly(own_private_event, public_event) }
 
     context "when user is not defined" do
       let(:user) { nil }
 
-      it { is_expected.to match_array([public_event]) }
+      it { is_expected.to contain_exactly(public_event) }
     end
   end
 end

@@ -28,11 +28,11 @@ describe Mutations::SignIn do
 
   let(:auth_code) { "4/0UDCw-secret_random_string" }
 
-  let(:client_secrets_double) { instance_double ::Google::APIClient::ClientSecrets }
+  let(:client_secrets_double) { instance_double Google::APIClient::ClientSecrets }
   let(:auth_client_double) { instance_double Signet::OAuth2::Client }
-  let(:oauth_service_double) { instance_double ::Google::Apis::Oauth2V2::Oauth2Service }
+  let(:oauth_service_double) { instance_double Google::Apis::Oauth2V2::Oauth2Service }
   let(:user_info_double) do
-    instance_double ::Google::Apis::Oauth2V2::Userinfo,
+    instance_double Google::Apis::Oauth2V2::Userinfo,
                     email: "adam@serwer.com",
                     family_name: "Serwer",
                     given_name: "Adam",
@@ -63,12 +63,12 @@ describe Mutations::SignIn do
   let(:get_userinfo_params) { { options: { authorization: auth_client_double } } }
 
   before do
-    allow(::Google::APIClient::ClientSecrets).to receive(:load) { client_secrets_double }
+    allow(Google::APIClient::ClientSecrets).to receive(:load) { client_secrets_double }
     allow(client_secrets_double).to receive(:to_authorization) { auth_client_double }
     allow(auth_client_double).to receive(:update!).with(google_env_variables) { auth_client_double }
     allow(auth_client_double).to receive(:code=).with(auth_code) { auth_code }
     allow(auth_client_double).to receive(:fetch_access_token!) { google_access_token }
-    allow(::Google::Apis::Oauth2V2::Oauth2Service).to receive(:new) { oauth_service_double }
+    allow(Google::Apis::Oauth2V2::Oauth2Service).to receive(:new) { oauth_service_double }
     allow(oauth_service_double).to receive(:get_userinfo).with(get_userinfo_params) { user_info_double }
   end
 

@@ -1,6 +1,6 @@
 ######################
 # Stage: Builder
-FROM ruby:2.7.5-alpine as Builder
+FROM ruby:2.7.7-alpine as Builder
 
 ARG BUNDLER_VERSION
 
