@@ -39,7 +39,7 @@ services:
       - "1025:1025"
       - "1080:1080"
   redis:
-    image: redis:6.0-rc3-alpine
+    image: redis:7.0.11-alpine
     sysctls:
       - net.core.somaxconn=511
   app:
