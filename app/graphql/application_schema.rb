@@ -1,8 +1,6 @@
 require "graphql/batch"
 
 class ApplicationSchema < GraphQL::Schema
-  description "The GraphQL schema for the API"
-
   mutation(Types::MutationType)
   query(Types::QueryType)
 

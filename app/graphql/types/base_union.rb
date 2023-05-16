@@ -1,5 +1,6 @@
 module Types
   class BaseUnion < GraphQL::Schema::Union
-    description "Base union for all unions"
+    edge_type_class(Types::BaseEdge)
+    connection_type_class(Types::BaseConnection)
   end
 end
