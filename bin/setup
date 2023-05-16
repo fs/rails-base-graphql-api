@@ -6,7 +6,6 @@ set -e
 if [ `uname -s` = "Darwin" ]; then
   echo "Install Homebrew dependencies ..."
   if [ -x "$(command -v brew)" ]; then
-    brew upgrade ruby-build
     brew bundle check --no-upgrade || brew bundle --no-upgrade
   fi
 

@@ -1,9 +1,10 @@
 require "graphql/batch"
 
 class ApplicationSchema < GraphQL::Schema
-  query(Types::QueryType)
+  description "The GraphQL schema for the API"
 
   mutation(Types::MutationType)
+  query(Types::QueryType)
 
   use GraphQL::Batch
   use GraphQL::PersistedQueries, store: :redis_with_local_cache, compiled_queries: true

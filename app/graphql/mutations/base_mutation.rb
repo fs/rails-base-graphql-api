@@ -2,6 +2,8 @@ module Mutations
   class BaseMutation < GraphQL::Schema::Mutation
     include ExecutionErrorResponder
 
+    description "Base mutation for all mutations"
+
     argument_class Types::BaseArgument
     field_class Types::BaseField
     object_class Types::BaseObject

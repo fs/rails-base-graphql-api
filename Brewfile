@@ -1,2 +1,2 @@
-brew "postgresql@14"
+brew "postgres"
 brew "redis"
