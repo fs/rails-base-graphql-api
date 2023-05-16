@@ -13,7 +13,7 @@ gem "bcrypt"
 gem "bootsnap", require: false
 gem "enumerize"
 gem "google-api-client"
-gem "graphql"
+gem "graphql", "~> 1.12.0"
 gem "graphql-batch"
 gem "graphql-persisted_queries"
 gem "graphql-rails_logger"

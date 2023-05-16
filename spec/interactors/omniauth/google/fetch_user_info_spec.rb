@@ -4,9 +4,9 @@ require "google/apis/oauth2_v2"
 describe Omniauth::Google::FetchUserInfo do
   subject(:context) { described_class.call(auth_client: auth_client_double) }
 
-  let(:auth_client_double) { instance_double "Signet::OAuth2::Client" }
-  let(:oauth_2_service_double) { instance_double "Google::Apis::Oauth2V2::Oauth2Service" }
-  let(:userinfo_double) { instance_double "Google::Apis::Oauth2V2::Userinfo" }
+  let(:auth_client_double) { instance_double Signet::OAuth2::Client }
+  let(:oauth_2_service_double) { instance_double Google::Apis::Oauth2V2::Oauth2Service }
+  let(:userinfo_double) { instance_double Google::Apis::Oauth2V2::Userinfo }
   let(:expected_options) { { options: { authorization: auth_client_double } } }
 
   before do

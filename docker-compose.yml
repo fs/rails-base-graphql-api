@@ -26,7 +26,7 @@ x-app: &app_base
 
 services:
   db:
-    image: postgres:11-alpine
+    image: postgres:15-alpine
     environment:
       - POSTGRES_PASSWORD=password
     ports:
@@ -34,12 +34,12 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
   mailcatcher:
-    image: yappabe/mailcatcher
+    image: schickling/mailcatcher
     ports:
       - "1025:1025"
       - "1080:1080"
   redis:
-    image: redis:6.0-rc3-alpine
+    image: redis:7.0.11-alpine
     sysctls:
       - net.core.somaxconn=511
   app:

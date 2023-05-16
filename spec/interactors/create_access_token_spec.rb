@@ -5,7 +5,7 @@ describe CreateAccessToken do
   include_context "when time is frozen"
 
   let(:initial_context) { { user: user, token_payload: token_payload } }
-  let(:user) { create :user, id: 111_111 }
+  let(:user) { create(:user, id: 111_111) }
 
   describe ".call" do
     context "with existing jti" do

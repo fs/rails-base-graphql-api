@@ -4,7 +4,7 @@ describe Mutations::UpdateToken do
   include_context "when time is frozen"
 
   let(:schema_context) { { current_user: user, token: token, token_payload: token_payload } }
-  let(:user) { create :user, id: 111_111 }
+  let(:user) { create(:user, id: 111_111) }
   let(:token) do
     "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiY2xpZW50X3VpZCI6IjExMTExMS0xNTg5MTEzODAwIiwiZXhwIjoxNT" \
       "kxNzA1ODAwLCJqdGkiOiJzZWs0elRBR2tOM09JIiwidHlwZSI6InJlZnJlc2gifQ.JalYKabh0MJcqFKxJbx0TdLH6PTUN5vjdDkHteuYTPc"
@@ -23,7 +23,7 @@ describe Mutations::UpdateToken do
   end
 
   before do
-    create :refresh_token, token: token, user: user
+    create(:refresh_token, token: token, user: user)
   end
 
   context "with valid refresh token" do

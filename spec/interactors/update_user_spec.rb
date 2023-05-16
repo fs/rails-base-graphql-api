@@ -4,7 +4,7 @@ describe UpdateUser do
   describe ".call" do
     include_context "with interactor"
 
-    let(:user) { create :user, password: "123456" }
+    let(:user) { create(:user, password: "123456") }
     let(:initial_context) { { user: user, user_params: user_params } }
 
     context "with valid data" do

@@ -10,11 +10,11 @@ describe SignoutUser do
       token: "token"
     }
   end
-  let(:user) { create :user }
+  let(:user) { create(:user) }
 
   before do
-    create :refresh_token, user: user
-    create :refresh_token, token: "other", user: user
+    create(:refresh_token, user: user)
+    create(:refresh_token, token: "other", user: user)
   end
 
   describe ".call" do

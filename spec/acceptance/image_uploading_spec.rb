@@ -23,7 +23,7 @@ describe "Upload image", type: :request do
   end
 
   it "returns 204 status" do
-    expect(response.status).to eq(204)
+    expect(response).to have_http_status(:no_content)
     expect(response.body).to be_empty
   end
 end

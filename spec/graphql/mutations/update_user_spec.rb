@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe Mutations::UpdateUser do
   let(:schema_context) { { current_user: user } }
-  let(:user) { create :user, password: "123456" }
+  let(:user) { create(:user, password: "123456") }
   let(:uploader) { ImageUploader.new(:cache) }
   let(:avatar_image_path) { Rails.root.join("spec/fixtures/images/avatar.jpg") }
   let(:uploaded_file) { uploader.upload(File.open(avatar_image_path, binmode: true)) }

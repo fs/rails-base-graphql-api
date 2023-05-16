@@ -1,9 +1,9 @@
 require "rails_helper"
 
 describe Types::QueryType do
-  let!(:user) { create :user, :with_data }
+  let!(:user) { create(:user, :with_data) }
   let(:token_payload) { { type: "access" } }
-  let!(:activity) { create :activity, user: user, event: :user_updated }
+  let!(:activity) { create(:activity, user: user, event: :user_updated) }
 
   let(:query) do
     <<-GRAPHQL

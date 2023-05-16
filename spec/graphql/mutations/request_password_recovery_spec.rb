@@ -19,7 +19,7 @@ describe Mutations::RequestPasswordRecovery do
   context "when user exists" do
     let(:fixture_path) { "json/acceptance/graphql/request_password_recovery.json" }
 
-    before { create :user, email: "zaphod.beeblebrox@gmail.com" }
+    before { create(:user, email: "zaphod.beeblebrox@gmail.com") }
 
     it_behaves_like "graphql request", "returns info message"
   end

@@ -1,6 +1,7 @@
 require:
   - rubocop-rspec
   - rubocop-rails
+  - rubocop-factory_bot
 
 inherit_gem:
   action_policy: config/rubocop-rspec.yml
@@ -51,6 +52,9 @@ RSpec/MessageSpies:
 
 RSpec/Capybara:
   Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Max: 10
 
 Style/AndOr:
   Enabled: false
@@ -131,4 +135,3 @@ Lint/StructNewOverride:
 
 Security/Open:
   Enabled: false
-

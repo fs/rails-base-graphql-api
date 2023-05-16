@@ -5,8 +5,8 @@ describe ConfirmUser do
     include_context "with interactor"
     include_context "when time is frozen"
 
-    let(:user) { create :user, password: "123456" }
-    let(:possession_token) { create :possession_token, user: user }
+    let(:user) { create(:user, password: "123456") }
+    let(:possession_token) { create(:possession_token, user: user) }
     let(:initial_context) { { user: user, value: possession_token.value } }
     let(:confirmed_at) { Time.current }
 
