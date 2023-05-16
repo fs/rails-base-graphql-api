@@ -98,10 +98,10 @@ GEM
     connection_pool (2.4.0)
     content_disposition (1.0.0)
     crass (1.0.6)
-    database_cleaner (1.8.4)
-    database_cleaner-active_record (1.8.0)
-      activerecord
-      database_cleaner (~> 1.8.0)
+    database_cleaner-active_record (2.1.0)
+      activerecord (>= 5.a)
+      database_cleaner-core (~> 2.0.0)
+    database_cleaner-core (2.0.1)
     date (3.3.3)
     declarative (0.0.20)
     diff-lcs (1.5.0)
@@ -112,7 +112,7 @@ GEM
       railties (>= 3.2)
     down (5.2.0)
       addressable (~> 2.5)
-    email_spec (2.2.0)
+    email_spec (2.2.1)
       htmlentities (~> 4.3.3)
       launchy (~> 2.1)
       mail (~> 2.7)
@@ -224,7 +224,7 @@ GEM
     msgpack (1.7.0)
     multi_json (1.15.0)
     multipart-post (2.3.0)
-    n_plus_one_control (0.6.2)
+    n_plus_one_control (0.7.1)
     net-imap (0.3.4)
       date
       net-protocol
