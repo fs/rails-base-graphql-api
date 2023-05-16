@@ -34,7 +34,7 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
   mailcatcher:
-    image: yappabe/mailcatcher
+    image: schickling/mailcatcher
     ports:
       - "1025:1025"
       - "1080:1080"
