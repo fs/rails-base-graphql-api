@@ -3,7 +3,7 @@ require "rails_helper"
 describe Omniauth::Google::ExchangeAuthCode do
   subject(:context) { described_class.call(auth_client: auth_client_double) }
 
-  let(:auth_client_double) { instance_double "Signet::OAuth2::Client" }
+  let(:auth_client_double) { instance_double Signet::OAuth2::Client }
 
   before do
     allow(auth_client_double).to receive(:fetch_access_token!)

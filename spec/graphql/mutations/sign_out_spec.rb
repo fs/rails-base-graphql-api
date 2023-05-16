@@ -1,10 +1,10 @@
 require "rails_helper"
 
 describe Mutations::SignOut, type: :request do
-  let(:user) { create :user }
+  let(:user) { create(:user) }
   let(:everywhere) { true }
   let(:token) { "token" }
-  let(:refresh_token) { create :refresh_token, user: user }
+  let(:refresh_token) { create(:refresh_token, user: user) }
   let(:query) do
     <<-GRAPHQL
     mutation {

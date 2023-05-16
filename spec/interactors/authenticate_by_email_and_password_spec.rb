@@ -7,7 +7,7 @@ describe AuthenticateByEmailAndPassword do
     { email: "user@flatstack.com", password: password }
   end
 
-  let!(:user) { create :user, email: "user@flatstack.com", password: "password" }
+  let!(:user) { create(:user, email: "user@flatstack.com", password: "password") }
 
   describe ".call" do
     context "with valid credentials" do

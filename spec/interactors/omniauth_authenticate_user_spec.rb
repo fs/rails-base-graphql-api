@@ -7,7 +7,7 @@ describe OmniauthAuthenticateUser do
     { auth_code: auth_code }
   end
 
-  let!(:user) { create :user, email: "user@flatstack.com", password: "password" }
+  let!(:user) { create(:user, email: "user@flatstack.com", password: "password") }
 
   describe ".call" do
     let(:expected_context) { Interactor::Context.new(user: user) }

@@ -5,7 +5,7 @@ describe CreatePossessionToken do
   include_context "when time is frozen"
 
   let(:initial_context) { { user: user } }
-  let(:user) { create :user, id: 111_111 }
+  let(:user) { create(:user, id: 111_111) }
 
   let(:possession_token_length) { 80 }
   let(:saved_possession_token) { PossessionToken.last }

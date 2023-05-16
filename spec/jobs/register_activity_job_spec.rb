@@ -4,7 +4,7 @@ describe RegisterActivityJob do
   let(:user_id) { 570_242 }
 
   context "when user exists" do
-    let!(:user) { create :user, id: user_id }
+    let!(:user) { create(:user, id: user_id) }
 
     it "calls interactor to create activity" do
       expect(CreateUserActivity).to receive(:call!).with(user: user, event: :user_registered)

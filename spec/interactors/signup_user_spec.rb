@@ -3,7 +3,7 @@ require "rails_helper"
 describe SignupUser do
   describe "#after" do
     let(:user_id) { 213_689 }
-    let(:user) { create :user, id: user_id }
+    let(:user) { create(:user, id: user_id) }
     let(:initial_context) { { user: user } }
     let(:event) { :user_registered }
 

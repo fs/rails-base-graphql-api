@@ -4,8 +4,8 @@ describe Mutations::ConfirmUser do
   include_context "when time is frozen"
 
   let(:schema_context) { { current_user: user } }
-  let(:user) { create :user, id: 123_456, password: "123456" }
-  let(:possession_token) { create :possession_token, user: user }
+  let(:user) { create(:user, id: 123_456, password: "123456") }
+  let(:possession_token) { create(:possession_token, user: user) }
 
   let(:query) do
     <<-GRAPHQL
