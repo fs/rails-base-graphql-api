@@ -58,6 +58,9 @@ RSpec/MultipleMemoizedHelpers:
 RSpec/Capybara:
   Enabled: false
 
+RSpec/MultipleMemoizedHelpers:
+  Max: 10
+
 Style/AndOr:
   Enabled: false
 

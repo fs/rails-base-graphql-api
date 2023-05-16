@@ -11,14 +11,14 @@ describe Types::QueryType do
            body: "New user registered with the next attributes: First Name - John, Last Name - Doe",
            event: :user_registered)
   end
-  let!(:second_activity) do
+  let!(:user_logged_in_activity) do
     create(:activity,
            user: user,
            title: "User Logged in",
            body: "User logged in",
            event: :user_logged_in)
   end
-  let!(:third_activity) do
+  let!(:another_user_logged_in_activity) do
     create(:activity,
            user: user,
            title: "User Logged in",
@@ -108,8 +108,8 @@ describe Types::QueryType do
       let(:prepared_fixture_file) do
         fixture_file.gsub(
           /:first_id|:second_id|:user_id/,
-          ":first_id" => second_activity.id,
-          ":second_id" => third_activity.id,
+          ":first_id" => user_logged_in_activity.id,
+          ":second_id" => another_user_logged_in_activity.id,
           ":user_id" => user.id
         )
       end
@@ -127,8 +127,8 @@ describe Types::QueryType do
         fixture_file.gsub(
           /:id_1|:id_2|:id_3|:id_4|:user_id|:email|:first_name|:last_name/,
           ":id_1" => activity.id,
-          ":id_2" => second_activity.id,
-          ":id_3" => third_activity.id,
+          ":id_2" => user_logged_in_activity.id,
+          ":id_3" => another_user_logged_in_activity.id,
           ":id_4" => private_activity.id,
           ":user_id" => user.id,
           ":email" => user.email,

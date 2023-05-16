@@ -1,10 +1,12 @@
 class Activity < ApplicationRecord
   extend Enumerize
 
-  belongs_to :user
+  EVENTS = %i[user_registered user_logged_in user_updated reset_password_requested
+              user_reset_password].freeze
 
-  enumerize :event, in: %i[user_registered user_logged_in user_updated reset_password_requested
-                           user_reset_password]
+  enumerize :event, in: EVENTS
+
+  belongs_to :user
 
   scope :public_events, -> { where(event: %i[user_registered user_logged_in]) }
 

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :refresh_token do
-    association :user
+    user
     token { "token" }
     expires_at { 1.year.since }
     jti { "jti" }

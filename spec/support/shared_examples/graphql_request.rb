@@ -9,7 +9,7 @@ shared_examples "graphql request" do |spec_name|
     }
   end
 
-  let(:response) { ApplicationSchema.execute(query, schema_options).as_json }
+  let(:response) { ApplicationSchema.execute(query, **schema_options).as_json }
 
   it spec_name do
     expect(response).to eql(parsed_fixture_file)

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :possession_token do
-    association :user
+    user
 
     value { "token" }
   end

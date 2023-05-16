@@ -24,7 +24,7 @@ describe Mutations::PresignData do
 
   context "with valid file type" do
     let(:file_type) { "image/png" }
-    let(:s3_storage) { instance_double(S3Storage, presign: presign_data) }
+    let(:s3_storage) { instance_double(Shrine::Storage::S3, presign: presign_data) }
     let(:presign_data) { { url: "http://some-url.com", fields: { key: :value } } }
 
     before do
