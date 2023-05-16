@@ -1,7 +1,5 @@
 module Loaders
   class AssociationLoader < GraphQL::Batch::Loader
-    description "Loads 1-m record association lazily"
-
     def self.validate(model, association_name)
       new(model, association_name)
       nil

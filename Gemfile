@@ -44,6 +44,7 @@ group :development, :test do
   gem "ffaker"
   gem "rspec-rails"
   gem "rubocop", require: false
+  gem "rubocop-graphql", require: false
   gem "rubocop-rails", require: false
   gem "rubocop-rspec", require: false
 end
