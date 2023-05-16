@@ -1,6 +1,6 @@
 {
   "data": {
-    "signout": {
+    "signOut": {
       "message": "User signed out successfully"
     }
   }
