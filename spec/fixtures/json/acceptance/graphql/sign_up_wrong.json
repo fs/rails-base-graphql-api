@@ -1,6 +1,6 @@
 {
   "data": {
-    "signup": null
+    "signUp": null
   },
   "errors": [
     {
@@ -13,7 +13,7 @@
       "locations": [
         { "line": 2, "column": 9 }
       ],
-      "path": ["signup"]
+      "path": ["signUp"]
     }
   ]
 }

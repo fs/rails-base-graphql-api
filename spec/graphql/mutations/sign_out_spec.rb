@@ -8,7 +8,7 @@ describe Mutations::SignOut, type: :request do
   let(:query) do
     <<-GRAPHQL
     mutation {
-      signout(
+      signOut(
         input: {
           everywhere: #{everywhere}
         }
@@ -24,6 +24,6 @@ describe Mutations::SignOut, type: :request do
   let(:schema_context) { { current_user: user } }
 
   it_behaves_like "graphql request", "return current user" do
-    let(:fixture_path) { "json/acceptance/signout/success.json" }
+    let(:fixture_path) { "json/acceptance/sign_out/success.json" }
   end
 end

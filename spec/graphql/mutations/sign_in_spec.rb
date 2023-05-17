@@ -6,7 +6,7 @@ describe Mutations::SignIn do
   let(:query) do
     <<-GRAPHQL
       mutation {
-        signin (
+        signIn (
           input: {
             email: "bilbo.baggins@shire.com",
             password: "#{password}"
@@ -40,7 +40,7 @@ describe Mutations::SignIn do
     let(:password) { "TheRing" }
 
     it_behaves_like "graphql request", "gets user token" do
-      let(:fixture_path) { "json/acceptance/graphql/signin.json" }
+      let(:fixture_path) { "json/acceptance/graphql/sign_in.json" }
       let(:prepared_fixture_file) do
         fixture_file.gsub(
           /:accessToken|:refreshToken/,
@@ -55,7 +55,7 @@ describe Mutations::SignIn do
     let(:password) { "Sauron" }
 
     it_behaves_like "graphql request", "returns error" do
-      let(:fixture_path) { "json/acceptance/graphql/signin_wrong.json" }
+      let(:fixture_path) { "json/acceptance/graphql/sign_in_wrong.json" }
     end
   end
 end
