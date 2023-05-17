@@ -1,6 +1,6 @@
 {
   "data": {
-    "omniauthSigninOrSignup": {
+    "omniauthSignInOrSignUp": {
       "accessToken": ":accessToken",
       "refreshToken": ":refreshToken",
       "me": {

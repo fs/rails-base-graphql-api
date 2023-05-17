@@ -1,6 +1,6 @@
 {
   "data": {
-    "signin": null
+    "signIn": null
   },
   "errors": [
     {
@@ -13,7 +13,7 @@
       "locations": [
         { "line": 2, "column": 9 }
       ],
-      "path": ["signin"]
+      "path": ["signIn"]
     }
   ]
 }
