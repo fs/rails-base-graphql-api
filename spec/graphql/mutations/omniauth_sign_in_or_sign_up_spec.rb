@@ -2,13 +2,13 @@ require "rails_helper"
 require "google/api_client/client_secrets"
 require "google/apis/oauth2_v2"
 
-describe Mutations::SignIn do
+describe Mutations::OmniauthSignInOrSignUp do
   include_context "when time is frozen"
 
   let(:query) do
     <<-GRAPHQL
       mutation {
-        omniauthSigninOrSignup (
+        omniauthSignInOrSignUp (
           input: {
             authCode: "#{auth_code}"
           }
@@ -74,7 +74,7 @@ describe Mutations::SignIn do
 
   context "with valid credentials" do
     it_behaves_like "graphql request", "gets user token" do
-      let(:fixture_path) { "json/acceptance/graphql/signin_with_google.json" }
+      let(:fixture_path) { "json/acceptance/graphql/sign_in_with_google.json" }
       let(:prepared_fixture_file) do
         fixture_file.gsub(
           /:id|:accessToken|:refreshToken/,
