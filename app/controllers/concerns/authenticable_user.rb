@@ -1,10 +1,12 @@
 module AuthenticableUser
+  def current_user
+    @current_user ||= User.find_by(id: payload["sub"]) if valid_to_authenticate?
+  end
+
   private
 
-  def current_user
-    return unless token && payload && active_refresh_token?
-
-    User.find_by(id: payload["sub"])
+  def valid_to_authenticate?
+    token && payload.present? && access_token_type? && active_refresh_token?
   end
 
   def token
@@ -17,11 +19,11 @@ module AuthenticableUser
     {}
   end
 
-  def jti
-    payload["jti"]
+  def active_refresh_token?
+    RefreshToken.active.exists?(jti: payload["jti"])
   end
 
-  def active_refresh_token?
-    RefreshToken.active.exists?(jti: jti)
+  def access_token_type?
+    payload["type"] == "access"
   end
 end

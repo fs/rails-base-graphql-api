@@ -68,4 +68,13 @@ describe Types::QueryType do
       end
     end
   end
+
+  context "with incorrect token type" do
+    let(:token_payload) { { type: "refresh" } }
+
+    it_behaves_like "graphql request", "gets current_user info" do
+      let(:schema_context) { { current_user: user, token_payload: token_payload } }
+      let(:fixture_path) { "json/acceptance/graphql/query_type_me_unauthorized.json" }
+    end
+  end
 end
