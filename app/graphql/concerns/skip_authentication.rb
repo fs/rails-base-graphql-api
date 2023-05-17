@@ -1,7 +1,7 @@
 module SkipAuthentication
   extend ActiveSupport::Concern
 
-  def authenticate(*)
+  def ready?(*)
     true
   end
 end
