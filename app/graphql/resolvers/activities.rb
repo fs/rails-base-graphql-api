@@ -1,6 +1,8 @@
 module Resolvers
   class Activities < Resolvers::Base
-    argument :events, [Types::ActivityEventType], required: false
+    description "Fetch activities"
+
+    argument :events, [Types::ActivityEventType], "Filter by events", required: false
 
     type Types::ActivityType.connection_type, null: true
 

@@ -3,6 +3,8 @@ module Resolvers
     include ActionPolicy::GraphQL::Behaviour
     include TriggerableEvents
 
+    description "Base resolver"
+
     argument_class Types::BaseArgument
 
     def resolve(**options)

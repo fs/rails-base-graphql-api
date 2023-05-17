@@ -1,8 +1,10 @@
 module Types
   class ImageUploaderType < Types::BaseInputObject
-    argument :id, String, required: true
-    argument :storage, String, required: false, default_value: "cache"
-    argument :metadata, Types::ImageUploaderMetadataType, required: true
+    description "Data type for file direct upload"
+
+    argument :id, String, "ID", required: true
+    argument :metadata, Types::ImageUploaderMetadataType, "File metadata", required: true
+    argument :storage, String, "Storage: cache or store", required: false, default_value: "cache"
 
     def prepare
       to_hash

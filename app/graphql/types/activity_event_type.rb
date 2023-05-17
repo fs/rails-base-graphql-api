@@ -1,5 +1,7 @@
 module Types
   class ActivityEventType < Types::BaseEnum
+    description "Data type for Activity Event"
+
     value "USER_LOGGED_IN", value: "user_logged_in"
     value "USER_REGISTERED", value: "user_registered"
     value "USER_RESET_PASSWORD", value: "user_reset_password"
