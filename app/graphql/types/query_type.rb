@@ -5,7 +5,8 @@ module Types
 
     description "Base query"
 
-    field :activities, description: "Activities", resolver: Resolvers::Activities, connection: true
     field :me, description: "Current User", resolver: Resolvers::CurrentUser
+
+    field :activities, description: "Activities", resolver: Resolvers::Activities, connection: true
   end
 end
