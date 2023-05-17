@@ -7,6 +7,6 @@ module Types
 
     field :me, description: "Current User", resolver: Resolvers::CurrentUser
 
-    field :activities, description: "Activities", resolver: Resolvers::Public::Activities, connection: true
+    field :activities, description: "Activities", resolver: Resolvers::PublicActivities, connection: true
   end
 end
