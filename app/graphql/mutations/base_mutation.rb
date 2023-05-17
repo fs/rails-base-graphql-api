@@ -1,5 +1,6 @@
 module Mutations
   class BaseMutation < GraphQL::Schema::Mutation
+    include AuthenticableGraphqlUser
     include ExecutionErrorResponder
 
     description "Base mutation for all mutations"
