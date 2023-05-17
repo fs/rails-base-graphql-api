@@ -1,6 +1,6 @@
 module Types
   class ActivityType < Types::BaseObject
-    description "Data type for Activity object"
+    description "Data type for Activity"
 
     field :id, ID, "ID", null: false
 

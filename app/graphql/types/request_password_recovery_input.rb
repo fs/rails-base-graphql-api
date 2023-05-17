@@ -1,6 +1,6 @@
 module Types
   class RequestPasswordRecoveryInput < Types::BaseInputObject
-    description "Data input to reset password flow"
+    description "Input object for reset password flow"
 
     argument :email, String, "Email", required: true
   end

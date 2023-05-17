@@ -1,7 +1,7 @@
 module Types
   module Payloads
     class UpdateTokenPayload < Types::BaseObject
-      description "Data payload on update token mutation"
+      description "Payload object for update token mutation"
 
       field :access_token, String, "Short live access token", null: false
       field :refresh_token, String, "Long live refresh token", null: false

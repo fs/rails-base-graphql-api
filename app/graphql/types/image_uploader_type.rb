@@ -1,6 +1,6 @@
 module Types
   class ImageUploaderType < Types::BaseInputObject
-    description "Data type for upload file"
+    description "Data type for file direct upload"
 
     argument :id, String, "ID", required: true
     argument :metadata, Types::ImageUploaderMetadataType, "File metadata", required: true

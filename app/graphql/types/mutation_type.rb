@@ -1,7 +1,7 @@
 # rubocop:disable GraphQL/ExtractType
 module Types
   class MutationType < Types::BaseObject
-    description "The mutation root of this schema"
+    description "Mutations"
 
     field :confirm_user, mutation: Mutations::ConfirmUser, description: "Confirm user email"
     field :omniauth_signin_or_signup,

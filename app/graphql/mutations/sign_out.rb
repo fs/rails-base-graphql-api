@@ -1,6 +1,6 @@
 module Mutations
   class SignOut < BaseMutation
-    description "Signout mutation"
+    description "Sign out mutation"
 
     include AuthenticableGraphqlUser
 

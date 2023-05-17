@@ -51,12 +51,12 @@ RSpec/RepeatedDescription:
 RSpec/MessageSpies:
   EnforcedStyle: receive
 
+RSpec/Capybara:
+  Enabled: false
+
 RSpec/MultipleMemoizedHelpers:
   AllowSubject: true
   Max: 10
-
-RSpec/Capybara:
-  Enabled: false
 
 Style/AndOr:
   Enabled: false

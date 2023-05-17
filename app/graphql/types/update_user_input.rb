@@ -1,6 +1,6 @@
 module Types
   class UpdateUserInput < Types::BaseInputObject
-    description "Data input to update user info"
+    description "Input object for update user info"
 
     argument :avatar, Types::ImageUploaderType, "Avatar data", required: false
     argument :email, String, "Email", required: false

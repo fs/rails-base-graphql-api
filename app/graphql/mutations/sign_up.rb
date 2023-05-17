@@ -1,6 +1,6 @@
 module Mutations
   class SignUp < BaseMutation
-    description "Signout mutation"
+    description "Sign up mutation"
 
     argument :input, Types::SignUpInput, "Data Input", required: true
 

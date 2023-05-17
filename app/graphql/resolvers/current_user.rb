@@ -1,6 +1,6 @@
 module Resolvers
   class CurrentUser < Resolvers::Base
-    description "Data type for current user"
+    description "Fetch current user"
 
     type Types::CurrentUserType, null: true
 

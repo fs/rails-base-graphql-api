@@ -1,7 +1,7 @@
 module Types
   module Payloads
     class SignInPayload < Types::BaseObject
-      description "Data payload on signin mutation"
+      description "Payload object for sign in mutation"
 
       field :access_token, String, "Short live access token", null: false
       field :refresh_token, String, "Long live refresh token", null: false

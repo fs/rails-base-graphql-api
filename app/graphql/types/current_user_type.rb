@@ -1,6 +1,6 @@
 module Types
   class CurrentUserType < Types::BaseObject
-    description "Data type for current user"
+    description "Data type for Current User"
 
     field :id, ID, "ID", null: false
 

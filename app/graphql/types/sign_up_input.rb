@@ -1,6 +1,6 @@
 module Types
   class SignUpInput < Types::BaseInputObject
-    description "Data input to sign up"
+    description "Input object for sign up"
 
     argument :avatar, Types::ImageUploaderType, "URL to avatar image", required: false
     argument :email, String, "Email", required: true

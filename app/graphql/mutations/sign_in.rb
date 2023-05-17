@@ -1,6 +1,6 @@
 module Mutations
   class SignIn < BaseMutation
-    description "Signin with email mutation"
+    description "Sign in with email mutation"
 
     argument :input, Types::SignInInput, "Data Input", required: true
 
