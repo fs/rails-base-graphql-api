@@ -3,7 +3,7 @@ module AuthenticableGraphqlUser
 
   private
 
-  def ready?(*)
+  def authenticate(*)
     return true if current_user
 
     raise execution_error(error_data: authentication_error)

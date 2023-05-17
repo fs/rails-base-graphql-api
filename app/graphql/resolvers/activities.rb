@@ -1,7 +1,5 @@
 module Resolvers
   class Activities < Resolvers::Base
-    include SkipAuthentication
-
     description "Fetch activities"
 
     argument :events, [Types::ActivityEventType], "Filter by events", required: false
