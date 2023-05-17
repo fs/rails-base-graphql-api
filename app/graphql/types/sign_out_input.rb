@@ -1,5 +1,7 @@
 module Types
   class SignOutInput < Types::BaseInputObject
-    argument :everywhere, Boolean, required: false
+    description "Input object for sign out"
+
+    argument :everywhere, Boolean, "If true all sessions will reset", required: false
   end
 end

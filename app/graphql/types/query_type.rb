@@ -1,6 +1,12 @@
 module Types
   class QueryType < Types::BaseObject
-    field :me, resolver: Resolvers::CurrentUser
-    field :activities, resolver: Resolvers::Activities, connection: true
+    include GraphQL::Types::Relay::HasNodeField
+    include GraphQL::Types::Relay::HasNodesField
+
+    description "Base query"
+
+    field :me, description: "Current User", resolver: Resolvers::CurrentUser
+
+    field :activities, description: "Activities", resolver: Resolvers::Activities, connection: true
   end
 end

@@ -1,6 +1,8 @@
 module Mutations
   class PresignData < BaseMutation
-    argument :input, Types::PresignDataInput, required: true
+    description "Presign file data mutation"
+
+    argument :input, Types::PresignDataInput, "Data Input", required: true
 
     type Types::Payloads::PresignDataPayload
 

@@ -1,6 +1,8 @@
 module Mutations
   class UpdatePassword < BaseMutation
-    argument :input, Types::UpdatePasswordInput, required: true
+    description "Update user password mutation"
+
+    argument :input, Types::UpdatePasswordInput, "Data Input", required: true
 
     type Types::Payloads::UpdatePasswordPayload
 

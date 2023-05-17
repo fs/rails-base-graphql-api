@@ -2,7 +2,6 @@ require "rails_helper"
 require "google/api_client/client_secrets"
 require "google/apis/oauth2_v2"
 
-# rubocop:disable RSpec/MultipleMemoizedHelpers
 describe Mutations::OmniauthSignInOrSignUp do
   include_context "when time is frozen"
 
@@ -25,11 +24,9 @@ describe Mutations::OmniauthSignInOrSignUp do
     GRAPHQL
   end
 
-  let(:auth_code) { "4/0UDCw-secret_random_string" }
-
-  let(:access_token) { CreateAccessToken.call(user: user).access_token }
-  let(:refresh_token) { RefreshToken.last }
   let!(:user) { create(:user, :with_data) }
+
+  let(:auth_code) { "4/0UDCw-secret_random_string" }
 
   let(:client_secrets_double) { instance_double Google::APIClient::ClientSecrets }
   let(:auth_client_double) { instance_double Signet::OAuth2::Client }
@@ -82,11 +79,10 @@ describe Mutations::OmniauthSignInOrSignUp do
         fixture_file.gsub(
           /:id|:accessToken|:refreshToken/,
           ":id" => user.id,
-          ":accessToken" => access_token,
-          ":refreshToken" => refresh_token.token
+          ":accessToken" => CreateAccessToken.call(user: user).access_token,
+          ":refreshToken" => RefreshToken.last.token
         )
       end
     end
   end
 end
-# rubocop:enable RSpec/MultipleMemoizedHelpers

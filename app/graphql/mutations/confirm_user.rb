@@ -1,6 +1,8 @@
 module Mutations
   class ConfirmUser < BaseMutation
-    argument :input, Types::ConfirmUserInput, required: true
+    description "Confirm user mutation"
+
+    argument :input, Types::ConfirmUserInput, "Data Input", required: true
 
     type Types::Payloads::ConfirmUserPayload
 

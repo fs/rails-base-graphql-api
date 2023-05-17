@@ -1,6 +1,8 @@
 module Mutations
   class RequestPasswordRecovery < BaseMutation
-    argument :input, Types::RequestPasswordRecoveryInput, required: true
+    description "Request reset password flow mutation"
+
+    argument :input, Types::RequestPasswordRecoveryInput, "Data Input", required: true
 
     type Types::Payloads::RequestPasswordRecoveryPayload
 

@@ -1,8 +1,10 @@
 module Types
   module Payloads
     class RequestPasswordRecoveryPayload < Types::BaseObject
-      field :message, String, null: false
-      field :detail, String, null: false
+      description "Payload object for request password reset mutation"
+
+      field :detail, String, "Detail", null: false
+      field :message, String, "Message", null: false
     end
   end
 end

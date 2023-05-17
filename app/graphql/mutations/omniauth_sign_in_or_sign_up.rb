@@ -1,6 +1,8 @@
 module Mutations
   class OmniauthSignInOrSignUp < BaseMutation
-    argument :input, Types::OmniauthInput, required: true
+    description "Signin with Google OAuth mutation"
+
+    argument :input, Types::OmniauthInput, "Data Input", required: true
 
     type Types::Payloads::SignInPayload
 

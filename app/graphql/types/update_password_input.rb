@@ -1,6 +1,8 @@
 module Types
   class UpdatePasswordInput < Types::BaseInputObject
-    argument :password, String, required: true
-    argument :reset_token, String, required: true
+    description "Input object for update user password on reset password"
+
+    argument :password, String, "A new password", required: true
+    argument :reset_token, String, "Password reset token", required: true
   end
 end
