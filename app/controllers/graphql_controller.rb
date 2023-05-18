@@ -29,7 +29,6 @@ class GraphqlController < ApplicationController
     {
       current_user: current_user,
       token: token,
-      token_payload: payload,
       extensions: ensure_hash(params[:extensions])
     }
   end

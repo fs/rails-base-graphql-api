@@ -7,13 +7,7 @@ module Resolvers
     type Types::CurrentUserType, null: true
 
     def resolve
-      current_user if type == "access"
-    end
-
-    private
-
-    def type
-      context[:token_payload][:type]
+      current_user
     end
   end
 end

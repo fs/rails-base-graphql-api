@@ -1,13 +1,18 @@
 class ValidateRefreshToken
   include Interactor
 
-  delegate :token, :token_payload, to: :context
+  delegate :token, to: :context
 
   def call
-    raise_unauthorized_error unless token_payload[:type] == "refresh"
-    destroy_same_tokens unless refresh_token
+    raise_unauthorized_error unless jwt_token.valid? && jwt_token.refresh?
 
+    destroy_same_tokens unless refresh_token
     refresh_token.destroy
+  end
+
+  after do
+    context.jwt_token_jti = jwt_token.jti
+    context.user = refresh_token.user
   end
 
   private
@@ -17,9 +22,13 @@ class ValidateRefreshToken
   end
 
   def destroy_same_tokens
-    RefreshToken.where(jti: token_payload[:jti]).destroy_all
+    RefreshToken.where(jti: jwt_token.jti).destroy_all
 
     raise_unauthorized_error
+  end
+
+  def jwt_token
+    @jwt_token ||= JWTToken.new(token)
   end
 
   def raise_unauthorized_error
