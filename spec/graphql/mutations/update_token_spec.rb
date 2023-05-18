@@ -3,7 +3,7 @@ require "rails_helper"
 describe Mutations::UpdateToken do
   include_context "when time is frozen"
 
-  let(:schema_context) { { current_user: user, token: token } }
+  let(:schema_context) { { token: token } }
   let(:user) { create(:user, id: 111_111) }
 
   let(:query) do

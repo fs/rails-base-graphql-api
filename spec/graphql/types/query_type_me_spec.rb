@@ -1,6 +1,7 @@
 require "rails_helper"
 
 describe Types::QueryType do
+  let(:schema_context) { { current_user: user } }
   let!(:user) { create(:user, :with_data) }
 
   let(:query) do
@@ -18,7 +19,6 @@ describe Types::QueryType do
 
   context "with user" do
     it_behaves_like "graphql request", "gets current_user info" do
-      let(:schema_context) { { current_user: user } }
       let(:fixture_path) { "json/acceptance/graphql/query_type_me.json" }
       let(:prepared_fixture_file) do
         fixture_file.gsub(
@@ -59,7 +59,6 @@ describe Types::QueryType do
       end
 
       it_behaves_like "graphql request", "gets current_user info" do
-        let(:schema_context) { { current_user: user } }
         let(:fixture_path) { "json/acceptance/graphql/query_type_me_with_activities.json" }
         let(:prepared_fixture_file) do
           fixture_file.gsub(
