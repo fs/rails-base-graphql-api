@@ -1,5 +1,7 @@
 module Mutations
   class UpdatePassword < BaseMutation
+    include SkipAuthentication
+
     description "Update user password mutation"
 
     argument :input, Types::UpdatePasswordInput, "Data Input", required: true

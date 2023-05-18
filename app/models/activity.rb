@@ -8,7 +8,7 @@ class Activity < ApplicationRecord
 
   belongs_to :user
 
-  scope :public_events, -> { where(event: %i[user_registered user_logged_in]) }
+  scope :public_events, -> { where(event: %i[user_registered]) }
 
   validates :title, :body, presence: true
 end

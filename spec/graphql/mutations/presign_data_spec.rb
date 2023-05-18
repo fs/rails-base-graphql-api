@@ -1,6 +1,8 @@
 require "rails_helper"
 
 describe Mutations::PresignData do
+  let(:schema_context) { { current_user: user } }
+  let(:user) { create(:user) }
   let(:query) do
     <<-GRAPHQL
       mutation {

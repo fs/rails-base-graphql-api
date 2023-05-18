@@ -1,5 +1,7 @@
 module Mutations
   class RequestPasswordRecovery < BaseMutation
+    include SkipAuthentication
+
     description "Request reset password flow mutation"
 
     argument :input, Types::RequestPasswordRecoveryInput, "Data Input", required: true

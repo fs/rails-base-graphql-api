@@ -8,7 +8,7 @@ module Mutations
 
     def resolve(input:)
       update_user = ::UpdateUser.call(
-        user: context[:current_user], user_params: input.to_h
+        user: current_user, user_params: input.to_h
       )
 
       update_user.success? ? update_user : execution_error(error_data: update_user.error_data)

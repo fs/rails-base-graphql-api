@@ -1,5 +1,7 @@
 module Mutations
   class SignUp < BaseMutation
+    include SkipAuthentication
+
     description "Sign up mutation"
 
     argument :input, Types::SignUpInput, "Data Input", required: true

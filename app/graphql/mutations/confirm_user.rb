@@ -1,5 +1,7 @@
 module Mutations
   class ConfirmUser < BaseMutation
+    include SkipAuthentication
+
     description "Confirm user mutation"
 
     argument :input, Types::ConfirmUserInput, "Data Input", required: true

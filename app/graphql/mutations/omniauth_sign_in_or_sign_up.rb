@@ -1,5 +1,7 @@
 module Mutations
   class OmniauthSignInOrSignUp < BaseMutation
+    include SkipAuthentication
+
     description "Signin with Google OAuth mutation"
 
     argument :input, Types::OmniauthInput, "Data Input", required: true

@@ -1,5 +1,7 @@
 module Resolvers
   class Base < GraphQL::Schema::Resolver
+    include AuthenticableGraphqlUser
+    include ExecutionErrorResponder
     include ActionPolicy::GraphQL::Behaviour
     include TriggerableEvents
 
@@ -22,7 +24,7 @@ module Resolvers
     end
 
     def current_user
-      @current_user ||= context[:current_user]
+      context[:current_user]
     end
 
     def trigger_event

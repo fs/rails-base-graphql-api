@@ -3,7 +3,6 @@ require "rails_helper"
 describe Types::QueryType do
   let!(:user) { create(:user, :with_data) }
   let(:token_payload) { { type: "access" } }
-  let!(:activity) { create(:activity, user: user, event: :user_updated) }
 
   let(:query) do
     <<-GRAPHQL
@@ -34,6 +33,7 @@ describe Types::QueryType do
     end
 
     context "with activities" do
+      let!(:activity) { create(:activity, user: user, event: :user_updated) }
       let(:query) do
         <<-GRAPHQL
           query {
@@ -53,6 +53,10 @@ describe Types::QueryType do
             }
           }
         GRAPHQL
+      end
+
+      before do
+        create(:activity, event: :user_updated)
       end
 
       it_behaves_like "graphql request", "gets current_user info" do
