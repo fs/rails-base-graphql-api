@@ -7,7 +7,7 @@ class ApplicationSchema < GraphQL::Schema
   use GraphQL::Batch
   use GraphQL::PersistedQueries, store: :redis_with_local_cache, compiled_queries: true
 
-  max_complexity 100
+  max_complexity 250
   max_depth 10
   default_max_page_size 25
 
