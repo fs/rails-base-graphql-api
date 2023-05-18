@@ -32,6 +32,15 @@ describe ValidateRefreshToken do
       it_behaves_like "failed interactor"
     end
 
+    context "with does not persisted valid refresh token" do
+      let(:token) do
+        "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiZXhwIjoyMDAwMDM5NDg3LCJqdGkiOiI0NmQzMDBlYTM5YWI0NjZkNz" \
+          "k1ODZhODU2YTQxZWUzMiIsInR5cGUiOiJyZWZyZXNoIn0.D2gEdqX6koi6G4Q9nwQl8ThkFCqdBJEznDInFBR-py8"
+      end
+
+      it_behaves_like "failed interactor"
+    end
+
     context "with persisted valid refresh token" do
       let(:token) do
         "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiZXhwIjoyMDAwMDM5NDg3LCJqdGkiOiI0NmQzMDBlYTM5YWI0NjZkNz" \
@@ -40,24 +49,22 @@ describe ValidateRefreshToken do
 
       before { create(:refresh_token, token: token, user: user) }
 
+      it_behaves_like "success interactor"
+
       it "removes refresh token" do
         expect { interactor.run }.to change(RefreshToken, :count).from(1).to(0)
       end
-    end
 
-    context "with does not persisted valid refresh token" do
-      let(:token) do
-        "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiZXhwIjoyMDAwMDM5NDg3LCJqdGkiOiI0NmQzMDBlYTM5YWI0NjZkNz" \
-          "k1ODZhODU2YTQxZWUzMiIsInR5cGUiOiJyZWZyZXNoIn0.D2gEdqX6koi6G4Q9nwQl8ThkFCqdBJEznDInFBR-py8"
+      it "sets context jwt_token_jti" do
+        interactor.run
+
+        expect(context.jwt_token_jti).to eq("46d300ea39ab466d79586a856a41ee32")
       end
 
-      before do
-        create(:refresh_token, jti: "46d300ea39ab466d79586a856a41ee32")
-        create(:refresh_token, jti: "other_jti")
-      end
+      it "sets context user" do
+        interactor.run
 
-      it "removes tokens with the same jti" do
-        expect { interactor.run }.to change(RefreshToken, :count).from(2).to(1)
+        expect(context.user).to eq(user)
       end
     end
   end
