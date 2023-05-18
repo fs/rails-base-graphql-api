@@ -160,7 +160,7 @@ GEM
       multi_json (~> 1.11)
       os (>= 0.9, < 2.0)
       signet (>= 0.16, < 2.a)
-    graphql (1.12.24)
+    graphql (1.13.19)
     graphql-batch (0.5.3)
       graphql (>= 1.12.18, < 3)
       promise.rb (~> 0.7.2)
@@ -393,7 +393,7 @@ DEPENDENCIES
   factory_bot_rails
   ffaker
   google-api-client
-  graphql (~> 1.12.0)
+  graphql (~> 1.13.0)
   graphql-batch
   graphql-persisted_queries
   graphql-rails_logger

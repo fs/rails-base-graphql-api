@@ -9,6 +9,7 @@ class ApplicationSchema < GraphQL::Schema
 
   max_complexity 100
   max_depth 10
+  default_max_page_size 25
 
   rescue_from(ActiveRecord::RecordNotFound) do |_err, _obj, _args, _ctx, field|
     raise GraphQL::ExecutionError.new("#{field.type.unwrap.graphql_name} not found",
