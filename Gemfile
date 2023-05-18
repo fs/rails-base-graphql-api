@@ -3,7 +3,7 @@ source "https://rubygems.org"
 ruby File.read(".ruby-version").strip
 
 # the most important stuff
-gem "pg"
+gem "pg", "1.2.3"
 gem "rails", "~> 6.1.7"
 
 # all other gems
@@ -25,7 +25,7 @@ gem "open-uri"
 gem "puma"
 gem "rack-cors"
 gem "shrine"
-gem "sidekiq"
+gem "sidekiq", "6.4.1"
 gem "strong_migrations"
 
 group :development do
