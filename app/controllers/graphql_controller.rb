@@ -12,12 +12,17 @@ class GraphqlController < ApplicationController
   private
 
   def execute_query
-    @execute_query ||= ApplicationSchema.execute(
-      params[:query],
+    @execute_query ||= ApplicationSchema.execute(params[:query], **query_options)
+  end
+
+  def query_options
+    options = {
       variables: ensure_hash(params[:variables]),
       context: execution_context.deep_symbolize_keys,
       operation_name: params[:operationName]
-    )
+    }
+    options.merge!(max_depth: nil, max_complexity: nil) if introspection?
+    options
   end
 
   def execution_context
@@ -27,6 +32,10 @@ class GraphqlController < ApplicationController
       token_payload: payload,
       extensions: ensure_hash(params[:extensions])
     }
+  end
+
+  def introspection?
+    params[:query].match?(/IntrospectionQuery/)
   end
 
   def trigger_events
