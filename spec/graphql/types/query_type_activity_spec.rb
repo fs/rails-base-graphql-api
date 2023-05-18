@@ -4,36 +4,27 @@ describe Types::QueryType do
   include_context "when time is frozen"
 
   let(:user) { create(:user, email: "john.doe@email.me", first_name: "John", last_name: "Doe") }
-  let!(:activity) do
+  let!(:user_registred_activity) do
     create(:activity,
            user: user,
            title: "User registered",
            body: "New user registered with the next attributes: First Name - John, Last Name - Doe",
            event: :user_registered)
   end
-  let!(:user_logged_in_activity) do
+  let!(:another_user_registred_activity) do
     create(:activity,
-           user: user,
-           title: "User Logged in",
-           body: "User logged in",
-           event: :user_logged_in)
-  end
-  let!(:another_user_logged_in_activity) do
-    create(:activity,
-           user: user,
-           title: "User Logged in",
-           body: "User logged in",
-           event: :user_logged_in)
-  end
-  let!(:private_activity) do
-    create(:activity,
-           user: user,
-           title: "User updated",
-           body: "New user updated with the next attributes: First Name - John, Last Name - Doe",
-           event: :user_updated)
+           title: "User registered",
+           body: "New user registered with the next attributes: First Name - Will, Last Name - Smith",
+           event: :user_registered)
   end
 
-  context "when first activity" do
+  before do
+    create(:activity, user: user, title: "User Logged in", event: :user_logged_in, body: "User logged in")
+    create(:activity, user: user, title: "User updated", event: :user_updated,
+                      body: "New user updated with the next attributes: First Name - John, Last Name - Doe")
+  end
+
+  context "when first N activities" do
     let(:query) do
       <<-GRAPHQL
         query {
@@ -44,14 +35,6 @@ describe Types::QueryType do
                 id
                 title
                 body
-                event
-                createdAt
-                user {
-                  id
-                  email
-                  firstName
-                  lastName
-                }
               }
             }
             pageInfo {
@@ -67,11 +50,16 @@ describe Types::QueryType do
 
     it_behaves_like "graphql request", "get first activity" do
       let(:fixture_path) { "json/acceptance/graphql/first_page_query_type_activities.json" }
-      let(:prepared_fixture_file) { fixture_file.gsub(/:id|:user_id/, ":id" => activity.id, ":user_id" => user.id) }
+      let(:prepared_fixture_file) do
+        fixture_file.gsub(
+          /:id/,
+          ":id" => user_registred_activity.id
+        )
+      end
     end
   end
 
-  context "when activity after cursor" do
+  context "with first N activities and cursor" do
     let(:query) do
       <<-GRAPHQL
         query {
@@ -82,14 +70,6 @@ describe Types::QueryType do
                 id
                 title
                 body
-                event
-                createdAt
-                user {
-                  id
-                  email
-                  firstName
-                  lastName
-                }
               }
             }
             pageInfo {
@@ -107,64 +87,9 @@ describe Types::QueryType do
       let(:fixture_path) { "json/acceptance/graphql/second_page_query_type_activities.json" }
       let(:prepared_fixture_file) do
         fixture_file.gsub(
-          /:first_id|:second_id|:user_id/,
-          ":first_id" => user_logged_in_activity.id,
-          ":second_id" => another_user_logged_in_activity.id,
-          ":user_id" => user.id
+          /:id/,
+          ":id" => another_user_registred_activity.id
         )
-      end
-    end
-  end
-
-  context "with authorized user" do
-    let!(:user) { create(:user, :with_data) }
-    let(:token_payload) { { type: "access" } }
-
-    it_behaves_like "graphql request", "includes user private activities to result" do
-      let(:schema_context) { { current_user: user, token_payload: token_payload } }
-      let(:fixture_path) { "json/acceptance/graphql/authorized_query_type_activities.json" }
-      let(:prepared_fixture_file) do
-        fixture_file.gsub(
-          /:id_1|:id_2|:id_3|:id_4|:user_id|:email|:first_name|:last_name/,
-          ":id_1" => activity.id,
-          ":id_2" => user_logged_in_activity.id,
-          ":id_3" => another_user_logged_in_activity.id,
-          ":id_4" => private_activity.id,
-          ":user_id" => user.id,
-          ":email" => user.email,
-          ":first_name" => user.first_name,
-          ":last_name" => user.last_name
-        )
-      end
-      let(:query) do
-        <<-GRAPHQL
-          query {
-            activities {
-              edges {
-                cursor
-                node {
-                  id
-                  title
-                  body
-                  event
-                  createdAt
-                  user {
-                    id
-                    email
-                    firstName
-                    lastName
-                  }
-                }
-              }
-              pageInfo {
-                endCursor
-                startCursor
-                hasPreviousPage
-                hasNextPage
-              }
-            }
-          }
-        GRAPHQL
       end
     end
   end

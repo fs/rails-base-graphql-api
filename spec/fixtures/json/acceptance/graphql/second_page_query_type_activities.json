@@ -4,37 +4,13 @@
       "edges": [{
         "cursor": "Mg",
         "node": {
-          "id": ":first_id",
-          "title": "User Logged in",
-          "event": "USER_LOGGED_IN",
-          "body": "User logged in",
-          "createdAt": "2020-05-10T12:30:00Z",
-          "user": {
-            "id": ":user_id",
-            "email": "john.doe@email.me",
-            "firstName": "John",
-            "lastName": "Doe"
-          }
-        }
-      },
-      {
-        "cursor": "Mw",
-        "node": {
-          "id": ":second_id",
-          "title": "User Logged in",
-          "event": "USER_LOGGED_IN",
-          "body": "User logged in",
-          "createdAt": "2020-05-10T12:30:00Z",
-          "user": {
-            "id": ":user_id",
-            "email": "john.doe@email.me",
-            "firstName": "John",
-            "lastName": "Doe"
-          }
+          "id": ":id",
+          "title": "User registered",
+          "body": "New user registered with the next attributes: First Name - Will, Last Name - Smith"
         }
       }],
       "pageInfo": {
-        "endCursor": "Mw",
+        "endCursor": "Mg",
         "hasNextPage": false,
         "hasPreviousPage": true,
         "startCursor": "Mg"

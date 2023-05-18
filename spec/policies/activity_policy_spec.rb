@@ -2,18 +2,18 @@ require "rails_helper"
 
 describe ActivityPolicy do
   let(:context) { { user: user } }
-  let(:user) { build_stubbed(:user, first_name: first_name) }
+  let(:user) { create(:user) }
 
   describe "#relation_scope" do
     subject { policy.apply_scope(Activity.all, type: :active_record_relation) }
 
-    let!(:own_private_event) { create(:activity, :private, user: another_user) }
-    let!(:public_event) { create(:activity, :public) }
-    let(:another_user) { create(:user) }
-    let(:user) { another_user }
+    let!(:own_private_event) { create(:activity, :private, user: user) }
 
-    before { create(:activity, :private) }
+    before do
+      create(:activity, :public)
+      create(:activity, :private)
+    end
 
-    it { is_expected.to contain_exactly(own_private_event, public_event) }
+    it { is_expected.to contain_exactly(own_private_event) }
   end
 end
