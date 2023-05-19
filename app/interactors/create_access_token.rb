@@ -3,11 +3,11 @@ class CreateAccessToken
 
   ACCESS_TOKEN_TTL = 1.hour
 
-  delegate :user, :jwt_token_jti, to: :context
+  delegate :user, :jti, to: :context
 
   def call
+    context.jti ||= generate_jti
     context.access_token = access_token
-    context.jti = jti
   end
 
   private
@@ -23,10 +23,6 @@ class CreateAccessToken
       jti: jti,
       type: "access"
     }
-  end
-
-  def jti
-    @jti ||= jwt_token_jti || generate_jti
   end
 
   def generate_jti

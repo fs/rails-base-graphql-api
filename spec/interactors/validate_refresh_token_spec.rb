@@ -55,10 +55,10 @@ describe ValidateRefreshToken do
         expect { interactor.run }.to change(RefreshToken, :count).from(1).to(0)
       end
 
-      it "sets context jwt_token_jti" do
+      it "sets context jti" do
         interactor.run
 
-        expect(context.jwt_token_jti).to eq("46d300ea39ab466d79586a856a41ee32")
+        expect(context.jti).to eq("46d300ea39ab466d79586a856a41ee32")
       end
 
       it "sets context user" do

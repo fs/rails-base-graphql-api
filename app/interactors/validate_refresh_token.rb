@@ -6,7 +6,7 @@ class ValidateRefreshToken
   def call
     raise_unauthorized_error! unless jwt_token.valid? && jwt_token.refresh? && refresh_token
 
-    context.jwt_token_jti = jwt_token.jti
+    context.jti = jwt_token.jti
     context.user = refresh_token.user
 
     refresh_token.destroy
