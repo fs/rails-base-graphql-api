@@ -5,7 +5,7 @@ class ApplicationSchema < GraphQL::Schema
   query(Types::QueryType)
 
   use GraphQL::Batch
-  use GraphQL::PersistedQueries, store: :redis_with_local_cache, compiled_queries: true
+  use GraphQL::PersistedQueries, store: :memory, compiled_queries: true
 
   max_complexity 250
   max_depth 10

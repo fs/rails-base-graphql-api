@@ -25,7 +25,7 @@ gem "open-uri"
 gem "puma"
 gem "rack-cors"
 gem "shrine"
-gem "sidekiq", "< 7"
+gem "sidekiq"
 gem "strong_migrations"
 
 group :development do
