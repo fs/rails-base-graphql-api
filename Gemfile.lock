@@ -419,7 +419,7 @@ DEPENDENCIES
   strong_migrations
 
 RUBY VERSION
-   ruby 3.0.6p216
+   ruby 3.2.2p53
 
 BUNDLED WITH
-   2.2.28
+   2.4.13
