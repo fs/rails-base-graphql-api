@@ -3,7 +3,7 @@ source "https://rubygems.org"
 ruby File.read(".ruby-version").strip
 
 # the most important stuff
-gem "pg", "~> 1.4.0"
+gem "pg"
 gem "rails", "~> 6.1.7"
 
 # all other gems
