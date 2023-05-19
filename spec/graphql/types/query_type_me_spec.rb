@@ -1,8 +1,8 @@
 require "rails_helper"
 
 describe Types::QueryType do
+  let(:schema_context) { { current_user: user } }
   let!(:user) { create(:user, :with_data) }
-  let(:token_payload) { { type: "access" } }
 
   let(:query) do
     <<-GRAPHQL
@@ -17,9 +17,8 @@ describe Types::QueryType do
     GRAPHQL
   end
 
-  context "with current_user provided" do
+  context "with user" do
     it_behaves_like "graphql request", "gets current_user info" do
-      let(:schema_context) { { current_user: user, token_payload: token_payload } }
       let(:fixture_path) { "json/acceptance/graphql/query_type_me.json" }
       let(:prepared_fixture_file) do
         fixture_file.gsub(
@@ -32,7 +31,7 @@ describe Types::QueryType do
       end
     end
 
-    context "with activities" do
+    context "with activities query" do
       let!(:activity) { create(:activity, user: user, event: :user_updated) }
       let(:query) do
         <<-GRAPHQL
@@ -60,7 +59,6 @@ describe Types::QueryType do
       end
 
       it_behaves_like "graphql request", "gets current_user info" do
-        let(:schema_context) { { current_user: user, token_payload: token_payload } }
         let(:fixture_path) { "json/acceptance/graphql/query_type_me_with_activities.json" }
         let(:prepared_fixture_file) do
           fixture_file.gsub(
@@ -73,11 +71,9 @@ describe Types::QueryType do
     end
   end
 
-  context "with incorrect token type" do
-    let(:token_payload) { { type: "refresh" } }
-
+  context "without user" do
     it_behaves_like "graphql request", "gets current_user info" do
-      let(:schema_context) { { current_user: user, token_payload: token_payload } }
+      let(:schema_context) { { current_user: nil } }
       let(:fixture_path) { "json/acceptance/graphql/query_type_me_unauthorized.json" }
     end
   end

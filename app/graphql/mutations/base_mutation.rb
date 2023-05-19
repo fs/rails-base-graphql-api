@@ -18,9 +18,5 @@ module Mutations
     def token
       context[:token]
     end
-
-    def token_payload
-      context[:token_payload]
-    end
   end
 end

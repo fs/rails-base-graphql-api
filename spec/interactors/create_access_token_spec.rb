@@ -4,12 +4,12 @@ describe CreateAccessToken do
   include_context "with interactor"
   include_context "when time is frozen"
 
-  let(:initial_context) { { user: user, token_payload: token_payload } }
+  let(:initial_context) { { user: user, jti: jti } }
   let(:user) { create(:user, id: 111_111) }
 
   describe ".call" do
     context "with existing jti" do
-      let(:token_payload) { { jti: "existing_token_jti" } }
+      let(:jti) { "existing_token_jti" }
       let(:expected_jti) { "existing_token_jti" }
       let(:expected_token_payload) do
         {
@@ -36,7 +36,7 @@ describe CreateAccessToken do
     end
 
     context "with generate jti" do
-      let(:token_payload) { {} }
+      let(:jti) { nil }
       let(:expected_jti) { "7fc6d21913811be48db74417f9a26598" }
       let(:expected_token_payload) do
         {

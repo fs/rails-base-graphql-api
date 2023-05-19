@@ -3,17 +3,17 @@ class CreateAccessToken
 
   ACCESS_TOKEN_TTL = 1.hour
 
-  delegate :user, :token_payload, to: :context
+  delegate :user, :jti, to: :context
 
   def call
+    context.jti ||= generate_jti
     context.access_token = access_token
-    context.jti = jti
   end
 
   private
 
   def access_token
-    JWT.encode(payload, auth_secret_token, "HS256")
+    JWT.encode(payload, ENV.fetch("AUTH_SECRET_TOKEN"), "HS256")
   end
 
   def payload
@@ -25,19 +25,7 @@ class CreateAccessToken
     }
   end
 
-  def jti
-    @jti ||= existing_jti || generate_jti
-  end
-
-  def existing_jti
-    token_payload && token_payload[:jti]
-  end
-
   def generate_jti
     Digest::MD5.hexdigest("#{user.id}-#{Time.current.to_i}")
-  end
-
-  def auth_secret_token
-    @auth_secret_token ||= ENV.fetch("AUTH_SECRET_TOKEN")
   end
 end
