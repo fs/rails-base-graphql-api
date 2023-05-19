@@ -8,6 +8,7 @@ RUN apk add --update --no-cache \
     build-base \
     gcompat \
     postgresql-dev \
+    libpq-dev \
     git \
     imagemagick \
     tzdata
@@ -45,6 +46,7 @@ RUN apk add --update --no-cache \
     build-base \
     gcompat \
     postgresql-client \
+    libpq-dev \
     imagemagick \
     tzdata \
     file \
