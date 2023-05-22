@@ -23,7 +23,7 @@ describe Types::ActivityType do
 
   it_behaves_like "succeed graphql request"
 
-  context "N+1", :n_plus_one do
+  context "when N+1", :n_plus_one do
     populate { |n| create_list(:activity, n, user: user) }
 
     include_examples "performs constant number of queries request"
