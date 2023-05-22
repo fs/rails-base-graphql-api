@@ -5,7 +5,10 @@ class ApplicationSchema < GraphQL::Schema
   query(Types::QueryType)
 
   use GraphQL::Batch
-  use GraphQL::PersistedQueries, store: :memory, compiled_queries: true
+  use GraphQL::PersistedQueries,
+      compiled_queries: true,
+      store: :redis_with_local_cache,
+      redis_client: -> { RedisClient.new(url: ENV.fetch("REDIS_URL", "redis://localhost:6379/1")) }
 
   max_complexity 250
   max_depth 10
