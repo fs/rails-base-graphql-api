@@ -14,7 +14,6 @@ gem "bootsnap", require: false
 gem "enumerize"
 gem "google-api-client"
 gem "graphql"
-gem "graphql-batch"
 gem "graphql-persisted_queries"
 gem "graphql-rails_logger"
 gem "health_check"
@@ -51,7 +50,7 @@ end
 
 group :test do
   gem "database_cleaner-active_record"
-  gem "email_spec"
+  gem "email_spec", "2.2.0"
   gem "n_plus_one_control"
   gem "simplecov", require: false
 end

@@ -11,7 +11,7 @@ module Types
     field :user, Types::UserType, "Activity initiator", null: false
 
     def user
-      Loaders::RecordLoader.for(User).load(object.user_id)
+      dataloader.with(Sources::ActiveRecordObject, User).load(object.user_id)
     end
   end
 end
