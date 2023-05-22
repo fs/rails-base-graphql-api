@@ -8,7 +8,7 @@ class ApplicationSchema < GraphQL::Schema
   use GraphQL::PersistedQueries,
       compiled_queries: true,
       store: :redis_with_local_cache,
-      redis_client: -> { RedisClient.new(url: ENV.fetch("REDIS_URL", "redis://localhost:6379/1")) }
+      redis_client: -> { RedisClient.new(url: ENV.fetch("REDIS_URL", "redis://localhost:6379/1"), protocol: 2) }
 
   max_complexity 250
   max_depth 10
