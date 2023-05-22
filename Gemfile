@@ -4,7 +4,7 @@ ruby File.read(".ruby-version").strip
 
 # the most important stuff
 gem "pg"
-gem "rails", "~> 6.1.7"
+gem "rails", "~> 7.0.0"
 
 # all other gems
 gem "action_policy-graphql"
@@ -13,7 +13,7 @@ gem "bcrypt"
 gem "bootsnap", require: false
 gem "enumerize"
 gem "google-api-client"
-gem "graphql", "~> 1.12.0"
+gem "graphql"
 gem "graphql-batch"
 gem "graphql-persisted_queries"
 gem "graphql-rails_logger"
