@@ -11,7 +11,7 @@ module Mutations
     def resolve
       @retries ||= MAX_RETRIES_COUNT
       UpdateTokenPair.call!(token: token)
-    rescue ActiveRecord::RecordNotUnique, Interactor::Failure => _e
+    rescue ActiveRecord::RecordNotUnique, ActiveRecord::RecordNotSaved, Interactor::Failure => _e
       prevent_constant_token_refresh
       (@retries -= 1).negative? ? raise_unauthorized_error! : retry
     end
