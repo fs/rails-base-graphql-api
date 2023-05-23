@@ -3,9 +3,9 @@ require "rails_helper"
 describe Mutations::UpdateToken do
   include_context "when time is frozen"
 
-  let(:schema_context) { { current_user: user, token: current_refresh_token.token } }
+  let(:schema_context) { { current_user: user, token: valid_access_token.token } }
   let(:user) { create(:user) }
-  let(:current_refresh_token) { create(:refresh_token, :access, user: user) }
+  let(:valid_access_token) { build(:access_token, user_id: user.id) }
 
   let(:query) do
     <<-GRAPHQL

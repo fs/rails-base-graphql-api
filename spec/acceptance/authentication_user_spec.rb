@@ -4,30 +4,50 @@ describe "Authenticate user", type: :request do
   include_context "when time is frozen"
 
   let!(:user) { create(:user, id: 111_111) }
+  let(:refresh_token) { nil }
   let(:query) do
     <<-GRAPHQL
-      query {
-        me {
-          id
-        }
+    query {
+      me {
+        id
       }
+    }
     GRAPHQL
   end
 
   before do
+    refresh_token
     post "/graphql", headers: { authorization: "Bearer #{token.token}" }, params: { query: query }
   end
 
-  context "with valid token" do
-    let(:token) { create(:refresh_token, :access, user: user) }
+  context "with valid token and valid refresh token" do
+    let(:token) { build(:access_token, user_id: user.id) }
+    let(:refresh_token) { create(:refresh_token, user: user, jti: token.jti) }
 
     it_behaves_like "full graphql request", "return current user" do
       let(:fixture_path) { "json/acceptance/current_user.json" }
     end
   end
 
+  context "with valid token and expired refresh token" do
+    let(:token) { build(:access_token, user_id: user.id) }
+    let(:refresh_token) { create(:refresh_token, :expired, user: user, jti: token.jti) }
+
+    it_behaves_like "full graphql request", "return null" do
+      let(:fixture_path) { "json/acceptance/not_user.json" }
+    end
+  end
+
+  context "with valid token and without refresh token" do
+    let(:token) { build(:access_token, user_id: user.id) }
+
+    it_behaves_like "full graphql request", "return null" do
+      let(:fixture_path) { "json/acceptance/not_user.json" }
+    end
+  end
+
   context "with invalid token" do
-    let(:token) { create(:refresh_token, token: "bad_token", user: user) }
+    let(:token) { build(:access_token, :invalid, user_id: user.id) }
 
     it_behaves_like "full graphql request", "return null" do
       let(:fixture_path) { "json/acceptance/not_user.json" }
@@ -35,7 +55,7 @@ describe "Authenticate user", type: :request do
   end
 
   context "with expired token" do
-    let(:token) { create(:refresh_token, :access, user: user, expires_at: 1.day.ago) }
+    let(:token) { build(:access_token, :expired, user_id: user.id) }
 
     it_behaves_like "full graphql request", "return null" do
       let(:fixture_path) { "json/acceptance/not_user.json" }
@@ -43,7 +63,7 @@ describe "Authenticate user", type: :request do
   end
 
   context "when use refresh token for receiving user" do
-    let(:token) { create(:refresh_token, :refresh, user: user) }
+    let(:token) { build(:refresh_token, :refresh, user: user) }
 
     it_behaves_like "full graphql request", "return null" do
       let(:fixture_path) { "json/acceptance/not_user.json" }
