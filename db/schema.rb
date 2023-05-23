@@ -36,7 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_065737) do
   create_table "refresh_tokens", force: :cascade do |t|
     t.string "token", null: false
     t.bigint "user_id", null: false
-    t.datetime "expires_at", precision: nil, null: false
+    t.datetime "expires_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "jti"
@@ -56,8 +56,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_065737) do
     t.datetime "updated_at", null: false
     t.text "avatar_data"
     t.string "password_reset_token"
-    t.datetime "password_reset_sent_at", precision: nil
-    t.datetime "confirmed_at", precision: nil
+    t.datetime "password_reset_sent_at"
+    t.datetime "confirmed_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["password_reset_token"], name: "index_users_on_password_reset_token"
   end
