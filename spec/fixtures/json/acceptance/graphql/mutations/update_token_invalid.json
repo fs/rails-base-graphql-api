@@ -1,6 +1,6 @@
 {
   "data": {
-    "me": null
+    "updateToken": null
   },
   "errors": [
     {
@@ -11,9 +11,9 @@
         "detail": null
       },
       "locations": [
-        { "line": 2, "column": 7 }
+        { "line": 2, "column": 9 }
       ],
-      "path": ["me"]
+      "path": ["updateToken"]
     }
   ]
 }
