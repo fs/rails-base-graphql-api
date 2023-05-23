@@ -1,6 +1,6 @@
 class AuthenticateByEmailAndPassword
   include Interactor
-  include AuthorizedInteractor
+  include AuthenticableInteractor
 
   delegate :email, :password, to: :context
 

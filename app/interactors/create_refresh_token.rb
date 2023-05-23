@@ -1,6 +1,6 @@
 class CreateRefreshToken
   include Interactor
-  include AuthorizedInteractor
+  include AuthenticableInteractor
 
   REFRESH_TOKEN_TTL = 30.days
 

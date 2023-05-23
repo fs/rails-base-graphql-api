@@ -1,6 +1,6 @@
 class UpdateExistingRefreshToken
   include Interactor
-  include AuthorizedInteractor
+  include AuthenticableInteractor
 
   TOKEN_GRACE_PERIOD = 60
 

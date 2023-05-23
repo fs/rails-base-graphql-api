@@ -1,7 +1,7 @@
 class UpdatePassword
   class FindUserByToken
     include Interactor
-    include AuthorizedInteractor
+    include AuthenticableInteractor
 
     delegate :reset_token, to: :context
 

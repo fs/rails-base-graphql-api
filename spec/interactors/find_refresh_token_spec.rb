@@ -47,7 +47,8 @@ describe FindRefreshToken do
         "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiZXhwIjoyMDAwMDM5NDg3LCJqdGkiOiI0NmQzMDBlYTM5YWI0NjZkNz" \
           "k1ODZhODU2YTQxZWUzMiIsInR5cGUiOiJyZWZyZXNoIn0.D2gEdqX6koi6G4Q9nwQl8ThkFCqdBJEznDInFBR-py8"
       end
-      let!(:refresh_token) { create(:refresh_token, token: token, user: user) }
+      let!(:refresh_token) { create(:refresh_token, token: token, user: user, substitution_token: substitution_token) }
+      let(:substitution_token) { nil }
 
       it_behaves_like "success interactor"
 
@@ -78,9 +79,7 @@ describe FindRefreshToken do
       end
 
       context "when refresh token with substituting token" do
-        let!(:refresh_token) do
-          create(:refresh_token, token: token, jti: "jti", substitution_token: another_refresh_token)
-        end
+        let(:substitution_token) { another_refresh_token }
 
         it "provides substituting refresh token" do
           interactor.run

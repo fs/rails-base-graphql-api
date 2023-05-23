@@ -2,7 +2,7 @@ module Omniauth
   module Google
     class FindOrCreateUser
       include Interactor
-      include AuthorizedInteractor
+      include AuthenticableInteractor
 
       delegate :user_info, :user, to: :context
       delegate :email, :family_name, :given_name, :picture, to: :user_info

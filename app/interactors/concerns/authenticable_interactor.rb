@@ -1,4 +1,4 @@
-module AuthorizedInteractor
+module AuthenticableInteractor
   extend ActiveSupport::Concern
 
   private

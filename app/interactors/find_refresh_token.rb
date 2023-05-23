@@ -1,6 +1,6 @@
 class FindRefreshToken
   include Interactor
-  include AuthorizedInteractor
+  include AuthenticableInteractor
 
   delegate :token, to: :context
 
