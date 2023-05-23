@@ -8,6 +8,7 @@ class UpdateExistingRefreshToken
 
   def call
     existing_refresh_token.assign_attributes(token_attributes)
+
     raise_unauthorized_error! unless existing_refresh_token.save
   end
 

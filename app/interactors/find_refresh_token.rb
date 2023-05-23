@@ -22,7 +22,7 @@ class FindRefreshToken
   end
 
   def refresh_token
-    @refresh_token ||= RefreshToken.find_by(token: token)
+    @refresh_token ||= RefreshToken.active.find_by(token: token)
   end
 
   def jwt_token

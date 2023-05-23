@@ -87,6 +87,12 @@ describe FindRefreshToken do
           expect(context.substitution_token).to eq(another_refresh_token)
         end
       end
+
+      context "with valid expired refresh token" do
+        let!(:refresh_token) { create(:refresh_token, :expired, token: token, user: user) }
+
+        it_behaves_like "failed interactor"
+      end
     end
   end
 end
