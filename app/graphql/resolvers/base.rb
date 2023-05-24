@@ -1,6 +1,5 @@
 module Resolvers
   class Base < GraphQL::Schema::Resolver
-    include AuthenticableGraphqlUser
     include ExecutionErrorResponder
     include ActionPolicy::GraphQL::Behaviour
     include TriggerableEvents
