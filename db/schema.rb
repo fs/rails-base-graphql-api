@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2021_06_04_145805) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_23_065737) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -40,8 +40,10 @@ ActiveRecord::Schema[7.0].define(version: 2021_06_04_145805) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "jti"
+    t.bigint "original_token_id"
     t.index ["jti"], name: "index_refresh_tokens_on_jti"
-    t.index ["token"], name: "index_refresh_tokens_on_token"
+    t.index ["original_token_id"], name: "index_refresh_tokens_on_original_token_id", unique: true
+    t.index ["token"], name: "index_refresh_tokens_on_token", unique: true
     t.index ["user_id"], name: "index_refresh_tokens_on_user_id"
   end
 
@@ -62,5 +64,6 @@ ActiveRecord::Schema[7.0].define(version: 2021_06_04_145805) do
 
   add_foreign_key "activities", "users"
   add_foreign_key "possession_tokens", "users"
+  add_foreign_key "refresh_tokens", "refresh_tokens", column: "original_token_id"
   add_foreign_key "refresh_tokens", "users"
 end

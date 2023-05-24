@@ -6,10 +6,28 @@ module Mutations
 
     type Types::Payloads::UpdateTokenPayload
 
-    def resolve
-      update_token = UpdateTokenPair.call(token: token)
+    MAX_RETRIES_COUNT = 5
 
-      update_token.success? ? update_token : execution_error(error_data: update_token.error_data)
+    def resolve
+      @retries ||= MAX_RETRIES_COUNT
+      UpdateTokenPair.call!(token: token)
+    rescue ActiveRecord::RecordNotUnique, ActiveRecord::RecordNotSaved, Interactor::Failure => _e
+      prevent_constant_token_refresh
+      (@retries -= 1).negative? ? raise_unauthorized_error! : retry
+    end
+
+    private
+
+    def prevent_constant_token_refresh
+      sleep(rand.seconds)
+    end
+
+    def raise_unauthorized_error!
+      raise execution_error(error_data: authentication_error)
+    end
+
+    def authentication_error
+      { message: "Invalid credentials", status: 401, code: :unauthorized }
     end
   end
 end

@@ -2,13 +2,14 @@ module Omniauth
   module Google
     class FindOrCreateUser
       include Interactor
+      include AuthenticableInteractor
 
       delegate :user_info, :user, to: :context
       delegate :email, :family_name, :given_name, :picture, to: :user_info
 
       def call
         context.user = user
-        context.fail!(error_data: error_data) unless user.valid?
+        raise_unauthorized_error! unless user.valid?
       end
 
       private
@@ -20,10 +21,6 @@ module Omniauth
           user.password = SecureRandom.hex(20)
           user.avatar = URI.open(picture) if picture.present?
         end
-      end
-
-      def error_data
-        { status: 401, code: :unauthorized, message: "Invalid credentials" }
       end
     end
   end

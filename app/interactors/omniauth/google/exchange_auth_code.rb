@@ -2,6 +2,7 @@ module Omniauth
   module Google
     class ExchangeAuthCode
       include Interactor
+      include AuthenticableInteractor
 
       delegate :auth_client, to: :context
 
