@@ -63,7 +63,7 @@ describe "Authenticate user", type: :request do
   end
 
   context "when use refresh token for receiving user" do
-    let(:token) { build(:refresh_token, :refresh, user: user) }
+    let(:token) { build(:refresh_token, user: user) }
 
     it_behaves_like "full graphql request", "return null" do
       let(:fixture_path) { "json/acceptance/not_user.json" }

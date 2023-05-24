@@ -4,24 +4,19 @@ describe CreateRefreshToken do
   include_context "with interactor"
   include_context "when time is frozen"
 
-  let(:initial_context) { { user: user, jti: jti, substitution_token: substitution_token } }
+  let(:initial_context) { { user: user, jti: "jti", substitution_token: substitution_token } }
 
   let(:user) { create(:user, id: 111_111) }
-  let(:refresh_token) do
-    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiZXhwIjoxNTkxNzA1ODAwLCJqdGkiOiJqdG" \
-      "kiLCJ0eXBlIjoicmVmcmVzaCJ9.rLewPTwiODP_ZkGvSN7h_WHGC1xv2DC7r_ne-cggcVo"
-  end
+  let(:refresh_token) { build(:refresh_token, user: user, jti: "jti", expires_at: 30.days.since) }
   let(:created_refresh_token) { RefreshToken.last }
-  let(:jti) { "jti" }
-  let(:expires_at) { 30.days.since }
   let(:substitution_token) { nil }
 
   let(:expected_refresh_token_attributes) do
     {
       user_id: 111_111,
-      token: refresh_token,
-      jti: jti,
-      expires_at: expires_at
+      token: refresh_token.token,
+      jti: "jti",
+      expires_at: 30.days.since
     }
   end
 
@@ -31,7 +26,7 @@ describe CreateRefreshToken do
     it "provides generated refresh token" do
       interactor.run
 
-      expect(context.refresh_token).to eq(refresh_token)
+      expect(context.refresh_token).to eq(refresh_token.token)
     end
 
     it "creates refresh token" do
@@ -45,7 +40,7 @@ describe CreateRefreshToken do
     end
 
     context "when substitution token provided" do
-      let!(:substitution_token) { create(:refresh_token, token: "substitution_token_value") }
+      let(:substitution_token) { create(:refresh_token, user: user, token: "substitution_token_value") }
 
       it_behaves_like "success interactor"
 
@@ -56,7 +51,9 @@ describe CreateRefreshToken do
       end
 
       it "does not create refresh token" do
-        expect { interactor.run }.not_to change(RefreshToken, :count)
+        interactor.run
+
+        expect(user.refresh_tokens.count).to eq(1)
       end
     end
   end

@@ -3,7 +3,7 @@ require "rails_helper"
 describe FindRefreshToken do
   include_context "with interactor"
 
-  let(:initial_context) { { token: token } }
+  let(:initial_context) { { token: jwt_token } }
   let(:user) { create(:user, id: 111_111) }
   let!(:another_refresh_token) { create(:refresh_token, token: "another_token", jti: "jti") }
 
@@ -13,41 +13,34 @@ describe FindRefreshToken do
 
   describe ".call" do
     context "with empty token" do
-      let(:token) { nil }
+      let(:jwt_token) { nil }
 
       it_behaves_like "failed interactor"
     end
 
     context "with invalid token" do
-      let(:token) { "fake_token" }
+      let(:jwt_token) { "fake_token" }
 
       it_behaves_like "failed interactor"
     end
 
     context "with valid access token" do
-      let(:token) do
-        "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiZXhwIjoyMDAwMDM5NTA5LCJqdGkiOiIxZGY5NzQ5MjY2ZDdmNzE3Z" \
-          "mI4N2E1YzY1ZTVhNDYxNyIsInR5cGUiOiJhY2Nlc3MifQ.n9lw1Ob0IUQhoUrLpF6Oj2bEJQs6c_05Ql64DR-yjos"
-      end
+      let(:access_token) { build(:access_token) }
+      let(:jwt_token) { access_token.token }
 
       it_behaves_like "failed interactor"
     end
 
     context "with does not persisted valid refresh token" do
-      let(:token) do
-        "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiZXhwIjoyMDAwMDM5NDg3LCJqdGkiOiI0NmQzMDBlYTM5YWI0NjZkNz" \
-          "k1ODZhODU2YTQxZWUzMiIsInR5cGUiOiJyZWZyZXNoIn0.D2gEdqX6koi6G4Q9nwQl8ThkFCqdBJEznDInFBR-py8"
-      end
+      let(:refresh_token) { build(:refresh_token, user: user) }
+      let(:jwt_token) { refresh_token.token }
 
       it_behaves_like "failed interactor"
     end
 
     context "with persisted valid refresh token" do
-      let(:token) do
-        "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiZXhwIjoyMDAwMDM5NDg3LCJqdGkiOiI0NmQzMDBlYTM5YWI0NjZkNz" \
-          "k1ODZhODU2YTQxZWUzMiIsInR5cGUiOiJyZWZyZXNoIn0.D2gEdqX6koi6G4Q9nwQl8ThkFCqdBJEznDInFBR-py8"
-      end
-      let!(:refresh_token) { create(:refresh_token, token: token, user: user, substitution_token: substitution_token) }
+      let(:refresh_token) { create(:refresh_token, user: user, substitution_token: substitution_token) }
+      let(:jwt_token) { refresh_token.token }
       let(:substitution_token) { nil }
 
       it_behaves_like "success interactor"
@@ -55,7 +48,7 @@ describe FindRefreshToken do
       it "sets context jti" do
         interactor.run
 
-        expect(context.jti).to eq("46d300ea39ab466d79586a856a41ee32")
+        expect(context.jti).to eq(refresh_token.jti)
       end
 
       it "sets context user" do
@@ -89,7 +82,7 @@ describe FindRefreshToken do
       end
 
       context "with valid expired refresh token" do
-        let!(:refresh_token) { create(:refresh_token, :expired, token: token, user: user) }
+        let(:refresh_token) { create(:refresh_token, :expired, user: user) }
 
         it_behaves_like "failed interactor"
       end

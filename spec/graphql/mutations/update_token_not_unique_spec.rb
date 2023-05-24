@@ -6,10 +6,6 @@ describe Mutations::UpdateToken do
   let(:schema_context) { { current_user: user, token: current_refresh_token.token } }
   let(:user) { create(:user, id: 111_111) }
   let(:current_refresh_token) { create(:refresh_token, user: user) }
-  let(:existing_token_value) do
-    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExMTExMSwiZXhwIjoxNTkxNzA1ODAwLCJqdGkiOiI3ZmM2ZDIxOTEzODExYmU" \
-      "0OGRiNzQ0MTdmOWEyNjU5OCIsInR5cGUiOiJyZWZyZXNoIn0.NcsFRIy6_P5FU4iEm-28hBWRMRDMGn8ei7dKJJfpD_0"
-  end
 
   let(:query) do
     <<-GRAPHQL
@@ -26,7 +22,7 @@ describe Mutations::UpdateToken do
   end
 
   before do
-    create(:refresh_token, token: existing_token_value)
+    create(:refresh_token, user: user, jti: current_refresh_token.jti, expires_at: 30.days.since)
   end
 
   it_behaves_like "graphql request", "returns error" do
