@@ -1,31 +1,7 @@
-class AccessToken
-  attr_reader :jti
-
-  def initialize(attrs)
-    @token = attrs[:token]
-    @user_id = attrs[:user_id]
-    @exp = attrs[:exp]
-    @jti = attrs[:jti]
-  end
-
-  def token
-    @token ||= JWT.encode(payload, ENV.fetch("AUTH_SECRET_TOKEN"), "HS256")
-  end
-
-  private
-
-  def payload
-    {
-      sub: @user_id || 1,
-      exp: @exp || Time.current.to_i,
-      jti: @jti || "1",
-      type: "access"
-    }
-  end
-end
+require_relative "dummy_jwt_token"
 
 FactoryBot.define do
-  factory :access_token do
+  factory :access_token, class: DummyJWTToken do
     initialize_with { new(attributes) }
 
     user_id { rand(1_000_000) }
