@@ -10,28 +10,28 @@ describe SignoutUser do
       token: "token"
     }
   end
+  let(:refresh_token) { create(:refresh_token, user: user) }
   let(:user) { create(:user) }
 
   before do
-    create(:refresh_token, user: user)
     create(:refresh_token, token: "other", user: user)
   end
 
   describe ".call" do
-    context "with everywhere is false" do
+    context "when everywhere is false" do
       let(:everywhere) { false }
 
-      it "remove refresh token" do
+      it "removes refresh token" do
         interactor.run
 
         expect(user.refresh_tokens.count).to eq(1)
       end
     end
 
-    context "with everywhere is true" do
+    context "when everywhere is true" do
       let(:everywhere) { true }
 
-      it "remove all refresh tokens" do
+      it "removes all refresh tokens" do
         interactor.run
 
         expect(user.refresh_tokens.count).to be_zero
