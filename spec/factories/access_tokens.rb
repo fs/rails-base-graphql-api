@@ -1,7 +1,7 @@
-require_relative "dummy_jwt_token"
+require_relative "dummy/jwt_token"
 
 FactoryBot.define do
-  factory :access_token, class: DummyJWTToken do
+  factory :access_token, class: Dummy::JWTToken do
     initialize_with { new(attributes) }
 
     user_id { rand(1_000_000) }
