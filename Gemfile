@@ -14,7 +14,6 @@ gem "bootsnap", require: false
 gem "enumerize"
 gem "google-api-client"
 gem "graphql"
-gem "graphql-batch"
 gem "graphql-persisted_queries"
 gem "graphql-rails_logger"
 gem "health_check"

@@ -142,4 +142,4 @@ GraphQL/ObjectDescription:
   Exclude:
     - app/graphql/application_schema.rb
     - app/graphql/types/base_**.rb
-    - app/graphql/loaders/**/*
+    - app/graphql/sources/**/*
