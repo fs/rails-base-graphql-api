@@ -63,29 +63,30 @@ describe FindRefreshToken do
         expect(context.existing_refresh_token).to eq(refresh_token)
       end
 
-      context "when refresh token without substituting token" do
-        it "does not provide substituting refresh token" do
-          interactor.run
+      it "does not provide substituting refresh token" do
+        interactor.run
 
-          expect(context.substitution_token).to be_nil
-        end
+        expect(context.substitution_token).to be_nil
       end
+    end
 
-      context "when refresh token with substituting token" do
-        let(:substitution_token) { another_refresh_token }
+    context "with valid refresh token and substituting token" do
+      let(:refresh_token) { create(:refresh_token, user: user, substitution_token: substitution_token) }
+      let(:jwt_token) { refresh_token.token }
+      let(:substitution_token) { another_refresh_token }
 
-        it "provides substituting refresh token" do
-          interactor.run
+      it "provides substituting refresh token" do
+        interactor.run
 
-          expect(context.substitution_token).to eq(another_refresh_token)
-        end
+        expect(context.substitution_token).to eq(another_refresh_token)
       end
+    end
 
-      context "with valid expired refresh token" do
-        let(:refresh_token) { create(:refresh_token, :expired, user: user) }
+    context "with valid expired refresh token" do
+      let(:refresh_token) { create(:refresh_token, :expired, user: user) }
+      let(:jwt_token) { refresh_token.token }
 
-        it_behaves_like "failed interactor"
-      end
+      it_behaves_like "failed interactor"
     end
   end
 end
